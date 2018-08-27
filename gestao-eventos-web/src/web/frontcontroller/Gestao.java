@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import classes.util.Resultado;
 import dominio.evento.IDominio;
 import web.command.ICommand;
+import web.command.impl.AlterarCommand;
 import web.command.impl.ConsultarCommand;
+import web.command.impl.ExcluirCommand;
 import web.command.impl.SalvarCommand;
 import web.viewhelper.IViewHelper;
 import web.viewhelper.impl.EventoVH;
@@ -34,6 +36,8 @@ public class Gestao extends HttpServlet {
     	
     	commands.put("SALVAR", new SalvarCommand());
     	commands.put("CONSULTAR", new ConsultarCommand());
+    	commands.put("ATUALIZAR", new AlterarCommand());
+    	commands.put("EXCLUIR", new ExcluirCommand());
     	
     	vhs = new HashMap<String, IViewHelper>();
     	vhs.put("/gestao-eventos-web/evento/salvar", new EventoVH());

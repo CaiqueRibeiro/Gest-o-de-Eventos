@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,11 +27,23 @@ public class EventoVH implements IViewHelper {
 		String operacao = request.getParameter("operacao");
 		Evento evento = new Evento();
 		
-		if(operacao.equals("SALVAR") || operacao.equals("ALTERAR")) {
+		if(operacao.equals("SALVAR") || operacao.equals("ATUALIZAR")) {
+			
 			Rateio rateio = new Rateio();
 			Endereco endereco = new Endereco();
 			Administrador administrador = new Administrador();
 			Locacao locacao = new Locacao();
+			
+			
+			if(operacao.equals("ATUALIZAR")) {
+				String eventoId = request.getParameter("evt-id");
+				String enderecoId = request.getParameter("end-id");
+				String rateioId = request.getParameter("rat-id");
+				
+				evento.setId(Integer.parseInt(eventoId));
+				endereco.setId(Integer.parseInt(enderecoId));
+				rateio.setId(Integer.parseInt(rateioId));
+			}
 			
 			administrador.setId(2);
 			locacao.setId(Integer.parseInt(request.getParameter("locacao")));
@@ -70,8 +83,36 @@ public class EventoVH implements IViewHelper {
 			evento.setAdministrador(administrador);
 			evento.setLocacao(locacao);
 		} // OPERACAO SALVAR E ALTERAR
-		//
-		//
+		else if(operacao.equals("CONSULTAR") || operacao.equals("EXCLUIR")) {
+
+			
+			String eventoId = request.getParameter("evt-id");
+			String eventoNome = request.getParameter("nome");
+			
+			if(eventoId != null && eventoId != "") {
+				evento.setId(Integer.parseInt(eventoId));
+			} else if(eventoNome != null && eventoNome != "") {
+				evento.setNome(eventoNome);
+			}
+			
+			if(operacao.equals("EXCLUIR")) {
+				
+				Rateio rateio = new Rateio();
+				Endereco endereco = new Endereco();
+				
+				String enderecoId = request.getParameter("end-id");
+				String rateioId = request.getParameter("rat-id");
+				
+				
+				endereco.setId(Integer.parseInt(enderecoId));
+				rateio.setId(Integer.parseInt(rateioId));
+				
+				evento.setEndereco(endereco);
+				evento.setRateio(rateio);
+				
+				System.out.println("ID no VH: " + rateio.getId());
+			}
+		}
 				
 		return evento;		
 		
@@ -80,6 +121,36 @@ public class EventoVH implements IViewHelper {
 	@Override
 	public void formataView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
+		
+		List<IDominio> recebido = null;
+		List<Evento> evtRecebidos = null;
+		
+		if(resultado != null) {
+			recebido = resultado.getEntidades();
+			evtRecebidos = (List<Evento>) (Object) recebido;
+		}
+		
+		if(recebido == null || recebido.size() <= 0) {
+			request.setAttribute("erro", "Não há eventos");
+			request.getRequestDispatcher("listar-eventos.jsp").forward(request, response);			
+		} else if(recebido.size() > 1) {
+			request.setAttribute("resultado", evtRecebidos);
+			request.getRequestDispatcher("listar-eventos.jsp").forward(request, response);
+		} else {
+			String editavel = request.getParameter("editar");
+			
+			System.out.println("EDITAVEL: " + editavel + " ID: " + request.getParameter("evt-id"));
+			Evento evento = (Evento) recebido.get(0);
+			request.setAttribute("resultado", evento);
+			if(editavel != "" && editavel != null) {
+				if(editavel.equals("false"))
+					request.getRequestDispatcher("consulta-evento.jsp").forward(request, response);
+				else
+					request.getRequestDispatcher("atualiza-evento.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("sucesso.jsp").forward(request, response);
+			}
+		}
 		
 	}
 	

@@ -1,27 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <meta charset="utf-8">
-        <div class="main-menu">
-            <nav>
-                <div class="nav-wrapper blue lighten-3">
-                    <div class="logo-container">
-                        <a href="#!" class="brand-logo">Gestão de Projetos</a>
-                    </div>
-                  <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                  <ul class="right hide-on-med-and-down">
-                    <li><a class="menu-items" href="sass.html">Eventos</a></li>
-                    <li><a class="menu-items" href="badges.html">Participantes</a></li>
-                    <li><a class="menu-items" href="collapsible.html">Endereços</a></li>
-                    <li><a class="menu-items" href="mobile.html">Locações</a></li>
-                    <li><a class="waves-effect waves-light btn">button</a></li>
-                  </ul>
-                </div>
-            </nav>
-            
-              <ul class="sidenav" id="mobile-demo">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">Javascript</a></li>
-                <li><a href="mobile.html">Mobile</a></li>
-              </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow p-3 mb-5">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
+          Eventos
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/gestao-eventos-web/evento/cadastro-evento.jsp">Cadastrar</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/evento/consultar?operacao=CONSULTAR&editar=false">Lista de Eventos</a>
         </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
+          Locações
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Cadastrar Locação</a>
+          <a class="dropdown-item" href="#">Lista de Locações</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>	
+        </div>
+      </li>              
+      
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+   
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+    </form>
+  </div>
+</nav>

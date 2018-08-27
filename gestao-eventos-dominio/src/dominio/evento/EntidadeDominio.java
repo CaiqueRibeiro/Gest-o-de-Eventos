@@ -4,7 +4,7 @@ import java.util.Date;
 
 public abstract class EntidadeDominio implements IDominio{
 	
-	protected int id;
+	protected int id = 0;
 	protected Date dtCadastro;
 	
 	public int getId() {

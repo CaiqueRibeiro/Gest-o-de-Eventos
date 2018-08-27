@@ -41,11 +41,20 @@ public class Facade implements IFacade{
 		ValidarDados vDados = new ValidarDados();
 		
 		List<IStrategy> rnsSalvarEvento = new ArrayList<IStrategy>();
+		List<IStrategy> rnsAlterarEvento = new ArrayList<IStrategy>();
+		List<IStrategy> rnsConsultarEvento = new ArrayList<IStrategy>();
+		List<IStrategy> rnsExcluirEvento = new ArrayList<IStrategy>();
 		
 		rnsSalvarEvento.add(vDados);
+		rnsAlterarEvento.add(vDados);
+		rnsConsultarEvento.add(vDados);
+		rnsExcluirEvento.add(vDados);
 		
 		Map<String, List<IStrategy>> rnsEvento = new HashMap<String, List<IStrategy>>();
 		rnsEvento.put("SALVAR", rnsSalvarEvento);
+		rnsEvento.put("ALTERAR", rnsSalvarEvento);
+		rnsEvento.put("CONSULTAR", rnsSalvarEvento);
+		rnsEvento.put("EXCLUIR", rnsSalvarEvento);
 		
 		rns.put(Evento.class.getName(), rnsEvento);
 
@@ -81,20 +90,84 @@ public class Facade implements IFacade{
 
 	@Override
 	public Resultado consultar(IDominio entidade) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		resultado = new Resultado();
+		String nmClasse = entidade.getClass().getName();
+		IDAO dao = daos.get(nmClasse);
+		
+		try {
+			
+		List<IDominio> lista = dao.consultar(entidade);
+		resultado.setEntidades(lista);
+		
+		} catch(SQLException e) {
+			e.printStackTrace();
+			System.out.println("Fachada: Não foi possível consultar o registro!");
+			resultado.setMensagem("Não foi possível consultar o registro!");
+		}
+		
+		return resultado;
+		
 	}
 
 	@Override
 	public Resultado alterar(IDominio entidade) {
-		// TODO Auto-generated method stub
-		return null;
+
+		resultado = new Resultado();
+		String nmClasse = entidade.getClass().getName();
+		String msg = executarRegras(entidade, "SALVAR");
+		
+		if(msg == null ) {
+			IDAO dao = daos.get(nmClasse);
+			
+			try {
+				
+				dao.alterar(entidade);
+				List<IDominio> entidades = new ArrayList<IDominio>();
+				entidades.add(entidade);
+				resultado.setEntidades(entidades);
+				System.out.println("obj alterado!");
+			} catch(SQLException e) {
+				e.printStackTrace();
+				System.out.println("Fachada: Não foi possível atualizar o registro!");
+				resultado.setMensagem("Não foi possível atualizar o registro!");
+			}
+		} else {
+			resultado.setMensagem(msg);
+		}
+		
+		return resultado;
+		
 	}
 
 	@Override
 	public Resultado excluir(IDominio entidade) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		resultado = new Resultado();
+		String nmClasse = entidade.getClass().getName();
+		String msg = executarRegras(entidade, "EXCLUIR");
+		
+		if(msg == null ) {
+			IDAO dao = daos.get(nmClasse);
+			
+			try {
+				
+				dao.excluir(entidade);
+				List<IDominio> entidades = new ArrayList<IDominio>();
+				entidades.add(entidade);
+				resultado.setEntidades(entidades);
+				System.out.println("obj alterado!");
+			} catch(SQLException e) {
+				e.printStackTrace();
+				System.out.println("Fachada: Não foi possível excluir o registro!");
+				resultado.setMensagem("Não foi possível excluir o registro!");
+			}
+		} else {
+			resultado.setMensagem(msg);
+		}
+		
+		return resultado;		
+		
 	}
 	
 	private String executarRegras(IDominio entidade, String operacao) {

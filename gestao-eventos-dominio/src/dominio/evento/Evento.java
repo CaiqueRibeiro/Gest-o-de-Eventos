@@ -15,6 +15,7 @@ public class Evento extends EntidadeDominio {
 	private String hora;
 	private int qdtMaximaPessoas = 0;
 	private int categoria;
+	private String catNome;
 	private Endereco endereco;
 	private Rateio rateio;
 	private Administrador administrador;
@@ -31,6 +32,18 @@ public class Evento extends EntidadeDominio {
 	
 	
 	
+	public String getCatNome() {
+		return catNome;
+	}
+
+
+
+	public void setCatNome(String catNome) {
+		this.catNome = catNome;
+	}
+
+
+
 	public double getValorTotal() {
 		return valorTotal;
 	}

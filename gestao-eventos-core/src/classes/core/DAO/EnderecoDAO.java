@@ -75,7 +75,7 @@ public class EnderecoDAO extends AbsDAO {
 
 	@Override
 	public void excluir(IDominio entidade) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	
