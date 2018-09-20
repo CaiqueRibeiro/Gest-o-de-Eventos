@@ -10,11 +10,19 @@ import classes.core.IDAO;
 import classes.core.IFacade;
 import classes.core.IStrategy;
 import classes.core.DAO.EventoDAO;
+import classes.core.DAO.ParticipanteDAO;
+import classes.core.DAO.UsuarioDAO;
 import classes.strategy.ValidarDados;
+import classes.strategy.ValidarDadosParticipante;
+import classes.strategy.ValidarDadosUsuario;
+import classes.strategy.ValidarEndereco;
+import classes.strategy.ValidarExistencia;
 import classes.util.Resultado;
-import dominio.evento.EntidadeDominio;
 import dominio.evento.Evento;
 import dominio.evento.IDominio;
+import dominio.participantes.Administrador;
+import dominio.participantes.Participante;
+import dominio.participantes.Usuario;
 
 public class Facade implements IFacade{
 	
@@ -35,28 +43,77 @@ public class Facade implements IFacade{
 		rns = new HashMap<String, Map<String, List<IStrategy>>>();
 		
 		EventoDAO evtDAO = new EventoDAO();
+		ParticipanteDAO ptcDAO = new ParticipanteDAO();
+		UsuarioDAO usrDAO = new UsuarioDAO();
 		
 		daos.put(Evento.class.getName(), evtDAO);
+		daos.put(Participante.class.getName(), ptcDAO);
+		daos.put(Administrador.class.getName(), usrDAO);
 		
+		// Instanciando strategies Evento
 		ValidarDados vDados = new ValidarDados();
+				
+		// Instanciando strategies Participante
+		ValidarExistencia vExistencia = new ValidarExistencia();
+		ValidarDadosParticipante vDadosParticipante = new ValidarDadosParticipante();
+		ValidarEndereco vEndereco = new ValidarEndereco();
 		
+		// Instanciando strategies Usuário
+		ValidarDadosUsuario vDadosUsuario = new ValidarDadosUsuario();
+		
+		// Listas de strategies para as operações do evento
 		List<IStrategy> rnsSalvarEvento = new ArrayList<IStrategy>();
 		List<IStrategy> rnsAlterarEvento = new ArrayList<IStrategy>();
 		List<IStrategy> rnsConsultarEvento = new ArrayList<IStrategy>();
 		List<IStrategy> rnsExcluirEvento = new ArrayList<IStrategy>();
 		
+		// Listas de strategies para as operações de participante
+		List<IStrategy> rnsSalvarParticipante = new ArrayList<IStrategy>();
+		List<IStrategy> rnsAlterarParticipante = new ArrayList<IStrategy>();
+		List<IStrategy> rnsConsultarParticipante = new ArrayList<IStrategy>();
+		List<IStrategy> rnsExcluirParticipante = new ArrayList<IStrategy>();
+		
+		// Lista de strategies para as operações de usuario
+		List<IStrategy> rnsSalvarUsuario = new ArrayList<IStrategy>();
+		List<IStrategy> rnsAlterarUsuario = new ArrayList<IStrategy>();
+		List<IStrategy> rnsConsultarUsuario = new ArrayList<IStrategy>();
+		List<IStrategy> rnsExcluirUsuario = new ArrayList<IStrategy>();
+		
+		// Regras de negócio sendo inseridas para o evento
 		rnsSalvarEvento.add(vDados);
 		rnsAlterarEvento.add(vDados);
-		rnsConsultarEvento.add(vDados);
-		rnsExcluirEvento.add(vDados);
 		
+		// Regras de negócio sendo inseridas para o participante
+		rnsSalvarParticipante.add(vExistencia);
+		rnsSalvarParticipante.add(vDadosParticipante);
+		rnsSalvarParticipante.add(vEndereco);
+		rnsAlterarParticipante.add(vDadosParticipante);
+		rnsAlterarParticipante.add(vEndereco);
+		
+		// Regras de negócio sendo inseridas para o usuario
+		rnsConsultarUsuario.add(vDadosUsuario);
+		
+		// Mapa para armazenar todas as operações do evento
 		Map<String, List<IStrategy>> rnsEvento = new HashMap<String, List<IStrategy>>();
 		rnsEvento.put("SALVAR", rnsSalvarEvento);
-		rnsEvento.put("ALTERAR", rnsSalvarEvento);
-		rnsEvento.put("CONSULTAR", rnsSalvarEvento);
-		rnsEvento.put("EXCLUIR", rnsSalvarEvento);
+		rnsEvento.put("ALTERAR", rnsAlterarEvento);
+		rnsEvento.put("CONSULTAR", rnsConsultarEvento);
+		rnsEvento.put("EXCLUIR", rnsExcluirEvento);
 		
+		// Mapa para armazenar todas as operações do participante
+		Map<String, List<IStrategy>> rnsParticipante = new HashMap<String, List<IStrategy>>();
+		rnsParticipante.put("SALVAR", rnsSalvarParticipante);
+		rnsParticipante.put("ALTERAR", rnsAlterarParticipante);
+		rnsParticipante.put("CONSULTAR", rnsConsultarParticipante);
+		rnsParticipante.put("EXCLUIR", rnsExcluirParticipante);
+		
+		Map<String, List<IStrategy>> rnsUsuario = new HashMap<String, List<IStrategy>>();
+		rnsUsuario.put("CONSULTAR", rnsConsultarUsuario);
+		
+		// Mapa para todas as regras de negócio de um determinado domínio
 		rns.put(Evento.class.getName(), rnsEvento);
+		rns.put(Participante.class.getName(), rnsParticipante);
+		rns.put(Administrador.class.getName(), rnsUsuario);
 
 	}
 
@@ -93,6 +150,7 @@ public class Facade implements IFacade{
 		
 		resultado = new Resultado();
 		String nmClasse = entidade.getClass().getName();
+		System.out.println("NOME NA FACHADA: " + nmClasse);
 		IDAO dao = daos.get(nmClasse);
 		
 		try {
@@ -115,7 +173,7 @@ public class Facade implements IFacade{
 
 		resultado = new Resultado();
 		String nmClasse = entidade.getClass().getName();
-		String msg = executarRegras(entidade, "SALVAR");
+		String msg = executarRegras(entidade, "ALTERAR");
 		
 		if(msg == null ) {
 			IDAO dao = daos.get(nmClasse);

@@ -19,6 +19,8 @@ import web.command.impl.ExcluirCommand;
 import web.command.impl.SalvarCommand;
 import web.viewhelper.IViewHelper;
 import web.viewhelper.impl.EventoVH;
+import web.viewhelper.impl.ParticipanteVH;
+import web.viewhelper.impl.UsuarioVH;
 
 /**
  * Servlet implementation class Gestao
@@ -40,10 +42,16 @@ public class Gestao extends HttpServlet {
     	commands.put("EXCLUIR", new ExcluirCommand());
     	
     	vhs = new HashMap<String, IViewHelper>();
+    	vhs.put("/gestao-eventos-web/login", new UsuarioVH());
+    	vhs.put("/gestao-eventos-web/cadastrar", new UsuarioVH());
     	vhs.put("/gestao-eventos-web/evento/salvar", new EventoVH());
     	vhs.put("/gestao-eventos-web/evento/consultar", new EventoVH());
     	vhs.put("/gestao-eventos-web/evento/alterar", new EventoVH());
     	vhs.put("/gestao-eventos-web/evento/excluir", new EventoVH());
+    	vhs.put("/gestao-eventos-web/participantes/salvar", new ParticipanteVH());
+    	vhs.put("/gestao-eventos-web/participantes/consultar", new ParticipanteVH());
+    	vhs.put("/gestao-eventos-web/participantes/alterar", new ParticipanteVH());
+    	vhs.put("/gestao-eventos-web/participantes/excluir", new ParticipanteVH());
         
      
     }
@@ -55,6 +63,8 @@ public class Gestao extends HttpServlet {
     	String uri = request.getRequestURI();
     	
     	String operacao = request.getParameter("operacao");
+    	
+    	System.out.println("A URI é " + uri);
 		
 		IViewHelper vh = vhs.get(uri);
 		

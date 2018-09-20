@@ -15,6 +15,10 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Gestao</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
     <url-pattern>/evento/salvar</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
@@ -28,5 +32,21 @@
   <servlet-mapping>
     <servlet-name>Gestao</servlet-name>
     <url-pattern>/evento/excluir</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/participantes/salvar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/participantes/consultar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/participantes/alterar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/participantes/excluir</url-pattern>
   </servlet-mapping>
 </web-app>

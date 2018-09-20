@@ -27,11 +27,11 @@
 			    <div class="form-group col-md-10">
 			    	<input type="hidden" name="situacao" value="AGENDADO">
 			    	<label for="nome">Nome do Evento</label>
-			    	<input type="text" class="form-control" name="nome" value="${resultado.getNome()}">
+			    	<input type="text" required=true class="form-control" name="nome" value="${resultado.getNome()}">
 			    </div>
 			    <div class="form-group col-md-2">
 			      <label for="max-participantes">Participantes máximos</label>
-			      <input type="text" class="max-participantes form-control" name="max-participantes" value="${resultado.getQdtMaximaPessoas()}">
+			      <input type="number" min="1" required class="max-participantes form-control" name="max-participantes" value="${resultado.getQdtMaximaPessoas()}">
 			    </div>
 			  </div>
 			  <div class="form-row">
@@ -45,25 +45,25 @@
 			    </div>
 			    <div class="form-group col-md-3">
 			      <label for="data">Data</label>
-			      <input type="date" class="data form-control" name="data" value="${resultado.getData()}">
+			      <input type="date" required class="data form-control" name="data" value="${resultado.getData()}">
 			    </div>
 			    <div class="form-group col-md-3">
 			      <label for="hora">Hora</label>
-			      <input type="time" class="hora form-control" name="hora" value="${resultado.getHora()}">
+			      <input type="time" required class="hora form-control" name="hora" value="${resultado.getHora()}">
 			    </div>
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-4">
 			      <label for="porcentagem-lucro">Porcentagem de lucro</label>
-			      <input type="text" class="porcentagem-lucro form-control" name="porcentagem-lucro" value="0">
+			      <input type="number" min="0" required class="porcentagem-lucro form-control" name="porcentagem-lucro" value="0">
 			    </div>
 			    <div class="form-group col-md-4">
 			      <label for="inicio-rateio">Início do rateio</label>
-			      <input type="date" class="inicio-rateio form-control" name="inicio-rateio" value="${resultado.getRateio().getInicioRateio()}">
+			      <input type="date" required class="inicio-rateio form-control" name="inicio-rateio" value="${resultado.getRateio().getInicioRateio()}">
 			    </div>
 			    <div class="form-group col-md-4">
 			      <label for="final-rateio">Final do rateio</label>
-			      <input type="date" class="final-rateio form-control" name="final-rateio" value="${resultado.getRateio().getFimRateio()}">
+			      <input type="date" required class="final-rateio form-control" name="final-rateio" value="${resultado.getRateio().getFimRateio()}">
 			    </div>
 			  </div>
 			  <div class="form-row">
@@ -79,11 +79,11 @@
 			  <div class="form-row">
 				  <div class="form-group col-md-10">
 				    <label for="rua">Rua</label>
-				    <input type="text" class="rua form-control" name="rua" value="${resultado.getEndereco().getRua() }">
+				    <input type="text" required class="rua form-control" name="rua" value="${resultado.getEndereco().getRua() }">
 				  </div>
 				  <div class="form-group col-md-2">
 				    <label for="bairro">Bairro</label>
-				    <input type="text" class="bairro form-control" name="bairro" value="${resultado.getEndereco().getBairro() }">
+				    <input type="text" required class="bairro form-control" name="bairro" value="${resultado.getEndereco().getBairro() }">
 				  </div>
 			  </div>
 			  <div class="form-row">
@@ -97,31 +97,44 @@
 			    </div>
 			    <div class="form-group col-md-4">
 					<label for="cep">CEP</label>
-					<input type="text" class="cep form-control" name="cep" value="${resultado.getEndereco().getCEP() }">
+					<input type="text" required class="cep form-control" name="cep" value="${resultado.getEndereco().getCEP() }">
 			    </div>
 			    <div class="form-group col-md-2">
 			      <label for="numero">Número</label>
-			      <input type="text" class="numero form-control" name="numero" value="${resultado.getEndereco().getNumero() }">
+			      <input type="text" required class="numero form-control" name="numero" value="${resultado.getEndereco().getNumero() }">
 			    </div>
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-2">
 			      <label for="cidade">Cidade</label>
-			      <input type="text" class="cidade form-control" name="cidade" value="${resultado.getEndereco().getCidade() }">
+			      <input type="text" required class="cidade form-control" name="cidade" value="${resultado.getEndereco().getCidade() }">
 			    </div>
 			    <div class="form-group col-md-2">
 			      <label for="estado">Estado</label>
-			      <input type="text" class="estado form-control" name="estado" value="${resultado.getEndereco().getEstado() }">
+			      <input type="text" required class="estado form-control" name="estado" value="${resultado.getEndereco().getEstado() }">
+			    </div>
+			    <div class="form-group col-md-3">
+			      <label for="logradouro">Situação</label>
+			      <select class="logradouro form-control" name="situação">
+			      	<option value="1">AGENDADO</option>
+			      	<option value="2">FINALIZADO</option>
+			      	<option value="3">CANCELADO</option>
+			      	<option value="3">ADIADO</option>
+			      </select>
 			    </div>
 			  </div>
 			  <br/>
-			  <button type="submit" name="operacao" class="btn btn-primary" value="ATUALIZAR">ATUALIZAR</button>
+			  <button type="submit" required name="operacao" class="btn btn-primary" value="ATUALIZAR">ATUALIZAR</button>
+			  <a href="../participantes/seleciona-participantes.jsp" class="btn btn-success">Adicionar Participantes</a>
+			  <a href="../participantes/participantes-evento.jsp" class="btn btn-success">Ver Participantes</a>
 			  <a href="excluir?&operacao=EXCLUIR&evt-id=${resultado.getId()}&rat-id=${resultado.getRateio().getId()}&end-id=${resultado.getEndereco().getId()}" class="btn btn-danger">EXCLUIR</a>
 			</form>
 		</div>
 	</div>
 	
-	<script type="text/javascript" src="js/visual.js"></script>
-	<script src="../bootstrap/js/bootstrap.min.js" ></script>
+	<script src="../bootstrap/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="../bootstrap/js/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="../js/visual.js"></script>
 </body>
 </html>

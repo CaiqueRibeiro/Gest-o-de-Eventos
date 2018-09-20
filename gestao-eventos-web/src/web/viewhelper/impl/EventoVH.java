@@ -124,36 +124,45 @@ public class EventoVH implements IViewHelper {
 		
 		List<IDominio> recebido = null;
 		List<Evento> evtRecebidos = null;
+		String msgErro = "";
 		
 		if(resultado != null) {
+			msgErro = resultado.getMensagem();
+			
 			recebido = resultado.getEntidades();
 			evtRecebidos = (List<Evento>) (Object) recebido;
 		}
 		
-		if(recebido == null || recebido.size() <= 0) {
-			request.setAttribute("erro", "Não há eventos");
-			request.getRequestDispatcher("listar-eventos.jsp").forward(request, response);			
-		} else if(recebido.size() > 1) {
-			request.setAttribute("resultado", evtRecebidos);
-			request.getRequestDispatcher("listar-eventos.jsp").forward(request, response);
+		if(msgErro != null && msgErro != "") {
+			request.setAttribute("mensagem", msgErro);
+			request.getRequestDispatcher("erro.jsp").forward(request, response);
 		} else {
-			String editavel = request.getParameter("editar");
-			
-			System.out.println("EDITAVEL: " + editavel + " ID: " + request.getParameter("evt-id"));
-			Evento evento = (Evento) recebido.get(0);
-			request.setAttribute("resultado", evento);
-			if(editavel != "" && editavel != null) {
-				if(editavel.equals("false"))
-					request.getRequestDispatcher("consulta-evento.jsp").forward(request, response);
-				else
-					request.getRequestDispatcher("atualiza-evento.jsp").forward(request, response);
-			} else {
-				request.getRequestDispatcher("sucesso.jsp").forward(request, response);
-			}
-		}
 		
-	}
-	
+			if(recebido == null || recebido.size() <= 0) {
+				request.setAttribute("erro", "Não há eventos");
+				request.getRequestDispatcher("listar-eventos.jsp").forward(request, response);			
+			} else if(recebido.size() > 1) {
+				request.setAttribute("resultado", evtRecebidos);
+				request.getRequestDispatcher("listar-eventos.jsp").forward(request, response);
+			} else {
+				String editavel = request.getParameter("editar");
+				
+				System.out.println("EDITAVEL: " + editavel + " ID: " + request.getParameter("evt-id"));
+				Evento evento = (Evento) recebido.get(0);
+				request.setAttribute("resultado", evento);
+				if(editavel != "" && editavel != null) {
+					if(editavel.equals("false"))
+						request.getRequestDispatcher("consulta-evento.jsp").forward(request, response);
+					else
+						request.getRequestDispatcher("atualiza-evento.jsp").forward(request, response);
+				} else {
+					request.getRequestDispatcher("sucesso.jsp").forward(request, response);
+				}
+			}
+		
+		} // caso não tenha mensagem de erro
+		
+	}	// final do método
 	
 
 }

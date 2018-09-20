@@ -91,8 +91,8 @@ public class EventoDAO extends AbsDAO {
 		
 		try {
 			
-			enderecoDAO.salvar(evento.getEndereco());
-			evento.getEndereco().setId(enderecoDAO.consultar());
+			enderecoDAO.alterar(evento.getEndereco());
+			//evento.getEndereco().setId(enderecoDAO.consultar());
 			
 			rateioDAO.alterar(evento.getRateio());
 			
@@ -177,6 +177,8 @@ public class EventoDAO extends AbsDAO {
 			if(evento.getNome() != null && evento.getNome() != "") {
 				ps.setString(2, evento.getNome());
 			}
+			
+			System.out.println(ps.toString());
 			
 			ResultSet resultado = ps.executeQuery();
 			

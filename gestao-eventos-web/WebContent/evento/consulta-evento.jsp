@@ -45,7 +45,7 @@
 			    </div>
 			    <div class="form-group col-md-3">
 			      <label for="hora">Hora</label>
-			      
+			      <p class="hora" id="hora">${resultado.getHora()}</p>
 			    </div>
 			  </div>
 			  <div class="form-row">
@@ -65,7 +65,7 @@
 			  <div class="form-row">
 				<div class="form-group col-md-12">
 			  		<label for="locacao">Locação</label>
-			  		<select class="genero form-control" name="locacao">
+			  		<select class="genero form-control" readonly name="locacao">
 			      		<option value="1">Zezinho Festas</option>
 			      		<option value="2">Residência Secreta da Maçonaria</option>
 			      		<option value="3">Salão de Festas - Apartamento Boulevard</option>
@@ -75,17 +75,17 @@
 			  <div class="form-row">
 				  <div class="form-group col-md-10">
 				    <label for="rua">Rua</label>
-				    <input type="text" class="rua form-control" name="rua" placeholder="ex. Nove de Julho">
+				    <p name="rua">${resultado.getEndereco().getRua() }</p>
 				  </div>
 				  <div class="form-group col-md-2">
 				    <label for="bairro">Bairro</label>
-				    <input type="text" class="bairro form-control" name="bairro" placeholder="ex. centro">
+				    <p name="bairro">${resultado.getEndereco().getBairro() }</p>
 				  </div>
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
 			      <label for="logradouro">Logradouro</label>
-			      <select class="logradouro form-control" name="logradouro">
+			      <select class="logradouro form-control" readonly name="logradouro">
 			      	<option value="1">Rua</option>
 			      	<option value="2">Avenida</option>
 			      	<option value="3">Alameda</option>
@@ -93,31 +93,38 @@
 			    </div>
 			    <div class="form-group col-md-4">
 					<label for="cep">CEP</label>
-					<input type="text" class="cep form-control" name="cep" placeholder="XXXXX-XXX">
+					<p name="cep">${resultado.getEndereco().getCEP() }</p>
 			    </div>
 			    <div class="form-group col-md-2">
 			      <label for="numero">Número</label>
-			      <input type="text" class="numero form-control" name="numero" placeholder="ex. 348, 193, 45">
+			      <p name="numero">${resultado.getEndereco().getNumero() }</p>
 			    </div>
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-2">
 			      <label for="cidade">Cidade</label>
-			      <input type="text" class="cidade form-control" name="cidade" placeholder="ex. Poá, Suzano, Mogi das Cruzes">
+			      <p name="cidade">${resultado.getEndereco().getCidade() }</p>
 			    </div>
 			    <div class="form-group col-md-2">
 			      <label for="estado">Estado</label>
-			      <input type="text" class="estado form-control" name="estado" placeholder="ex. São Paulo, Rio Grande do Sul, Paraná">
+			      <p name="estado">${resultado.getEndereco().getEstado() }</p>
+			    </div>
+			    <div class="form-group col-md-3">
+			      <label for="logradouro">Situação</label>
+			      	<p name="situacao">AGENDADO</P>
 			    </div>
 			  </div>
 			  <br/>
 			  <input type="submit" class="btn btn-primary" value="ALTERAR DADOS">
+			  <a href="rateio-evento.jsp" class="btn btn-success">RATEIO DO EVENTO</a>
 			  <input type="hidden" name="operacao" class="btn btn-primary" value="CONSULTAR">
 			</form>
 		</div>
 	</div>
 	
-	<script type="text/javascript" src="js/visual.js"></script>
-	<script src="../bootstrap/js/bootstrap.min.js" ></script>
+	<script src="../bootstrap/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="../bootstrap/js/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="../js/visual.js"></script>
 </body>
 </html>

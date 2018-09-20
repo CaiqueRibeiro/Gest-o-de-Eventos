@@ -1,0 +1,3 @@
+function addInativo() {
+	alert("Teste")
+}

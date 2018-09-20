@@ -24,11 +24,11 @@
 			    <div class="form-group col-md-10">
 			    	<input type="hidden" name="situacao" value="AGENDADO">
 			    	<label for="nome">Nome do Evento</label>
-			    	<input type="text" class="form-control" name="nome" placeholder="Nome do evento">
+			    	<input type="text" class="form-control" name="nome" required placeholder="Nome do evento">
 			    </div>
 			    <div class="form-group col-md-2">
 			      <label for="max-participantes">Participantes máximos</label>
-			      <input type="text" class="max-participantes form-control" name="max-participantes" placeholder="ex. 100, 5000">
+			      <input type="number" class="max-participantes form-control" required min="1" name="max-participantes" placeholder="ex. 100, 5000">
 			    </div>
 			  </div>
 			  <div class="form-row">
@@ -42,25 +42,25 @@
 			    </div>
 			    <div class="form-group col-md-3">
 			      <label for="data">Data</label>
-			      <input type="date" class="data form-control" name="data">
+			      <input type="date" required class="data form-control" name="data">
 			    </div>
 			    <div class="form-group col-md-3">
 			      <label for="hora">Hora</label>
-			      <input type="time" class="hora form-control" name="hora">
+			      <input type="time" required class="hora form-control" name="hora">
 			    </div>
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-4">
 			      <label for="porcentagem-lucro">Porcentagem de lucro</label>
-			      <input type="text" class="porcentagem-lucro form-control" name="porcentagem-lucro">
+			      <input type="number" required class="porcentagem-lucro form-control" min="0" name="porcentagem-lucro">
 			    </div>
 			    <div class="form-group col-md-4">
 			      <label for="inicio-rateio">Início do rateio</label>
-			      <input type="date" class="inicio-rateio form-control" name="inicio-rateio">
+			      <input type="date" required class="inicio-rateio form-control" name="inicio-rateio">
 			    </div>
 			    <div class="form-group col-md-4">
 			      <label for="final-rateio">Final do rateio</label>
-			      <input type="date" class="final-rateio form-control" name="final-rateio">
+			      <input type="date" required class="final-rateio form-control" name="final-rateio">
 			    </div>
 			  </div>
 			  <div class="form-row">
@@ -76,11 +76,11 @@
 			  <div class="form-row">
 				  <div class="form-group col-md-10">
 				    <label for="rua">Rua</label>
-				    <input type="text" class="rua form-control" name="rua" placeholder="ex. Nove de Julho">
+				    <input type="text" required class="rua form-control" name="rua" placeholder="ex. Nove de Julho">
 				  </div>
 				  <div class="form-group col-md-2">
 				    <label for="bairro">Bairro</label>
-				    <input type="text" class="bairro form-control" name="bairro" placeholder="ex. centro">
+				    <input type="text" required class="bairro form-control" name="bairro" placeholder="ex. centro">
 				  </div>
 			  </div>
 			  <div class="form-row">
@@ -94,21 +94,21 @@
 			    </div>
 			    <div class="form-group col-md-4">
 					<label for="cep">CEP</label>
-					<input type="text" class="cep form-control" name="cep" placeholder="XXXXX-XXX">
+					<input type="text" required class="cep form-control" name="cep" placeholder="XXXXX-XXX">
 			    </div>
 			    <div class="form-group col-md-2">
 			      <label for="numero">Número</label>
-			      <input type="text" class="numero form-control" name="numero" placeholder="ex. 348, 193, 45">
+			      <input type="text" required class="numero form-control" name="numero" placeholder="ex. 348, 193, 45">
 			    </div>
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-2">
 			      <label for="cidade">Cidade</label>
-			      <input type="text" class="cidade form-control" name="cidade" placeholder="ex. Poá, Suzano, Mogi das Cruzes">
+			      <input type="text" required class="cidade form-control" name="cidade" placeholder="ex. Poá, Suzano, Mogi das Cruzes">
 			    </div>
 			    <div class="form-group col-md-2">
 			      <label for="estado">Estado</label>
-			      <input type="text" class="estado form-control" name="estado" placeholder="ex. São Paulo, Rio Grande do Sul, Paraná">
+			      <input type="text" required class="estado form-control" name="estado" placeholder="ex. São Paulo, Rio Grande do Sul, Paraná">
 			    </div>
 			  </div>
 			  <br/>
@@ -117,7 +117,9 @@
 		</div>
 	</div>
 	
-	<script type="text/javascript" src="js/visual.js"></script>
-	<script src="../bootstrap/js/bootstrap.min.js" ></script>
+	<script src="../bootstrap/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="../bootstrap/js/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="../js/visual.js"></script>
 </body>
 </html>
