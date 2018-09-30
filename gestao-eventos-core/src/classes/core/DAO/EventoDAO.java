@@ -162,6 +162,7 @@ public class EventoDAO extends AbsDAO {
 			// inicia a declaração da query
 			sql.append("SELECT * from eventos ev left join enderecos end on end.end_id = ev.end_id left join categorias c");
 			sql.append(" on c.cat_id = ev.cat_id left join rateios r on r.rat_id = ev.rat_id where 1=1");
+			
 			if(evento.getId() != 0) {
 				sql.append(" AND evt_id=?");
 			}
@@ -174,6 +175,7 @@ public class EventoDAO extends AbsDAO {
 			if(evento.getId() != 0) {
 				ps.setInt(1, evento.getId());
 			}
+			
 			if(evento.getNome() != null && evento.getNome() != "") {
 				ps.setString(2, evento.getNome());
 			}
