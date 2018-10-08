@@ -1,4 +1,4 @@
-<%@page import="dominio.participantes.Participante"%>
+<%@page import="dominio.produto.Produto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,16 +11,16 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Lista de Participantes</title>
+    <title>Lista de produtos</title>
     </head>
     <body>
     	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     	<c:import url="../header.jsp" />
 
     	<div class="container">
-    		<center><h3>Busca de Participantes</h3></center>  
-
-    		<table class="table">
+    		<center><h3>Busca de Produtos</h3></center>  
+    		
+			 <table class="table">
 	    		<thead>
 	    			<tr>
 	    				<th colspan="2" scope="col" style="width: 100%">Consultar</th>
@@ -31,8 +31,8 @@
 	    		<tbody>
 	    			<tr>
 	    				<td  id="nome-filtro"><input type="text"style="width: 80%; margin-top: 0.5%" id="nome" name="nome"/></td>
-	    				<td style="text-align: left"><input type="button" id="consultar" class="btn btn-primary" value="Filtrar" onclick="procuraNome()"/>
-	    					<a href="cadastro-evento.jsp" class="btn btn-success">Cadastrar</a>
+	    				<td style="text-align: left"><input type="submit" id="consultar" class="btn btn-primary" value="CONSULTAR"/>
+	    					<a href="consultar?operacao=CONSULTAR&editar=false" class="btn btn-success">Cadastrar</a>
 	    				</td>                       
 	    			</tr>
 	    		</tbody>
@@ -42,19 +42,19 @@
 		    <table class="table table-light">
 			    <thead>
 				    <tr>
-				    	<th scope="col">Nome</th>
+				    	<th scope="col">Produto</th>
 				    </tr>
 			    </thead>
 				    <tbody  id="corpo-lista">
 				    	<%
-				    		List<Participante> resultado = (List<Participante>) request.getAttribute("resultado");
+				    		List<Produto> resultado = (List<Produto>) request.getAttribute("resultado");
 				    	
 					    	if(resultado != null) {
 					    		  
-					    	  	for(Participante ptc : resultado) {
+					    	  	for(Produto pdt : resultado) {
 				    	%>
 				    	<tr>
-				    		<td><a href="consultar?operacao=CONSULTAR&part-id=<%=ptc.getId()%>&editar=false"><%=ptc.getNome()%></a></td>
+				    		<td><a href="consultar?operacao=CONSULTAR&pdt-id=<%=pdt.getId()%>&editar=false"><%=pdt.getNome()%></a></td>
 				    	</tr>
 				    	<%
 					    	  	}

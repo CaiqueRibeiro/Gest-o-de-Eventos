@@ -9,6 +9,7 @@ import java.util.List;
 import java.sql.Timestamp;
 
 import dominio.evento.IDominio;
+import dominio.produto.Categoria;
 import dominio.produto.Fornecedor;
 import dominio.produto.Produto;
 
@@ -26,23 +27,18 @@ public class ProdutoDAO extends AbsDAO {
 			
 			conexao.setAutoCommit(false);
 			StringBuilder sql = new StringBuilder();
-			
-			sql.append("INSERT into produtos (nome, preco, perecivel, dt_validade, dt_entrada, descricao, id_fornecedor)");
-			sql.append(" VALUES (?,?,?,?,?,?,?)");
-			
+				
+			sql.append("INSERT into produtos (nome, perecivel, descricao, id_categoria)");
+			sql.append(" VALUES (?,?,?,?)");
+
+			System.out.println("QUERIE: " + sql.toString());
 			ps = conexao.prepareStatement(sql.toString());
 			
 			ps.setString(1, produto.getNome());
-			ps.setDouble(2, produto.getPreco());
-			ps.setBoolean(3, produto.isPerecivel());
-			// Converte as datas
-			Timestamp entrada = new Timestamp(produto.getDtCadastro().getTime());
-			Timestamp validade = new Timestamp(produto.getValidade().getTime());
-			
-			ps.setTimestamp(4, entrada);
-			ps.setTimestamp(5, validade);
-			ps.setString(6, produto.getDescricao());
-			ps.setInt(7, produto.getFornecedor().getId());
+			ps.setBoolean(2, produto.isPerecivel());
+			ps.setString(3, produto.getDescricao());
+			ps.setInt(4, produto.getCategoria().getId());
+
 			
 			ps.executeUpdate();
 			conexao.commit();
@@ -67,7 +63,47 @@ public class ProdutoDAO extends AbsDAO {
 
 	@Override
 	public void alterar(IDominio entidade) throws SQLException {
-		// TODO Auto-generated method stub
+
+		conectar();
+		PreparedStatement ps = null;
+		Produto produto = (Produto) entidade;
+		
+		try {
+			
+			conexao.setAutoCommit(false);
+			
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append("UPDATE produtos set nome=?, perecivel=?, descricao=?, id_categoria=?");
+			sql.append(" WHERE prd_id=?");
+			
+			ps = conexao.prepareStatement(sql.toString());
+			
+			ps.setString(1, produto.getNome());
+			ps.setBoolean(2, produto.isPerecivel());
+			ps.setString(3, produto.getDescricao());
+			ps.setInt(4, produto.getCategoria().getId());
+			ps.setInt(5, produto.getId());
+			
+			ps.executeUpdate();
+			conexao.commit();
+			
+		} catch (SQLException e) {
+			try {
+				conexao.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} // fim do try/catch INTERNO
+			
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} // final FINALLY	
 		
 	}
 
@@ -79,6 +115,7 @@ public class ProdutoDAO extends AbsDAO {
 		List<IDominio> produtos = new ArrayList<IDominio>();
 		
 		Produto produto = (Produto) entidade;
+		System.out.println("ID no DAO: " + produto.getId());
 		
 		try {
 			
@@ -88,15 +125,15 @@ public class ProdutoDAO extends AbsDAO {
 			
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("SELECT * from produtos p left join fornecedores f on f.fnc_id = p.id_fornecedor");
+			sql.append("SELECT p.*, c.* from produtos p inner join categorias_produto c on c.cat_id = p.id_categoria");
 			sql.append(" where 1=1");
 			
 			if(produto.getId() != 0) {
-				sql.append(" AND p.prd_id = ?");
+				sql.append(" AND prd_id = ?");
 			}
 			
 			if(produto.getNome() != null && produto.getNome() != "") {
-				sql.append(" AND p.nome = ?");
+				sql.append(" AND nome = ?");
 			}
 			
 			ps = conexao.prepareStatement(sql.toString());
@@ -115,12 +152,16 @@ public class ProdutoDAO extends AbsDAO {
 			
 			while(resultado.next()) {
 				Produto pdtBuscado = new Produto();
-				Fornecedor fncBuscado = new Fornecedor();
+				Categoria ctgBuscada = new Categoria();
 				
-				pdtBuscado.setNome(resultado.getString("p.nome"));	
-				pdtBuscado.setDtCadastro(resultado.getDate("p.dt_entrada"));
-				pdtBuscado.setValidade(resultado.getDate("p.dt_validade"));
-				pdtBuscado.setPerecivel(Boolean.getBoolean(1));
+				pdtBuscado.setId(resultado.getInt("p.prd_id"));
+				pdtBuscado.setNome(resultado.getString("p.nome"));
+				pdtBuscado.setPerecivel(resultado.getInt("p.perecivel") == 1 ? true : false);
+				pdtBuscado.setDescricao(resultado.getString("p.descricao"));
+				
+				ctgBuscada.setId(resultado.getInt("c.cat_id"));
+				ctgBuscada.setNome(resultado.getString("c.nome"));
+				pdtBuscado.setCategoria(ctgBuscada);
 				
 				produtos.add(pdtBuscado);
 			}
@@ -147,7 +188,46 @@ public class ProdutoDAO extends AbsDAO {
 
 	@Override
 	public void excluir(IDominio entidade) throws SQLException {
-		// TODO Auto-generated method stub
+		conectar();
+		PreparedStatement ps = null;
+		List<IDominio> produtos = new ArrayList<IDominio>();
+		
+		Produto produto = (Produto) entidade;
+		System.out.println("ID no DAO: " + produto.getId());
+		
+		try {
+			
+			conexao.setAutoCommit(false);
+			
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("DELETE from produtos");
+			sql.append(" where prd_id=?");
+			
+			
+			ps = conexao.prepareStatement(sql.toString());
+			
+				ps.setInt(1, produto.getId());
+				
+				ps.executeUpdate();
+				conexao.commit();
+			
+		} catch (SQLException e) {
+			try {
+				conexao.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} // fim do try/catch INTERNO
+			
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} // final FINALLY
 		
 	}
 

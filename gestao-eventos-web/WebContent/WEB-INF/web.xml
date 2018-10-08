@@ -49,4 +49,21 @@
     <servlet-name>Gestao</servlet-name>
     <url-pattern>/participantes/excluir</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/produtos/salvar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/produtos/consultar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/produtos/alterar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/produtos/excluir</url-pattern>
+  </servlet-mapping>
+ 
 </web-app>

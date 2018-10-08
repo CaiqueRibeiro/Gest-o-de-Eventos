@@ -19,7 +19,9 @@ import web.command.impl.ExcluirCommand;
 import web.command.impl.SalvarCommand;
 import web.viewhelper.IViewHelper;
 import web.viewhelper.impl.EventoVH;
+import web.viewhelper.impl.ItemProdutoVH;
 import web.viewhelper.impl.ParticipanteVH;
+import web.viewhelper.impl.ProdutoVH;
 import web.viewhelper.impl.UsuarioVH;
 
 /**
@@ -52,8 +54,15 @@ public class Gestao extends HttpServlet {
     	vhs.put("/gestao-eventos-web/participantes/consultar", new ParticipanteVH());
     	vhs.put("/gestao-eventos-web/participantes/alterar", new ParticipanteVH());
     	vhs.put("/gestao-eventos-web/participantes/excluir", new ParticipanteVH());
-        
-     
+    	vhs.put("/gestao-eventos-web/produtos/salvar", new ProdutoVH());
+    	vhs.put("/gestao-eventos-web/produtos/consultar", new ProdutoVH());
+    	vhs.put("/gestao-eventos-web/produtos/alterar", new ProdutoVH());
+    	vhs.put("/gestao-eventos-web/produtos/excluir", new ProdutoVH());
+    	vhs.put("/gestao-eventos-web/estoque/salvar", new ItemProdutoVH());
+    	vhs.put("/gestao-eventos-web/estoque/consultar", new ItemProdutoVH());
+    	vhs.put("/gestao-eventos-web/estoque/alterar", new ItemProdutoVH());
+    	vhs.put("/gestao-eventos-web/estoque/excluir", new ItemProdutoVH());
+   
     }
 
 
@@ -63,9 +72,7 @@ public class Gestao extends HttpServlet {
     	String uri = request.getRequestURI();
     	
     	String operacao = request.getParameter("operacao");
-    	
-    	System.out.println("A URI é " + uri);
-		
+    			
 		IViewHelper vh = vhs.get(uri);
 		
 		IDominio entidade =  vh.getData(request);

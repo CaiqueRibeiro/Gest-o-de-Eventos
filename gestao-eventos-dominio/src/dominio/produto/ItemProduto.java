@@ -7,6 +7,7 @@ public class ItemProduto extends EntidadeDominio {
 	private Produto produto;
 	private double quantidade = 0.0;
 	private double precoTotal = 0.0;
+	Fornecedor fornecedor;
 	
 	public Produto getProduto() {
 		return produto;
@@ -35,6 +36,16 @@ public class ItemProduto extends EntidadeDominio {
  	private void calcPrecoTotal() {
  		this.precoTotal = this.produto.getPreco() * this.quantidade;
  	}
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+ 	
+ 	
 	
 	
 

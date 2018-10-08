@@ -37,16 +37,17 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/gestao-eventos-web/participantes/cadastro-participante.jsp">Cadastrar Participante</a>
-          <a class="dropdown-item" href="/gestao-eventos-web/participantes/consultar?operacao=CONSULTAR&editar=false"">Lista de Participantes</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/participantes/consultar?operacao=CONSULTAR&editar=false">Lista de Participantes</a>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
-          Estoque
+          Produtos e Estoque
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/gestao-eventos-web/participantes/lista-participantes.jsp">Cadastrar Novo Item</a>
-          <a class="dropdown-item" href="/gestao-eventos-web/participantes/lista-participantes.jsp">Lista de Estoque</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/produtos/consultar?operacao=CONSULTAR&editar=false">Lista Produtos</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/produtos/cadastro-produto.jsp">Cadastrar Novo Produto</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/participantes/lista-participantes.jsp">Consulta de Estoque</a>
         </div>
       </li>
       <li class="nav-item dropdown">

@@ -129,6 +129,7 @@ public class ParticipanteVH implements IViewHelper {
 				request.getRequestDispatcher("lista-participantes.jsp").forward(request, response);
 			} else {
 				String editavel = request.getParameter("editar");
+				System.out.println("Editável? " + editavel);
 				
 				Participante participante = (Participante) recebido.get(0);
 				request.setAttribute("resultado", participante);

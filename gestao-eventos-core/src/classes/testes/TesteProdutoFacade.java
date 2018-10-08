@@ -4,17 +4,19 @@ import java.sql.SQLException;
 import java.util.List;
 
 import classes.core.DAO.ProdutoDAO;
+import classes.facade.Facade;
+import classes.util.Resultado;
 import dominio.produto.Produto;
 
-public class TesteConsultaProduto {
+public class TesteProdutoFacade {
 	
 	public static void main(String[] args) throws SQLException {
 		
 		Produto p1 = new Produto();
-		p1.setId(3);
 		
-		ProdutoDAO dao = new ProdutoDAO();
-		List<Produto> produtos = (List<Produto>) (Object) dao.consultar(p1);
+		Facade fachada = new Facade();
+		Resultado resultado = fachada.consultar(p1);
+		List<Produto> produtos = (List<Produto>) (Object) resultado.getEntidades();
 		
 		for (Produto produto : produtos) {
 			

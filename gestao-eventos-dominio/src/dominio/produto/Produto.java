@@ -9,10 +9,9 @@ public class Produto extends EntidadeDominio {
 	private String nome;
 	private double preco;
 	private boolean perecivel;
-	private Date validade;
 	private String descricao;
-	private Fornecedor fornecedor;
-	
+	private Categoria categoria;
+
 	public String getNome() {
 		return nome;
 	}
@@ -37,14 +36,6 @@ public class Produto extends EntidadeDominio {
 		this.perecivel = perecivel;
 	}
 	
-	public Date getValidade() {
-		return validade;
-	}
-	
-	public void setValidade(Date validade) {
-		this.validade = validade;
-	}
-	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -53,14 +44,13 @@ public class Produto extends EntidadeDominio {
 		this.descricao = descricao;
 	}
 
-	public Fornecedor getFornecedor() {
-		return fornecedor;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
-	
 	
 
 }
