@@ -19,7 +19,7 @@
 		<div class="container-form-login">
 			<h1 class="text-center">Login</h1>
 			
-			<form action="login">
+			<form action="login" method="post">
 			  <div class="form-row">
 			    <div class="form-group col-md-12">
 			    	<label for="nome">Nome</label>

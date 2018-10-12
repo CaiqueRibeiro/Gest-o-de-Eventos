@@ -10,6 +10,7 @@ import classes.core.IDAO;
 import classes.core.IFacade;
 import classes.core.IStrategy;
 import classes.core.DAO.EventoDAO;
+import classes.core.DAO.ItemProdutoDAO;
 import classes.core.DAO.ParticipanteDAO;
 import classes.core.DAO.ProdutoDAO;
 import classes.core.DAO.UsuarioDAO;
@@ -25,6 +26,7 @@ import dominio.evento.IDominio;
 import dominio.participantes.Administrador;
 import dominio.participantes.Participante;
 import dominio.participantes.Usuario;
+import dominio.produto.ItemProduto;
 import dominio.produto.Produto;
 
 public class Facade implements IFacade{
@@ -49,11 +51,13 @@ public class Facade implements IFacade{
 		ParticipanteDAO ptcDAO = new ParticipanteDAO();
 		UsuarioDAO usrDAO = new UsuarioDAO();
 		ProdutoDAO pdtDAO = new ProdutoDAO();
+		ItemProdutoDAO itemDAO = new ItemProdutoDAO();
 		
 		daos.put(Evento.class.getName(), evtDAO);
 		daos.put(Participante.class.getName(), ptcDAO);
 		daos.put(Administrador.class.getName(), usrDAO);
 		daos.put(Produto.class.getName(), pdtDAO);
+		daos.put(ItemProduto.class.getName(), itemDAO);
 		
 		// Instanciando strategies Evento
 		ValidarDados vDados = new ValidarDados();

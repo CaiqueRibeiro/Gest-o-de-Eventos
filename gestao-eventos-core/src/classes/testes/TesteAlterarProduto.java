@@ -18,7 +18,6 @@ public class TesteAlterarProduto {
 		p1.setNome("Maionese - Hellmanns");
 		p1.setDescricao("Maionese em pote Hellmanns");
 		p1.setDtCadastro(new Date());
-		p1.setPreco(4.60);
 		
 		p1.setPerecivel(false);
 		

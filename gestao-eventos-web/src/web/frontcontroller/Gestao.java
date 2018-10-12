@@ -36,6 +36,7 @@ public class Gestao extends HttpServlet {
 	
     public Gestao() {
     	
+    	
     	commands = new HashMap<String, ICommand>();
     	
     	commands.put("SALVAR", new SalvarCommand());

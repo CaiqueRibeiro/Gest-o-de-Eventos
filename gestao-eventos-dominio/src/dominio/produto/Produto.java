@@ -7,7 +7,6 @@ import dominio.evento.EntidadeDominio;
 public class Produto extends EntidadeDominio {
 	
 	private String nome;
-	private double preco;
 	private boolean perecivel;
 	private String descricao;
 	private Categoria categoria;
@@ -18,14 +17,6 @@ public class Produto extends EntidadeDominio {
 	
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	
-	public double getPreco() {
-		return preco;
-	}
-	
-	public void setPreco(double preco) {
-		this.preco = preco;
 	}
 	
 	public boolean isPerecivel() {

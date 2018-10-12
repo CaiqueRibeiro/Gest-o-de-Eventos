@@ -1,13 +1,17 @@
 package dominio.produto;
 
+import java.util.Date;
+
 import dominio.evento.EntidadeDominio;
 
 public class ItemProduto extends EntidadeDominio {
 	
 	private Produto produto;
 	private double quantidade = 0.0;
+	private double preco = 0.0;
 	private double precoTotal = 0.0;
 	Fornecedor fornecedor;
+	private Date dtValidade;
 	
 	public Produto getProduto() {
 		return produto;
@@ -29,12 +33,21 @@ public class ItemProduto extends EntidadeDominio {
 		this.calcPrecoTotal();
 	}
 	
- 	public double getPrecoTotal() {
+	
+ 	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	public double getPrecoTotal() {
  		return this.precoTotal;
  	}
  	
  	private void calcPrecoTotal() {
- 		this.precoTotal = this.produto.getPreco() * this.quantidade;
+ 		this.precoTotal = this.getPreco() * this.quantidade;
  	}
 
 	public Fornecedor getFornecedor() {
@@ -44,9 +57,13 @@ public class ItemProduto extends EntidadeDominio {
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 	}
- 	
- 	
-	
-	
+
+	public Date getDtValidade() {
+		return dtValidade;
+	}
+
+	public void setDtValidade(Date dtValidade) {
+		this.dtValidade = dtValidade;
+	}
 
 }

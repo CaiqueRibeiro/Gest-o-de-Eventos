@@ -64,6 +64,22 @@
   <servlet-mapping>
     <servlet-name>Gestao</servlet-name>
     <url-pattern>/produtos/excluir</url-pattern>
+  </servlet-mapping> 
+    <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/estoque/salvar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/estoque/consultar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/estoque/alterar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/estoque/excluir</url-pattern>
   </servlet-mapping>
  
 </web-app>

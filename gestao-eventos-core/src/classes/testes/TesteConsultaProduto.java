@@ -20,7 +20,6 @@ public class TesteConsultaProduto {
 			
 			System.out.println(produto.getNome());
 			System.out.println(produto.isPerecivel());
-			System.out.println(produto.getPreco());
 			System.out.println(produto.getDtCadastro().toString());
 			
 		}

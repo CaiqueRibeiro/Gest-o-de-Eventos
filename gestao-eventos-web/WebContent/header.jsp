@@ -47,7 +47,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/gestao-eventos-web/produtos/consultar?operacao=CONSULTAR&editar=false">Lista Produtos</a>
           <a class="dropdown-item" href="/gestao-eventos-web/produtos/cadastro-produto.jsp">Cadastrar Novo Produto</a>
-          <a class="dropdown-item" href="/gestao-eventos-web/participantes/lista-participantes.jsp">Consulta de Estoque</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/estoque/consultar?operacao=CONSULTAR&editar=false"">Consulta de Estoque</a>
         </div>
       </li>
       <li class="nav-item dropdown">

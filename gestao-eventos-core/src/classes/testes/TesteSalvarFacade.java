@@ -17,7 +17,6 @@ public class TesteSalvarFacade {
 		p1.setNome("Doce de leite");
 		p1.setDescricao("Doce de leite que é doce e feito puramente de leite");
 		p1.setDtCadastro(new Date());
-		p1.setPreco(34.99);
 		
 		p1.setPerecivel(true);
 		
