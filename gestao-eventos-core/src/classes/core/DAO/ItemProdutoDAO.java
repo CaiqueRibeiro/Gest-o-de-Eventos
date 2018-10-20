@@ -3,6 +3,7 @@ package classes.core.DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +19,133 @@ public class ItemProdutoDAO extends AbsDAO {
 	@Override
 	public void salvar(IDominio entidade) throws SQLException {
 
+		conectar();
+		PreparedStatement ps = null;
+		ItemProduto item = (ItemProduto) entidade;
+		ProdutoDAO pDAO = new ProdutoDAO();
+		
+		try {
+			
+			List<Produto> produtos = (List<Produto>) (Object) pDAO.consultar(item.getProduto());
+			Produto produto = produtos.get(0);
+			
+			System.out.println("Produto é perecível? " + produto.isPerecivel());
+			
+			conexao.setAutoCommit(false);
+			
+			StringBuilder sql = new StringBuilder();
+			
+			if(produto.isPerecivel()) {
+				sql.append("INSERT into item_produto values(?,?,?,?,?,?,?)");
+			} else {
+				sql.append("INSERT into item_produto (prd_id, fnc_id, quantidade, preco, preco_total, dt_entrada) values(?,?,?,?,?,?)");
+			}
+			
+			ps = conexao.prepareStatement(sql.toString());
+			
+			ps.setInt(1, item.getProduto().getId());
+			ps.setInt(2, item.getFornecedor().getId());
+			ps.setDouble(3, item.getQuantidade());
+			ps.setDouble(4, item.getPreco());
+			ps.setDouble(5, item.getPrecoTotal());
+			
+			Timestamp entrada = new Timestamp(item.getDtCadastro().getTime());
+			ps.setTimestamp(6, entrada);
+			
+			Timestamp validade = null;
+			if(produto.isPerecivel()) {
+				System.out.println("ENTROU no perecivel");
+				validade = new Timestamp(item.getDtValidade().getTime());
+				ps.setTimestamp(7, validade);
+			}
+			
+			ps.executeUpdate();
+			conexao.commit();
+			
+		} catch (SQLException e) {
+			try {
+				conexao.rollback();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			
+			e.printStackTrace();
+		} finally {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} // final FINALLY
 	}
 
 	@Override
 	public void alterar(IDominio entidade) throws SQLException {
+		
+		conectar();
+		PreparedStatement ps = null;
+		ItemProduto item = (ItemProduto) entidade;
+		ProdutoDAO pDAO = new ProdutoDAO();
+		
+		try {
+			
+			List<Produto> produtos = (List<Produto>) (Object) pDAO.consultar(item.getProduto());
+			Produto produto = produtos.get(0);
+			
+			System.out.println("Produto é perecível? " + produto.isPerecivel());
+			
+			conexao.setAutoCommit(false);
+			
+			StringBuilder sql = new StringBuilder();
+			
+			if(produto.isPerecivel()) {
+				sql.append("UPDATE item_produto set quantidade = ?, preco = ?, preco_total = ?, dt_entrada = ?, dt_validade = ?");
+			} else {
+				sql.append("UPDATE item_produto set quantidade = ?, preco = ?, preco_total = ?, dt_entrada = ?");
+			}
+			
+			sql.append(" WHERE prd_id = ? AND fnc_id = ?");
+
+			ps = conexao.prepareStatement(sql.toString());
+			
+			ps.setDouble(1, item.getQuantidade());
+			ps.setDouble(2, item.getPreco());
+			ps.setDouble(3, item.getPrecoTotal());
+			
+			Timestamp entrada = new Timestamp(item.getDtCadastro().getTime());
+			ps.setTimestamp(4, entrada);
+			
+			Timestamp validade = null;
+			if(produto.isPerecivel()) {
+				System.out.println("ENTROU no perecivel");
+				validade = new Timestamp(item.getDtValidade().getTime());
+				ps.setTimestamp(5, validade);
+				ps.setInt(6, item.getProduto().getId());
+				ps.setInt(7, item.getFornecedor().getId());
+			} else {
+				ps.setInt(5, item.getProduto().getId());
+				ps.setInt(6, item.getFornecedor().getId());				
+			}
+			
+			ps.executeUpdate();
+			conexao.commit();
+			
+			
+		} catch (SQLException e) {
+			try {
+				conexao.rollback();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			
+			e.printStackTrace();
+		} finally {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} // final FINALLY
 
 	}
 
@@ -52,6 +176,8 @@ public class ItemProdutoDAO extends AbsDAO {
 			if(itemProduto.getFornecedor()!= null && itemProduto.getFornecedor().getId() != 0) {
 				sql.append(" AND f.fnc_id = ?");
 			}
+			
+			sql.append(" order by p.nome");
 			
 			ps = conexao.prepareStatement(sql.toString());
 			
@@ -119,6 +245,44 @@ public class ItemProdutoDAO extends AbsDAO {
 
 	@Override
 	public void excluir(IDominio entidade) throws SQLException {
+		conectar();
+		PreparedStatement ps = null;		
+		ItemProduto item = (ItemProduto) entidade;
+		
+		try {
+			
+			conexao.setAutoCommit(false);
+			
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("DELETE from item_produto");
+			sql.append(" where prd_id=? AND fnc_id=?");
+			
+			
+			ps = conexao.prepareStatement(sql.toString());
+			
+				ps.setInt(1, item.getProduto().getId());
+				ps.setInt(2, item.getFornecedor().getId());
+				
+				ps.executeUpdate();
+				conexao.commit();
+			
+		} catch (SQLException e) {
+			try {
+				conexao.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} // fim do try/catch INTERNO
+			
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} // final FINALLY
 		
 	}
 

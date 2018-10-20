@@ -10,7 +10,9 @@ import classes.core.IDAO;
 import classes.core.IFacade;
 import classes.core.IStrategy;
 import classes.core.DAO.EventoDAO;
+import classes.core.DAO.FornecedorDAO;
 import classes.core.DAO.ItemProdutoDAO;
+import classes.core.DAO.LocacaoDAO;
 import classes.core.DAO.ParticipanteDAO;
 import classes.core.DAO.ProdutoDAO;
 import classes.core.DAO.UsuarioDAO;
@@ -21,11 +23,12 @@ import classes.strategy.ValidarDadosUsuario;
 import classes.strategy.ValidarEndereco;
 import classes.strategy.ValidarExistencia;
 import classes.util.Resultado;
+import dominio.endereco.Locacao;
 import dominio.evento.Evento;
 import dominio.evento.IDominio;
 import dominio.participantes.Administrador;
 import dominio.participantes.Participante;
-import dominio.participantes.Usuario;
+import dominio.produto.Fornecedor;
 import dominio.produto.ItemProduto;
 import dominio.produto.Produto;
 
@@ -52,12 +55,16 @@ public class Facade implements IFacade{
 		UsuarioDAO usrDAO = new UsuarioDAO();
 		ProdutoDAO pdtDAO = new ProdutoDAO();
 		ItemProdutoDAO itemDAO = new ItemProdutoDAO();
+		FornecedorDAO fncDAO = new FornecedorDAO();
+		LocacaoDAO locDAO = new LocacaoDAO();
 		
 		daos.put(Evento.class.getName(), evtDAO);
 		daos.put(Participante.class.getName(), ptcDAO);
 		daos.put(Administrador.class.getName(), usrDAO);
 		daos.put(Produto.class.getName(), pdtDAO);
 		daos.put(ItemProduto.class.getName(), itemDAO);
+		daos.put(Fornecedor.class.getName(), fncDAO);
+		daos.put(Locacao.class.getName(), locDAO);
 		
 		// Instanciando strategies Evento
 		ValidarDados vDados = new ValidarDados();
@@ -241,7 +248,7 @@ public class Facade implements IFacade{
 				List<IDominio> entidades = new ArrayList<IDominio>();
 				entidades.add(entidade);
 				resultado.setEntidades(entidades);
-				System.out.println("obj alterado!");
+				System.out.println("obj excluído!");
 			} catch(SQLException e) {
 				e.printStackTrace();
 				System.out.println("Fachada: Não foi possível excluir o registro!");

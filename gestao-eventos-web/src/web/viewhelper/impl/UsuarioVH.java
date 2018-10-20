@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import classes.util.Resultado;
 import dominio.evento.IDominio;
@@ -71,6 +72,8 @@ public class UsuarioVH implements IViewHelper {
 				request.setAttribute("erro", "Usuário ou senha inválidos");
 				request.getRequestDispatcher("login.jsp").forward(request, response);			
 			} else {
+				LoginService service = new LoginService(request);
+				service.setLogin(usrRecebidos.get(0));
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 		}

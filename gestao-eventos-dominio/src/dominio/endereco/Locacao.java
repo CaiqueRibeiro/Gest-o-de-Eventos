@@ -4,12 +4,20 @@ import dominio.evento.EntidadeDominio;
 
 public class Locacao extends EntidadeDominio {
 	
+	private String nome;
 	private Ambiente ambiente;
 	private boolean acustica;
 	private boolean possuiEstacionamento;
 	private int vagasEstacionamento;
 	private int vagasEstacionamentoUsadas;	
 	private double valorAluguel;
+	
+	public String getNome() {
+		return nome;
+	}	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	public Ambiente getAmbiente() {
 		return ambiente;
 	}

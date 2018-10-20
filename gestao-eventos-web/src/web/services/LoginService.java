@@ -28,11 +28,18 @@ public class LoginService {
 	
 	public Usuario getLogin() {
 		
-		HttpSession session = request.getSession();
+		HttpSession session = this.request.getSession();
 		
 		Administrador usuario = (Administrador) session.getAttribute("usuarioLogado");
 		
 		return usuario;		
+		
+	}
+	
+	public void setLogin(Administrador usuario) {
+		
+		HttpSession session = this.request.getSession();
+		session.setAttribute("usuarioLogado", usuario);
 		
 	}
 

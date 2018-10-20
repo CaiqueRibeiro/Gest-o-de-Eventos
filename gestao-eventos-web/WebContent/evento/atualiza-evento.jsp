@@ -37,10 +37,11 @@
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
 			      <label for="categoria">Categoria</label>
-			      <select class="genero form-control" name="categoria">
+			      <select class="genero form-control" name="categoria" id="categoria">
 			      	<option value="1">Aniversário</option>
 			      	<option value="2">Casamento</option>
 			      	<option value="3">Festa empresarial</option>
+			      	<option value="4">Show</option>
 			      </select>
 			    </div>
 			    <div class="form-group col-md-3">
@@ -55,7 +56,7 @@
 			  <div class="form-row">
 			    <div class="form-group col-md-4">
 			      <label for="porcentagem-lucro">Porcentagem de lucro</label>
-			      <input type="number" min="0" required class="porcentagem-lucro form-control" name="porcentagem-lucro" value="0">
+			      <input type="number" min="0" step="0.01" required class="porcentagem-lucro form-control" name="porcentagem-lucro" value="${resultado.getLucro()}">
 			    </div>
 			    <div class="form-group col-md-4">
 			      <label for="inicio-rateio">Início do rateio</label>
@@ -125,7 +126,7 @@
 			  </div>
 			  <br/>
 			  <button type="submit" required name="operacao" class="btn btn-primary" value="ATUALIZAR">ATUALIZAR</button>
-			  <a href="../participantes/seleciona-participantes.jsp" class="btn btn-success">Adicionar Participantes</a>
+			  <a href="../participantes/seleciona-participantes.jsp" id="add-participantes" class="btn btn-success">Adicionar Participantes</a>
 			  <a href="../participantes/participantes-evento.jsp" class="btn btn-success">Ver Participantes</a>
 			  <a href="excluir?&operacao=EXCLUIR&evt-id=${resultado.getId()}&rat-id=${resultado.getRateio().getId()}&end-id=${resultado.getEndereco().getId()}" class="btn btn-danger">EXCLUIR</a>
 			</form>

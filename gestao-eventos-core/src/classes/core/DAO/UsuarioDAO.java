@@ -53,6 +53,7 @@ public class UsuarioDAO extends AbsDAO {
 				Administrador adm = new Administrador();
 				adm.setEmail(resultado.getString("email"));
 				adm.setSenha(resultado.getString("senha"));
+				adm.setId(resultado.getInt("usr_id"));
 				
 				usuarios.add(adm);
 			}

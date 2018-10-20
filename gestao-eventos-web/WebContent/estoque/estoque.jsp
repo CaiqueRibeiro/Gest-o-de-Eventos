@@ -9,7 +9,8 @@
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="../css/visual.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/visual.css">
+    <link type="text/css" rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -61,6 +62,7 @@
 				    		<td><a href="consultar?operacao=CONSULTAR&pdt-id=<%=item.getProduto().getId()%>&fnc-id=<%=item.getFornecedor().getId()%>&editar=false"><%=item.getProduto().getNome()%></a></td>
 				    		<td><a href="consultar?operacao=CONSULTAR&pdt-id=<%=item.getProduto().getId()%>&fnc-id=<%=item.getFornecedor().getId()%>&editar=false"><%=item.getFornecedor().getNome()%></a></td>
 				    		<td><a href="consultar?operacao=CONSULTAR&pdt-id=<%=item.getProduto().getId()%>&fnc-id=<%=item.getFornecedor().getId()%>&editar=false"><%=item.getQuantidade()%></a></td>
+				    		<td><a class="btn btn-danger btn-delete" href="consultar?operacao=EXCLUIR&pdt-id=<%=item.getProduto().getId()%>&fnc-id=<%=item.getFornecedor().getId()%>&editar=false"><i class="fa fa-times" aria-hidden="true"></i></a></td>
 				    	</tr>
 				    	<%
 					    	  	}

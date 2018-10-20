@@ -6,6 +6,7 @@ public class Fornecedor extends EntidadeDominio {
 	
 	private String nome;
 	private String cnpj;
+	
 	public String getNome() {
 		return nome;
 	}

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import classes.util.Resultado;
+import dominio.endereco.Locacao;
 import dominio.evento.IDominio;
+import dominio.produto.Fornecedor;
+import dominio.produto.Produto;
 import web.command.ICommand;
 import web.command.impl.AlterarCommand;
 import web.command.impl.ConsultarCommand;
@@ -33,6 +37,23 @@ public class Gestao extends HttpServlet {
 	
 	private static Map<String, ICommand> commands;
 	private static Map<String, IViewHelper> vhs;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		
+		super.init(config);
+		
+		ConsultarCommand command = new ConsultarCommand();
+		Resultado rsProduto = command.execute(new Produto());
+		config.getServletContext().setAttribute("listaProdutos", rsProduto);
+		
+		Resultado rsFornecedor = command.execute(new Fornecedor());
+		config.getServletContext().setAttribute("listaFornecedores", rsFornecedor);
+		
+		Resultado rsLocacao = command.execute(new Locacao());
+		config.getServletContext().setAttribute("listaLocacoes", rsLocacao);
+		
+	}
 	
     public Gestao() {
     	
@@ -68,7 +89,7 @@ public class Gestao extends HttpServlet {
 
 
     protected void service(HttpServletRequest request, 
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response) throws ServletException, IOException {    	
     	
     	String uri = request.getRequestURI();
     	

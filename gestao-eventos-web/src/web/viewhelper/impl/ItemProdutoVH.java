@@ -43,7 +43,10 @@ public class ItemProdutoVH implements IViewHelper {
 			try {
 				
 				item.setDtCadastro(new Date());
-				item.setDtValidade(dt.parse(request.getParameter("dt-validade")));
+				String dtValidade = request.getParameter("dt-validade");
+				
+				if(dtValidade != null && dtValidade != "")
+					item.setDtValidade(dt.parse(request.getParameter("dt-validade")));
 				
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -52,7 +55,7 @@ public class ItemProdutoVH implements IViewHelper {
 			
 		}
 		
-		if(operacao.equals("CONSULTAR")) {
+		if(operacao.equals("CONSULTAR") || operacao.equals("EXCLUIR")) {
 			String pdt_id = request.getParameter("pdt-id");
 			String fnc_id = request.getParameter("fnc-id");
 			
@@ -72,6 +75,8 @@ public class ItemProdutoVH implements IViewHelper {
 	public void formataView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		
+		String operacao = request.getParameter("operacao");
+		
 		List<IDominio> recebido = null;
 		List<ItemProduto> pdtRecebidos = null;
 		String msgErro = "";
@@ -89,24 +94,20 @@ public class ItemProdutoVH implements IViewHelper {
 		} else {
 		
 			if(recebido == null || recebido.size() <= 0) {
-				request.setAttribute("erro", "Não há produtos");
+				request.setAttribute("resultado", null);
 				request.getRequestDispatcher("estoque.jsp").forward(request, response);			
 			} else if(recebido.size() > 1) {
 				request.setAttribute("resultado", pdtRecebidos);
 				request.getRequestDispatcher("estoque.jsp").forward(request, response);
-			} else {
-				String editavel = request.getParameter("editar");
-				System.out.println("Editável? " + editavel);
-				
+			} else {				
 				ItemProduto item = (ItemProduto) recebido.get(0);
 				request.setAttribute("resultado", item);
-				if(editavel != "" && editavel != null) {
-					if(editavel.equals("false"))
-						request.getRequestDispatcher("consulta-produto.jsp").forward(request, response);
-					else
-						request.getRequestDispatcher("entrada-estoque.jsp").forward(request, response);
+				if(operacao.equals("ATUALIZAR") || operacao.equals("SALVAR")) {
+					request.getRequestDispatcher("sucesso.jsp").forward(request, response);	
+				} else if (operacao.equals("EXCLUIR")) {
+					response.sendRedirect("consultar?operacao=CONSULTAR&editar=false");					
 				} else {
-					request.getRequestDispatcher("sucesso.jsp").forward(request, response);
+					request.getRequestDispatcher("entrada-estoque.jsp").forward(request, response);
 				}
 			}
 		

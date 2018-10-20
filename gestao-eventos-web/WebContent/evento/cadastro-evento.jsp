@@ -1,3 +1,7 @@
+<%@page import="dominio.endereco.Locacao"%>
+<%@page import="dominio.evento.IDominio"%>
+<%@page import="java.util.List"%>
+<%@page import="classes.util.Resultado"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,6 +20,12 @@
 	<c:import url="../header.jsp" />
 	
 	<div class="container-fluid" style="justify-content: flex-end;">
+	
+	<%
+		Resultado resultado = (Resultado) getServletContext().getAttribute("listaLocacoes");
+		List<IDominio> lista = resultado.getEntidades();	
+		List<Locacao> locacoes = (List<Locacao>) (Object) lista;
+	%>
 		<div class="container-form">
 			<h1>Cadastro de Evento</h1>
 			
@@ -34,10 +44,11 @@
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
 			      <label for="categoria">Categoria</label>
-			      <select class="genero form-control" name="categoria">
+			      <select class="categoria form-control" name="categoria" id="categoria">
 			      	<option value="1">Aniversário</option>
 			      	<option value="2">Casamento</option>
 			      	<option value="3">Festa empresarial</option>
+			      	<option value="4">Show</option>
 			      </select>
 			    </div>
 			    <div class="form-group col-md-3">
@@ -67,9 +78,15 @@
 				<div class="form-group col-md-12">
 			  		<label for="locacao">Locação</label>
 			  		<select class="genero form-control" name="locacao">
-			      		<option value="1">Zezinho Festas</option>
-			      		<option value="2">Residência Secreta da Maçonaria</option>
-			      		<option value="3">Salão de Festas - Apartamento Boulevard</option>
+			      <%
+			      if(locacoes != null) {
+			    	for(Locacao l : locacoes) {  			      
+			      %>
+			      	<option value="<%=l.getId()%>"><%=l.getNome() %></option>
+					<%
+			    	}
+			      }
+					%>
 			      	</select>
 			 	</div>
 			  </div>
@@ -101,10 +118,10 @@
 			      <input type="text" required class="numero form-control" name="numero" placeholder="ex. 348, 193, 45">
 			    </div>
 			  </div>
-			  <div class="form-row">
+			  <div class="form-row" id="cidade-estado">
 			    <div class="form-group col-md-2">
 			      <label for="cidade">Cidade</label>
-			      <input type="text" required class="cidade form-control" name="cidade" placeholder="ex. Poá, Suzano, Mogi das Cruzes">
+			      <input type="text" required class="cidade form-control" name="cidade" id="cidade" placeholder="ex. Poá, Suzano, Mogi das Cruzes">
 			    </div>
 			    <div class="form-group col-md-2">
 			      <label for="estado">Estado</label>

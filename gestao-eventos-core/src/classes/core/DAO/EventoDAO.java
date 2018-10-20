@@ -37,8 +37,8 @@ public class EventoDAO extends AbsDAO {
 			
 			StringBuilder sql = new StringBuilder(); // variável para concatenar as Strings
 			// inicia a declaração da query
-			sql.append("INSERT INTO eventos (nome, data, hora, max_pessoas, situacao, cat_id, end_id, user_id, loc_id, rat_id)");
-			sql.append(" VALUES(?,?,?,?,?,?,?,?,?,?)");
+			sql.append("INSERT INTO eventos (nome, data, hora, max_pessoas, situacao, cat_id, end_id, user_id, loc_id, rat_id, pct_lucro)");
+			sql.append(" VALUES(?,?,?,?,?,?,?,?,?,?,?)");
 			
 			ps = conexao.prepareStatement(sql.toString());
 			
@@ -55,6 +55,7 @@ public class EventoDAO extends AbsDAO {
 			ps.setInt(8, evento.getAdministrador().getId());
 			ps.setInt(9, evento.getLocacao().getId());
 			ps.setInt(10, evento.getRateio().getId());
+			ps.setDouble(11, evento.getLucro());
 			
 			ps.executeUpdate();
 			conexao.commit();
@@ -69,12 +70,12 @@ public class EventoDAO extends AbsDAO {
 			e.printStackTrace();
 			
 		} /* fim do try/catch */ finally {
-		try {
-			ps.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	} // final FINALLY
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} // final FINALLY
 		
 	} // final SALVAR
 
@@ -100,7 +101,7 @@ public class EventoDAO extends AbsDAO {
 			
 			StringBuilder sql = new StringBuilder(); // variável para concatenar as Strings
 			// inicia a declaração da query
-			sql.append("UPDATE eventos set nome=?, data=?, hora=?, max_pessoas=?, situacao=?, cat_id=?, end_id=?, user_id=?, loc_id=?");
+			sql.append("UPDATE eventos set nome=?, data=?, hora=?, max_pessoas=?, situacao=?, cat_id=?, end_id=?, user_id=?, loc_id=?, pct_lucro=?");
 			sql.append(" where evt_id=?");
 			
 			ps = conexao.prepareStatement(sql.toString());
@@ -117,7 +118,8 @@ public class EventoDAO extends AbsDAO {
 			ps.setInt(7, evento.getEndereco().getId());
 			ps.setInt(8, evento.getAdministrador().getId());
 			ps.setInt(9, evento.getLocacao().getId());
-			ps.setInt(10, evento.getId());
+			ps.setDouble(10, evento.getLucro());
+			ps.setInt(11, evento.getId());
 			
 			ps.executeUpdate();
 			conexao.commit();
@@ -197,6 +199,7 @@ public class EventoDAO extends AbsDAO {
 				eventoBuscado.setHora(resultado.getString("hora"));
 				eventoBuscado.setSituacao(resultado.getString("situacao"));
 				eventoBuscado.setCatNome(resultado.getString("cat_nome"));
+				eventoBuscado.setLucro(resultado.getDouble("pct_lucro"));
 				
 				enderecoBuscado.setId(resultado.getInt("end_id"));
 				enderecoBuscado.setLogradouro(resultado.getString("logradouro"));

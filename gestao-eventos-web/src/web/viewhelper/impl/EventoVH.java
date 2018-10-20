@@ -44,7 +44,10 @@ public class EventoVH implements IViewHelper {
 				rateio.setId(Integer.parseInt(rateioId));
 			}
 			
-			administrador.setId(2);
+			Administrador adm = (Administrador) request.getSession().getAttribute("usuarioLogado");
+			int admId = adm.getId();
+			
+			administrador.setId(admId);
 			locacao.setId(Integer.parseInt(request.getParameter("locacao")));
 						
 			// insere informações sobre o evento
@@ -53,6 +56,7 @@ public class EventoVH implements IViewHelper {
 			evento.setHora(request.getParameter("hora"));
 			evento.setQdtMaximaPessoas(Integer.parseInt(request.getParameter("max-participantes")));
 			evento.setSituacao(request.getParameter("situacao"));
+			evento.setLucro(Integer.parseInt(request.getParameter("porcentagem-lucro")));
 			
 			// insere informações sobre o endereço
 			endereco.setLogradouro(request.getParameter("logradouro"));
@@ -63,7 +67,7 @@ public class EventoVH implements IViewHelper {
 			endereco.setCidade(request.getParameter("cidade"));
 			endereco.setEstado(request.getParameter("estado"));
 			
-			rateio.setValorPagar(10000);
+			rateio.setValorPagar(0);
 			
 			// Formata as datas necessárias
 			SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");			

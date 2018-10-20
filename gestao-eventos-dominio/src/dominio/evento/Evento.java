@@ -23,6 +23,7 @@ public class Evento extends EntidadeDominio {
 	private Locacao locacao;
 	private String situacao;
 	private double valorTotal = 0;
+	private double lucro = 0;
 	
 	
 	// Adiciona participante um por um na lista
@@ -129,6 +130,19 @@ public class Evento extends EntidadeDominio {
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
+	public double getLucro() {
+		return this.lucro;
+	}
+
+	public void setLucro(double lucro) {
+		lucro = lucro * 0.1;
+		
+		if(lucro > 0)
+			this.lucro = lucro;
+		else
+			this.lucro = 0;
+	}
+	
 	
 	
 }

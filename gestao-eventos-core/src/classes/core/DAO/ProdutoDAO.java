@@ -189,9 +189,7 @@ public class ProdutoDAO extends AbsDAO {
 	@Override
 	public void excluir(IDominio entidade) throws SQLException {
 		conectar();
-		PreparedStatement ps = null;
-		List<IDominio> produtos = new ArrayList<IDominio>();
-		
+		PreparedStatement ps = null;		
 		Produto produto = (Produto) entidade;
 		System.out.println("ID no DAO: " + produto.getId());
 		
