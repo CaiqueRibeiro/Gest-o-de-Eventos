@@ -20,7 +20,7 @@
 			<h1>Atualização de Evento</h1>
 			
 			<form action="alterar">
-				<input type="hidden" name="evt-id" value="${resultado.getId()}">
+				<input type="hidden" name="evt-id" id="evt-id" value="${resultado.getId()}">
 				<input type="hidden" name="rat-id" value="${resultado.getRateio().getId()}">
 				<input type="hidden" name="end-id" value="${resultado.getEndereco().getId()}">
 			  <div class="form-row">

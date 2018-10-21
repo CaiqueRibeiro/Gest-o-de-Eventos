@@ -9,14 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let categoria = document.querySelector("#categoria");
 let participantes = document.querySelector("#add-participantes");
+let idEvento = document.querySelector("#evt-id");
 
 categoria.onchange = e => {
 	
 	if(e.target.value == "4") {
 		participantes.innerHTML = "Convidar todos os participantes"
-		participantes.href = "/gestao-eventos-web/evento/consultar?operacao=CONSULTAR&editar=false"
+		participantes.href = "/gestao-eventos-web/evento/add-participante?operacao=SALVAR&id=0&evt-id=" + idEvento.value
 	} else {
 		participantes.innerHTML = "Selecionar participantes"
-		participantes.href = "/gestao-eventos-web/participantes/seleciona-participantes.jsp"
+		participantes.href = "/gestao-eventos-web/participantes/seleciona.jsp"
 	}
 }
