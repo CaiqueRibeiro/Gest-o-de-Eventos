@@ -23,21 +23,25 @@ public class ParticipanteEventoDAO extends AbsDAO {
 		
 		try {
 			
-			participantes = (List<Participante>) (Object) this.consultarId();
-			
-			
 			conexao.setAutoCommit(false);
 			
-			for(Participante p : participantes) {
-				StringBuilder sql = new StringBuilder();
-				sql.append("INSERT into participantes_evento (pe_ptc_id, pe_evt_id) values (?,?);");
-				ps = conexao.prepareStatement(sql.toString());
-				ps.setInt(1, p.getId());
-				ps.setInt(2, participantesVM.getIdEvento());
-
-				ps.executeUpdate();
-				System.out.println(ps.toString());
-			}	
+			if(participantesVM.getParticipantes().get(0).getId() == 0) {			
+				participantes = (List<Participante>) (Object) this.consultarId();
+				
+			}  else {
+				participantes = participantesVM.getParticipantes();
+			}
+						
+				for(Participante p : participantes) {
+					StringBuilder sql = new StringBuilder();
+					sql.append("INSERT into participantes_evento (pe_ptc_id, pe_evt_id) values (?,?);");
+					ps = conexao.prepareStatement(sql.toString());
+					ps.setInt(1, p.getId());
+					ps.setInt(2, participantesVM.getIdEvento());
+						
+					ps.executeUpdate();
+					System.out.println(ps.toString());
+				}	
 			
 			conexao.commit();
 			

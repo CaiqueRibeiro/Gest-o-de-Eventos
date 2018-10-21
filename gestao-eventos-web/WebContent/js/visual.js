@@ -17,7 +17,7 @@ categoria.onchange = e => {
 		participantes.innerHTML = "Convidar todos os participantes"
 		participantes.href = "/gestao-eventos-web/evento/add-participante?operacao=SALVAR&id=0&evt-id=" + idEvento.value
 	} else {
-		participantes.innerHTML = "Selecionar participantes"
-		participantes.href = "/gestao-eventos-web/participantes/seleciona.jsp"
+		participantes.innerHTML = "Adicionar participantes"
+		participantes.href = "/gestao-eventos-web/evento/consultar-participantes?operacao=CONSULTAR"
 	}
 }

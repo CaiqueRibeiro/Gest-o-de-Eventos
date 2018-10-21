@@ -42,8 +42,8 @@
 			    <div class="form-group col-md-6">
 			      <label for="genero">Gênero</label>
 			      <select class="genero form-control" name="genero">
-			      	<option value="1" selected>Masculino</option>
-			      	<option value="2">Feminino</option>
+			      	<option value="1" ${resultado.getGenero() == 1 ? "selected" : "" }>Masculino</option>
+			      	<option value="2" ${resultado.getGenero() == 2 ? "selected" : "" }>Feminino</option>
 			      </select>
 			    </div>
 			    <div class="form-group col-md-3">
@@ -69,9 +69,9 @@
 			    <div class="form-group col-md-6">
 			      <label for="logradouro">Logradouro</label>
 			      <select class="logradouro form-control" name="logradouro">
-			      	<option value="1" selected>Rua</option>
-			      	<option value="2">Avenida</option>
-			      	<option value="3">Alameda</option>
+			      	<option value="1" ${resultado.getEndereco().getLogradouro().equals("1") ? "selected" : "" }>Rua</option>
+			      	<option value="2" ${resultado.getEndereco().getLogradouro().equals("2") ? "selected" : "" }>Avenida</option>
+			      	<option value="3" ${resultado.getEndereco().getLogradouro().equals("3") ? "selected" : "" }>Alameda</option>
 			      </select>
 			    </div>
 			    <div class="form-group col-md-4">

@@ -56,7 +56,11 @@ public class EventoVH implements IViewHelper {
 			evento.setHora(request.getParameter("hora"));
 			evento.setQdtMaximaPessoas(Integer.parseInt(request.getParameter("max-participantes")));
 			evento.setSituacao(request.getParameter("situacao"));
-			evento.setLucro(Integer.parseInt(request.getParameter("porcentagem-lucro")));
+			
+			if(evento.getCategoria() == 4)
+				evento.setEntrada(Double.parseDouble(request.getParameter("porcentagem-lucro")));
+			else
+				evento.setLucro(Double.parseDouble(request.getParameter("porcentagem-lucro")));
 			
 			// insere informações sobre o endereço
 			endereco.setLogradouro(request.getParameter("logradouro"));

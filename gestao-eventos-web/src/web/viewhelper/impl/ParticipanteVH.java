@@ -108,42 +108,50 @@ public class ParticipanteVH implements IViewHelper {
 		List<IDominio> recebido = null;
 		List<Participante> ptcRecebidos = null;
 		String msgErro = "";
+		String uri = request.getRequestURI();
+		
 		
 		if(resultado != null) {
 			msgErro = resultado.getMensagem();
-			
+				
 			recebido = resultado.getEntidades();
 			ptcRecebidos = (List<Participante>) (Object) recebido;
 		}
-		
-		if(msgErro != null && msgErro != "") {
-			request.setAttribute("mensagem", msgErro);
-			request.getRequestDispatcher("erro.jsp").forward(request, response);
+			
+		if(uri.equals("/gestao-eventos-web/evento/consultar-participantes")) {
+			request.setAttribute("resultado", ptcRecebidos);
+			request.getRequestDispatcher("seleciona-participantes.jsp").forward(request, response);			
 		} else {
-		
-			if(recebido == null || recebido.size() <= 0) {
-				request.setAttribute("erro", "Não há eventos");
-				request.getRequestDispatcher("lista-participantes.jsp").forward(request, response);			
-			} else if(recebido.size() > 1) {
-				request.setAttribute("resultado", ptcRecebidos);
-				request.getRequestDispatcher("lista-participantes.jsp").forward(request, response);
+			
+			if(msgErro != null && msgErro != "") {
+				request.setAttribute("mensagem", msgErro);
+				request.getRequestDispatcher("erro.jsp").forward(request, response);
 			} else {
-				String editavel = request.getParameter("editar");
-				System.out.println("Editável? " + editavel);
-				
-				Participante participante = (Participante) recebido.get(0);
-				request.setAttribute("resultado", participante);
-				if(editavel != "" && editavel != null) {
-					if(editavel.equals("false"))
-						request.getRequestDispatcher("consulta-participante.jsp").forward(request, response);
-					else
-						request.getRequestDispatcher("atualiza-participante.jsp").forward(request, response);
+			
+				if(recebido == null || recebido.size() <= 0) {
+					request.setAttribute("erro", "Não há eventos");
+					request.getRequestDispatcher("lista-participantes.jsp").forward(request, response);			
+				} else if(recebido.size() > 1) {
+					request.setAttribute("resultado", ptcRecebidos);
+					request.getRequestDispatcher("lista-participantes.jsp").forward(request, response);
 				} else {
-					request.getRequestDispatcher("sucesso.jsp").forward(request, response);
+					String editavel = request.getParameter("editar");
+					System.out.println("Editável? " + editavel);
+					
+					Participante participante = (Participante) recebido.get(0);
+					request.setAttribute("resultado", participante);
+					if(editavel != "" && editavel != null) {
+						if(editavel.equals("false"))
+							request.getRequestDispatcher("consulta-participante.jsp").forward(request, response);
+						else
+							request.getRequestDispatcher("atualiza-participante.jsp").forward(request, response);
+					} else {
+						request.getRequestDispatcher("sucesso.jsp").forward(request, response);
+					}
 				}
-			}
-		
-		} // caso não tenha mensagem de erro
+			
+			} // caso não tenha mensagem de erro
+		}
 		
 	}
 

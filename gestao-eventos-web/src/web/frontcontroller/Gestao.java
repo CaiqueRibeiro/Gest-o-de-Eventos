@@ -69,19 +69,24 @@ public class Gestao extends HttpServlet {
     	vhs = new HashMap<String, IViewHelper>();
     	vhs.put("/gestao-eventos-web/login", new UsuarioVH());
     	vhs.put("/gestao-eventos-web/cadastrar", new UsuarioVH());
+    	
     	vhs.put("/gestao-eventos-web/evento/salvar", new EventoVH());
     	vhs.put("/gestao-eventos-web/evento/consultar", new EventoVH());
     	vhs.put("/gestao-eventos-web/evento/alterar", new EventoVH());
     	vhs.put("/gestao-eventos-web/evento/excluir", new EventoVH());
     	vhs.put("/gestao-eventos-web/evento/add-participante", new ParticipantesEventoVH());
+    	vhs.put("/gestao-eventos-web/evento/consultar-participantes", new ParticipanteVH()); 
+    	
     	vhs.put("/gestao-eventos-web/participantes/salvar", new ParticipanteVH());
     	vhs.put("/gestao-eventos-web/participantes/consultar", new ParticipanteVH());
     	vhs.put("/gestao-eventos-web/participantes/alterar", new ParticipanteVH());
     	vhs.put("/gestao-eventos-web/participantes/excluir", new ParticipanteVH());
+    	
     	vhs.put("/gestao-eventos-web/produtos/salvar", new ProdutoVH());
     	vhs.put("/gestao-eventos-web/produtos/consultar", new ProdutoVH());
     	vhs.put("/gestao-eventos-web/produtos/alterar", new ProdutoVH());
     	vhs.put("/gestao-eventos-web/produtos/excluir", new ProdutoVH());
+    	
     	vhs.put("/gestao-eventos-web/estoque/salvar", new ItemProdutoVH());
     	vhs.put("/gestao-eventos-web/estoque/consultar", new ItemProdutoVH());
     	vhs.put("/gestao-eventos-web/estoque/alterar", new ItemProdutoVH());

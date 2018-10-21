@@ -85,11 +85,22 @@
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
 			      <label for="logradouro">Logradouro</label>
-			      <select class="logradouro form-control" readonly name="logradouro">
-			      	<option value="1">Rua</option>
-			      	<option value="2">Avenida</option>
-			      	<option value="3">Alameda</option>
-			      </select>
+				  <p>
+				      <c:choose>
+				         <c:when test = "${resultado.getEndereco().getLogradouro() == 1}">
+				            Rua
+				         </c:when>
+				         <c:when test = "${resultado.getEndereco().getLogradouro() == 2}">
+				           Avenida
+				         </c:when>			         
+				         <c:when test = "${resultado.getEndereco().getLogradouro() == 3}">
+				           Avenida
+				         </c:when>				         
+				         <c:otherwise>
+				            NÃO ESPECIFICADO
+				         </c:otherwise>
+				      </c:choose>
+				  </p>
 			    </div>
 			    <div class="form-group col-md-4">
 					<label for="cep">CEP</label>

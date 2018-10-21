@@ -62,8 +62,8 @@
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-4">
-			      <label for="porcentagem-lucro">Porcentagem de lucro</label>
-			      <input type="number" required class="porcentagem-lucro form-control" min="0" name="porcentagem-lucro">
+			      <label for="porcentagem-lucro">Porcentagem de lucro / entrada</label>
+			      <input type="number" required class="porcentagem-lucro form-control" min="0" id="porcentagem-lucro" name="porcentagem-lucro">
 			    </div>
 			    <div class="form-group col-md-4">
 			      <label for="inicio-rateio">Início do rateio</label>

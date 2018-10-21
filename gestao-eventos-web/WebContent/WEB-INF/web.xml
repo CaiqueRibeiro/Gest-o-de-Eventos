@@ -37,6 +37,10 @@
     <servlet-name>Gestao</servlet-name>
     <url-pattern>/evento/add-participante</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/evento/consultar-participantes</url-pattern>
+  </servlet-mapping>
     <servlet-mapping>
     <servlet-name>Gestao</servlet-name>
     <url-pattern>/participantes/salvar</url-pattern>

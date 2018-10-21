@@ -6,7 +6,7 @@ public class Rateio extends EntidadeDominio {
 	
 	private Date inicioRateio;
 	private Date fimRateio;
-	private double valorPagar;
+	private double valorPagar = 0;
 	
 	public void pagarRateio(double valor) {
 		this.valorPagar -= valor;

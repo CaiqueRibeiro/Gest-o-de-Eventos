@@ -23,8 +23,8 @@ public class Evento extends EntidadeDominio {
 	private Locacao locacao;
 	private String situacao;
 	private double valorTotal = 0;
-	private double lucro = 0;
-	
+	private double lucro = -1;
+	private double entrada = -1;
 	
 	// Adiciona participante um por um na lista
 	public void addParticipante(Participante participante) {
@@ -135,13 +135,25 @@ public class Evento extends EntidadeDominio {
 	}
 
 	public void setLucro(double lucro) {
-		lucro = lucro * 0.1;
+		lucro = lucro * 0.01;
 		
 		if(lucro > 0)
 			this.lucro = lucro;
 		else
 			this.lucro = 0;
 	}
+
+
+	public double getEntrada() {
+		return entrada;
+	}
+
+
+	public void setEntrada(double entrada) {
+		this.entrada = entrada;
+	}
+	
+	
 	
 	
 	

@@ -55,7 +55,10 @@ public class EventoDAO extends AbsDAO {
 			ps.setInt(8, evento.getAdministrador().getId());
 			ps.setInt(9, evento.getLocacao().getId());
 			ps.setInt(10, evento.getRateio().getId());
-			ps.setDouble(11, evento.getLucro());
+			if(evento.getEntrada() == -1)
+				ps.setDouble(11, evento.getLucro());
+			else
+				ps.setDouble(11, evento.getEntrada());
 			
 			ps.executeUpdate();
 			conexao.commit();
@@ -118,7 +121,11 @@ public class EventoDAO extends AbsDAO {
 			ps.setInt(7, evento.getEndereco().getId());
 			ps.setInt(8, evento.getAdministrador().getId());
 			ps.setInt(9, evento.getLocacao().getId());
-			ps.setDouble(10, evento.getLucro());
+			if(evento.getEntrada() == -1)
+				ps.setDouble(10, evento.getLucro());
+			else
+				ps.setDouble(10, evento.getEntrada());
+			
 			ps.setInt(11, evento.getId());
 			
 			ps.executeUpdate();
@@ -199,7 +206,10 @@ public class EventoDAO extends AbsDAO {
 				eventoBuscado.setHora(resultado.getString("hora"));
 				eventoBuscado.setSituacao(resultado.getString("situacao"));
 				eventoBuscado.setCatNome(resultado.getString("cat_nome"));
-				eventoBuscado.setLucro(resultado.getDouble("pct_lucro"));
+				if(eventoBuscado.getCatNome().equals("Show"))
+					eventoBuscado.setEntrada(resultado.getDouble("pct_lucro"));
+				else
+					eventoBuscado.setLucro(resultado.getDouble("pct_lucro"));
 				
 				enderecoBuscado.setId(resultado.getInt("end_id"));
 				enderecoBuscado.setLogradouro(resultado.getString("logradouro"));

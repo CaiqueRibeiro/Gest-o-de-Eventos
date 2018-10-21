@@ -55,8 +55,8 @@
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-4">
-			      <label for="porcentagem-lucro">Porcentagem de lucro</label>
-			      <input type="number" min="0" step="0.01" required class="porcentagem-lucro form-control" name="porcentagem-lucro" value="${resultado.getLucro()}">
+			      <label for="porcentagem-lucro">Porcentagem de lucro ou Valor de entrada</label>
+			      <input type="number" min="0" step="0.01" required class="porcentagem-lucro form-control" name="porcentagem-lucro" value="${resultado.getLucro() == -1 ? resultado.getEntrada() : resultado.getLucro()}">
 			    </div>
 			    <div class="form-group col-md-4">
 			      <label for="inicio-rateio">Início do rateio</label>
@@ -91,9 +91,9 @@
 			    <div class="form-group col-md-6">
 			      <label for="logradouro">Logradouro</label>
 			      <select class="logradouro form-control" name="logradouro">
-			      	<option value="1">Rua</option>
-			      	<option value="2">Avenida</option>
-			      	<option value="3">Alameda</option>
+			      	<option value="1" ${resultado.getEndereco().getLogradouro().equals("1") ? "selected" : "" }>Rua</option>
+			      	<option value="2" ${resultado.getEndereco().getLogradouro().equals("2") ? "selected" : "" }>Avenida</option>
+			      	<option value="3" ${resultado.getEndereco().getLogradouro().equals("3") ? "selected" : "" }>Alameda</option>
 			      </select>
 			    </div>
 			    <div class="form-group col-md-4">
@@ -126,7 +126,7 @@
 			  </div>
 			  <br/>
 			  <button type="submit" required name="operacao" class="btn btn-primary" value="ATUALIZAR">ATUALIZAR</button>
-			  <a href="../participantes/seleciona-participantes.jsp" id="add-participantes" class="btn btn-success">Adicionar Participantes</a>
+			  <a href="/gestao-eventos-web/evento/consultar-participantes?operacao=CONSULTAR&evtid=${resultado.getId()}" id="add-participantes" class="btn btn-success">Adicionar Participantes</a>
 			  <a href="../participantes/participantes-evento.jsp" class="btn btn-success">Ver Participantes</a>
 			  <a href="excluir?&operacao=EXCLUIR&evt-id=${resultado.getId()}&rat-id=${resultado.getRateio().getId()}&end-id=${resultado.getEndereco().getId()}" class="btn btn-danger">EXCLUIR</a>
 			</form>
