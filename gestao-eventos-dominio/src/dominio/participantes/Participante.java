@@ -5,6 +5,8 @@ public class Participante extends Pessoa {
 	private String email;
 	private int valorPagar;
 	private int qtdConvidados;
+	private String situacao;
+	private boolean pago;
 
 	public String getEmail() {
 		return email;
@@ -28,6 +30,24 @@ public class Participante extends Pessoa {
 
 	public void setQtdConvidados(int qtdConvidados) {
 		this.qtdConvidados = qtdConvidados;
-	}	
+	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+
+	public boolean isPago() {
+		return pago;
+	}
+
+	public void setPago(boolean pago) {
+		this.pago = pago;
+	}
+	
+	
 
 }

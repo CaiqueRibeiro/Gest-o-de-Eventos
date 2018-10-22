@@ -24,7 +24,7 @@ public class ParticipantesEventoVH implements IViewHelper {
 		
 		String requestIds = request.getParameter("id");
 		
-		if(operacao.equals("SALVAR") || operacao.equals("ATUALIZAR")) {
+		if(operacao.equals("SALVAR") || operacao.equals("ATUALIZAR") || operacao.equals("EXCLUIR")) {
 				String[] strId = requestIds.split(",");
 				int[] ids = new int[strId.length];
 				int idEvento = Integer.parseInt(request.getParameter("evt-id"));
@@ -42,6 +42,10 @@ public class ParticipantesEventoVH implements IViewHelper {
 				}
 				
 				participantes.setParticipantes(listaParticipantes);
+				
+		} else if(operacao.equals("CONSULTAR")) {
+			int idEvento = Integer.parseInt(request.getParameter("evtid"));
+			participantes.setIdEvento(idEvento);
 		}
 		
 		
@@ -75,16 +79,17 @@ public class ParticipantesEventoVH implements IViewHelper {
 				request.getRequestDispatcher("sucesso.jsp").forward(request, response);			
 			} else if(recebido.size() > 1) {
 				request.setAttribute("resultado", ptcRecebidos);
-				request.getRequestDispatcher("evento-participante.jsp").forward(request, response);
+				request.getRequestDispatcher("participantes-evento.jsp").forward(request, response);
 			} else {
 				
 				if(operacao.equals("CONSULTAR")) {
-					Participante participante = (Participante) recebido.get(0);
-					request.setAttribute("resultado", participante);
-				}
-
+					System.out.println("ENTROU NO CONSULTAR");
+					request.setAttribute("resultado", ptcRecebidos);
+					request.getRequestDispatcher("participantes-evento.jsp").forward(request, response);
+				} else {
 						request.getRequestDispatcher("sucesso.jsp").forward(request, response);
 				}
+			}
 		
 		} // caso não tenha mensagem de erro		
 		

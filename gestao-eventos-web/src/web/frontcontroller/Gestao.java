@@ -75,6 +75,7 @@ public class Gestao extends HttpServlet {
     	vhs.put("/gestao-eventos-web/evento/alterar", new EventoVH());
     	vhs.put("/gestao-eventos-web/evento/excluir", new EventoVH());
     	vhs.put("/gestao-eventos-web/evento/add-participante", new ParticipantesEventoVH());
+    	vhs.put("/gestao-eventos-web/evento/participantes-evento", new ParticipantesEventoVH());
     	vhs.put("/gestao-eventos-web/evento/consultar-participantes", new ParticipanteVH()); 
     	
     	vhs.put("/gestao-eventos-web/participantes/salvar", new ParticipanteVH());

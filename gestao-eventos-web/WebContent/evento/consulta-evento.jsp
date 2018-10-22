@@ -1,3 +1,7 @@
+<%@page import="dominio.endereco.Locacao"%>
+<%@page import="dominio.evento.IDominio"%>
+<%@page import="java.util.List"%>
+<%@page import="classes.util.Resultado"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -65,11 +69,9 @@
 			  <div class="form-row">
 				<div class="form-group col-md-12">
 			  		<label for="locacao">Locação</label>
-			  		<select class="genero form-control" readonly name="locacao">
-			      		<option value="1">Zezinho Festas</option>
-			      		<option value="2">Residência Secreta da Maçonaria</option>
-			      		<option value="3">Salão de Festas - Apartamento Boulevard</option>
-			      	</select>
+			  		<p class="locacao" name="locacao">
+						${resultado.getLocacao().getNome()}
+			      	</p>
 			 	</div>
 			  </div>
 			  <div class="form-row">

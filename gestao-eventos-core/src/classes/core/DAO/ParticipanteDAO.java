@@ -223,9 +223,7 @@ public class ParticipanteDAO extends AbsDAO {
 		EnderecoDAO enderecoDAO = new EnderecoDAO();
 		
 		Participante participante = (Participante) entidade;
-		
-		System.out.println("ID do participante dentro do DAO Excluir: " + participante.getId());
-		
+				
 		try {
 			
 			enderecoDAO.excluir(participante.getEndereco());

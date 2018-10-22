@@ -32,8 +32,6 @@
 			<input type="hidden" name="id" class="id" id="id" value="<%=ptc.getId()%>">
 			<img src="https://via.placeholder.com/110x150"/>
 			<span><%=ptc.getNome()%></span>
-			<h4 style="margin-right: 5px">Convidados</h4>
-			<input type="number" min="0" style="margin-right: 10px">
 			<button type="button" value="<%=ptc.getId()%>" class="btn btn-primary add-button">Adicionar</button>	
 		</div>
 		<%

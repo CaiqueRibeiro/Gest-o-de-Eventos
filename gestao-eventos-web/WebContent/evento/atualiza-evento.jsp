@@ -1,3 +1,8 @@
+<%@page import="dominio.evento.Evento"%>
+<%@page import="dominio.endereco.Locacao"%>
+<%@page import="dominio.evento.IDominio"%>
+<%@page import="java.util.List"%>
+<%@page import="classes.util.Resultado"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,6 +19,14 @@
 <body>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<c:import url="../header.jsp" />
+	
+		<%
+			Resultado listaLocacoes = (Resultado) getServletContext().getAttribute("listaLocacoes");
+			List<IDominio> lista = listaLocacoes.getEntidades();	
+			List<Locacao> locacoes = (List<Locacao>) (Object) lista;
+			
+			Evento evento = (Evento) request.getAttribute("resultado");
+		%>
 	
 	<div class="container-fluid" style="justify-content: flex-end;">
 		<div class="container-form">
@@ -71,9 +84,15 @@
 				<div class="form-group col-md-12">
 			  		<label for="locacao">Locação</label>
 			  		<select class="genero form-control" name="locacao">
-			      		<option value="1">Zezinho Festas</option>
-			      		<option value="2">Residência Secreta da Maçonaria</option>
-			      		<option value="3">Salão de Festas - Apartamento Boulevard</option>
+			      <%
+			      if(locacoes != null) {
+			    	for(Locacao l : locacoes) {  			      
+			      %>
+			      	<option value="<%=l.getId()%>" <%if (evento.getLocacao().getId() == l.getId()) {%> selected <%} %>><%=l.getNome() %></option>
+				  <%
+			    	}
+			      }
+					%>
 			      	</select>
 			 	</div>
 			  </div>
@@ -127,7 +146,7 @@
 			  <br/>
 			  <button type="submit" required name="operacao" class="btn btn-primary" value="ATUALIZAR">ATUALIZAR</button>
 			  <a href="/gestao-eventos-web/evento/consultar-participantes?operacao=CONSULTAR&evtid=${resultado.getId()}" id="add-participantes" class="btn btn-success">Adicionar Participantes</a>
-			  <a href="../participantes/participantes-evento.jsp" class="btn btn-success">Ver Participantes</a>
+			  <a href="/gestao-eventos-web/evento/participantes-evento?operacao=CONSULTAR&evtid=${resultado.getId()}"" class="btn btn-success">Ver Participantes</a>
 			  <a href="excluir?&operacao=EXCLUIR&evt-id=${resultado.getId()}&rat-id=${resultado.getRateio().getId()}&end-id=${resultado.getEndereco().getId()}" class="btn btn-danger">EXCLUIR</a>
 			</form>
 		</div>

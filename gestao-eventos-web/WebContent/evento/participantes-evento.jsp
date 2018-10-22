@@ -1,3 +1,5 @@
+<%@page import="dominio.participantes.Participante"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,29 +19,27 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<c:import url="../header.jsp" />
 	
-	<div class="container-fluid">
+	<div class="container-fluid">		
+	<%
+	
+	List<Participante> resultado = (List<Participante>) request.getAttribute("resultado");
+	
+	if(resultado != null) {
+		  
+	  	for(Participante ptc : resultado) {	
+	%>
 		<div class="card-image" id="box01">
-			<img src="https://via.placeholder.com/110x150"/>
-			<span>Carlos Maria Aparecido</span>
-			<a href="" class="btn btn-danger add-button">Remover</a>
+			<input type="hidden" name="id" class="id" id="id" value="<%=ptc.getId()%>">
+			<span><%=ptc.getNome()%></span>
+			<button type="button" value="<%=ptc.getId()%>" class="btn btn-danger add-button">Remover</button>	
 		</div>
-		<div class="card-image" id="box01 add-button">
-			<img src="https://via.placeholder.com/110x150"/>
-			<span>Márcia Rosatto</span>
-			<a href="" class="btn btn-danger add-button">Remover</a>
-		</div>
-		<div class="card-image" id="box01">
-			<img src="https://via.placeholder.com/110x150"/>
-			<span>Leila Morrone</span>
-			<a href="" class="btn btn-danger add-button">Remover</a>
-		</div>
-		<div class="card-image" id="box01">
-			<img src="https://via.placeholder.com/110x150"/>
-			<span>Caique Ribeiro Rodrigues</span>
-			<a href="" class="btn btn-danger add-button">Remover</a>
-		</div>
+		<%
+		  	}
+		}
+		%>
 		
-		<a id="voltar-button" class="btn btn-primary" href="/gestao-eventos-web/evento/consultar?evt-id=28&editar=true&locacao=1&logradouro=1&operacao=CONSULTAR">Voltar ao evento</a>
+		<a id="add-participantes-button" class="btn btn-danger" href="/gestao-eventos-web/evento/participantes-evento?evt-id=${param.evtid}&operacao=EXCLUIR&id=">Excluir participantes</a>		
+		<a id="voltar-button" class="btn btn-primary" href="/gestao-eventos-web/evento/consultar?evt-id=${param.evtid}&editar=true&operacao=CONSULTAR">Voltar ao evento</a>
 	</div>
 	
 	<script src="../bootstrap/js/jquery-3.3.1.slim.min.js"></script>
