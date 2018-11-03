@@ -207,11 +207,12 @@ public class EventoDAO extends AbsDAO {
 				eventoBuscado.setData(resultado.getDate("data"));
 				eventoBuscado.setHora(resultado.getString("hora"));
 				eventoBuscado.setSituacao(resultado.getString("situacao"));
+				eventoBuscado.setCategoria(resultado.getInt("c.cat_id"));
 				eventoBuscado.setCatNome(resultado.getString("cat_nome"));
 				if(eventoBuscado.getCatNome().equals("Show"))
 					eventoBuscado.setEntrada(resultado.getDouble("pct_lucro"));
 				else
-					eventoBuscado.setLucro(resultado.getDouble("pct_lucro"));
+					eventoBuscado.setLucro(resultado.getDouble("pct_lucro") * 100);
 				
 				enderecoBuscado.setId(resultado.getInt("end_id"));
 				enderecoBuscado.setLogradouro(resultado.getString("logradouro"));

@@ -14,5 +14,14 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Caique/Downloads/Email/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Caique/Downloads/Email/commons-email-1.5/activation-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Caique/Downloads/Email/commons-email-1.5/commons-email-1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Caique/Downloads/javamail-1.4.6/lib/dsn.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Caique/Downloads/javamail-1.4.6/lib/gimap.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Caique/Downloads/javamail-1.4.6/lib/imap.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Caique/Downloads/javamail-1.4.6/lib/mailapi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Caique/Downloads/javamail-1.4.6/lib/pop3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Caique/Downloads/javamail-1.4.6/lib/smtp.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

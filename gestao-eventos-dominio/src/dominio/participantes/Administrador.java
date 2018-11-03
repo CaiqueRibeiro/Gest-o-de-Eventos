@@ -4,6 +4,7 @@ public class Administrador extends Pessoa implements Usuario{
 	
 	private String email;
 	private String senha;
+	private Participante participante;
 
 	@Override
 	public String getEmail() {
@@ -23,6 +24,13 @@ public class Administrador extends Pessoa implements Usuario{
 		this.senha = senha;
 	}
 
+	public Participante getParticipante() {
+		return participante;
+	}
+
+	public void setParticipante(Participante participante) {
+		this.participante = participante;
+	}
 	
 	
 }

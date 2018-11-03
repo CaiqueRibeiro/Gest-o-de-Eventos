@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dominio.evento.EntidadeDominio;
+import dominio.evento.Evento;
 import dominio.participantes.Participante;
 
 public class ParticipanteEventoVM extends EntidadeDominio {
 	
 	public List<Participante> participantes;
-	int idEvento;
+	public Evento evento;
 	
 	public ParticipanteEventoVM(){
 	}
@@ -27,11 +28,11 @@ public class ParticipanteEventoVM extends EntidadeDominio {
 	}
 
 	public int getIdEvento() {
-		return idEvento;
+		return evento.getId();
 	}
 
-	public void setIdEvento(int idEvento) {
-		this.idEvento = idEvento;
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 	
 	

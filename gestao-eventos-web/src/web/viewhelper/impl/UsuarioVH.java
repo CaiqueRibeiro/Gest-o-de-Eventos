@@ -43,7 +43,13 @@ public class UsuarioVH implements IViewHelper {
 			
 			administrador = new Administrador();
 			administrador.setEmail(email);
-			administrador.setSenha(senha);			
+			administrador.setSenha(senha);	
+			
+			if(operacao.equals("SALVAR") || operacao.equals("ALTERAR")) {
+				
+				
+				
+			}
 		}
 		
 		return administrador;

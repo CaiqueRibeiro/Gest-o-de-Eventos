@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import classes.util.Resultado;
+import dominio.evento.Evento;
 import dominio.evento.IDominio;
 import dominio.participantes.Participante;
 import dominio.viewmodels.ParticipanteEventoVM;
@@ -29,7 +30,10 @@ public class ParticipantesEventoVH implements IViewHelper {
 				int[] ids = new int[strId.length];
 				int idEvento = Integer.parseInt(request.getParameter("evt-id"));
 				
-				participantes.setIdEvento(idEvento);
+				Evento evento = new Evento();
+				evento.setId(idEvento);
+				
+				participantes.setEvento(evento);
 				
 				ArrayList<Participante> listaParticipantes = new ArrayList<Participante>();
 				
@@ -45,7 +49,10 @@ public class ParticipantesEventoVH implements IViewHelper {
 				
 		} else if(operacao.equals("CONSULTAR")) {
 			int idEvento = Integer.parseInt(request.getParameter("evtid"));
-			participantes.setIdEvento(idEvento);
+			
+			Evento evento = new Evento();
+			evento.setId(idEvento);
+			participantes.setEvento(evento);
 		}
 		
 		

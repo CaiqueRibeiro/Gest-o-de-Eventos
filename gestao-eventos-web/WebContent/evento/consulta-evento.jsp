@@ -124,7 +124,7 @@
 			    </div>
 			    <div class="form-group col-md-3">
 			      <label for="logradouro">Situação</label>
-			      	<p name="situacao">AGENDADO</P>
+			      	<p name="situacao">${resultado.getSituacao()}</P>
 			    </div>
 			  </div>
 			  <br/>

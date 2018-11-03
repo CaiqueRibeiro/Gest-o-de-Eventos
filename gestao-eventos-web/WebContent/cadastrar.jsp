@@ -4,22 +4,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="../css/visual.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="css/visual.css"/>
+<link type="text/css" rel="stylesheet" href="css/login.css"/>
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Cadastro de participante</title>
+<title>Cadastro no Sistema</title>
 </head>
 <body>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-	<c:import url="../header.jsp" />
-	
+		
 	<div class="container-fluid" style="justify-content: flex-end;">
-		<div class="container-form">
-			<h1>Cadastro de Participante</h1>
+		<div class="container-form-login" style="width: 60% !important; margin-top: 5%; margin-bottom: 5%; padding: 2%">
+			<h1 class="text-center">Cadastro</h1>
 			
-			<form action="salvar">
+			<form action="salvar" method="post">
 			  <div class="form-row">
 			    <div class="form-group col-md-12">
 			    	<label for="nome">Nome</label>
@@ -96,10 +96,10 @@
 			</form>
 		</div>
 	</div>
-	
-	<script src="../bootstrap/js/jquery-3.3.1.slim.min.js"></script>
+
+	<script src="bootstrap/js/jquery-3.3.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="../bootstrap/js/bootstrap.min.js" ></script>
-    <script type="text/javascript" src="../js/visual.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="js/visual.js"></script>
 </body>
 </html>

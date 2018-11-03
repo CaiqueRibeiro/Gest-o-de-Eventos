@@ -22,7 +22,7 @@
 			<form action="login" method="post">
 			  <div class="form-row">
 			    <div class="form-group col-md-12">
-			    	<label for="nome">Nome</label>
+			    	<label for="nome">Login</label>
 			    	<input type="text" class="form-control" name="email" required placeholder="Email">
 			    </div>
 			  </div>

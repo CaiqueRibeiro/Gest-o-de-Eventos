@@ -38,7 +38,6 @@
 				<input type="hidden" name="end-id" value="${resultado.getEndereco().getId()}">
 			  <div class="form-row">
 			    <div class="form-group col-md-10">
-			    	<input type="hidden" name="situacao" value="AGENDADO">
 			    	<label for="nome">Nome do Evento</label>
 			    	<input type="text" required=true class="form-control" name="nome" value="${resultado.getNome()}">
 			    </div>
@@ -51,10 +50,10 @@
 			    <div class="form-group col-md-6">
 			      <label for="categoria">Categoria</label>
 			      <select class="genero form-control" name="categoria" id="categoria">
-			      	<option value="1">Aniversário</option>
-			      	<option value="2">Casamento</option>
-			      	<option value="3">Festa empresarial</option>
-			      	<option value="4">Show</option>
+			      	<option value="1" ${resultado.getCategoria() == 1 ? "selected" : "" }>Aniversário</option>
+			      	<option value="2" ${resultado.getCategoria() == 2 ? "selected" : "" }>Casamento</option>
+			      	<option value="3" ${resultado.getCategoria() == 3 ? "selected" : "" }>Festa empresarial</option>
+			      	<option value="4" ${resultado.getCategoria() == 4 ? "selected" : "" }>Show</option>
 			      </select>
 			    </div>
 			    <div class="form-group col-md-3">
@@ -134,19 +133,20 @@
 			      <input type="text" required class="estado form-control" name="estado" value="${resultado.getEndereco().getEstado() }">
 			    </div>
 			    <div class="form-group col-md-3">
-			      <label for="logradouro">Situação</label>
-			      <select class="logradouro form-control" name="situação">
-			      	<option value="1">AGENDADO</option>
-			      	<option value="2">FINALIZADO</option>
-			      	<option value="3">CANCELADO</option>
-			      	<option value="3">ADIADO</option>
+			      <label for="situacao">Situação</label>
+			      <select class="logradouro form-control" name="situacao">
+			      	<option value="AGENDADO" ${resultado.getSituacao().equals("AGENDADO") ? "selected" : ""}>AGENDADO</option>
+			      	<option value="FINALIZADO" ${resultado.getSituacao().equals("FINALIZADO") ? "selected" : ""}>FINALIZADO</option>
+			      	<option value="CANCELADO" ${resultado.getSituacao().equals("CANCELADO") ? "selected" : ""}>CANCELADO</option>
+			      	<option value="ADIADO" ${resultado.getSituacao().equals("ADIADO") ? "selected" : ""}>ADIADO</option>
 			      </select>
 			    </div>
 			  </div>
 			  <br/>
 			  <button type="submit" required name="operacao" class="btn btn-primary" value="ATUALIZAR">ATUALIZAR</button>
 			  <a href="/gestao-eventos-web/evento/consultar-participantes?operacao=CONSULTAR&evtid=${resultado.getId()}" id="add-participantes" class="btn btn-success">Adicionar Participantes</a>
-			  <a href="/gestao-eventos-web/evento/participantes-evento?operacao=CONSULTAR&evtid=${resultado.getId()}"" class="btn btn-success">Ver Participantes</a>
+			  <a href="/gestao-eventos-web/evento/participantes-evento?operacao=CONSULTAR&evtid=${resultado.getId()}" class="btn btn-success">Ver Participantes</a>
+			  <a href="" class="btn btn-primary">Gerir Estoque</a>
 			  <a href="excluir?&operacao=EXCLUIR&evt-id=${resultado.getId()}&rat-id=${resultado.getRateio().getId()}&end-id=${resultado.getEndereco().getId()}" class="btn btn-danger">EXCLUIR</a>
 			</form>
 		</div>

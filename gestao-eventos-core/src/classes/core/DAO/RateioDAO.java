@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import dominio.evento.Evento;
@@ -115,8 +116,58 @@ public class RateioDAO extends AbsDAO {
 
 	@Override
 	public List<IDominio> consultar(IDominio entidade) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		conectar();
+		PreparedStatement ps = null;
+		
+		List<IDominio> rateios = new ArrayList<IDominio>();
+		
+		Rateio rateio = (Rateio) entidade;
+		
+		try {
+			
+			conexao.setAutoCommit(false);
+			
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append("SELECT * from rateios WHERE rat_id=?");
+			
+			ps = conexao.prepareStatement(sql.toString());
+			
+			ps.setInt(1, rateio.getId());
+			
+			ResultSet resultado = ps.executeQuery();
+			
+			while(resultado.next()) {
+				Rateio rateioProcurado = new Rateio();
+				
+				rateioProcurado.setId(resultado.getInt("rat_id"));
+				rateioProcurado.setInicioRateio(resultado.getDate("dt_inicio"));
+				rateioProcurado.setFimRateio(resultado.getDate("dt_final"));
+				rateioProcurado.setValorPagar(resultado.getDouble("valor_pagar"));
+				
+				rateios.add(rateioProcurado);
+			}
+			
+			
+		} catch (SQLException e) {
+			try {
+				conexao.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} // fim do try/catch INTERNO
+			
+			e.printStackTrace();
+			
+		} /* fim do try/catch */ finally {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} // final FINALLY
+		
+		return rateios;
 	}
 	
 	public int consultar() {

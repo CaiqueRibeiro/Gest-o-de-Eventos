@@ -27,6 +27,7 @@ import web.viewhelper.impl.ItemProdutoVH;
 import web.viewhelper.impl.ParticipanteVH;
 import web.viewhelper.impl.ParticipantesEventoVH;
 import web.viewhelper.impl.ProdutoVH;
+import web.viewhelper.impl.RateioVH;
 import web.viewhelper.impl.UsuarioVH;
 
 /**
@@ -77,6 +78,8 @@ public class Gestao extends HttpServlet {
     	vhs.put("/gestao-eventos-web/evento/add-participante", new ParticipantesEventoVH());
     	vhs.put("/gestao-eventos-web/evento/participantes-evento", new ParticipantesEventoVH());
     	vhs.put("/gestao-eventos-web/evento/consultar-participantes", new ParticipanteVH()); 
+    	
+    	vhs.put("/gestao-eventos-web/evento/consultar-rateio", new RateioVH()); 
     	
     	vhs.put("/gestao-eventos-web/participantes/salvar", new ParticipanteVH());
     	vhs.put("/gestao-eventos-web/participantes/consultar", new ParticipanteVH());

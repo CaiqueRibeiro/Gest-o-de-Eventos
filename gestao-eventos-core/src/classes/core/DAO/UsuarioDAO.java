@@ -38,7 +38,7 @@ public class UsuarioDAO extends AbsDAO {
 			
 			StringBuilder sql = new StringBuilder(); // variável para concatenar as Strings
 			// inicia a declaração da query
-			sql.append("SELECT * from usuarios where email=? AND senha=?");
+			sql.append("SELECT * from usuarios u left join participantes p  on p.ptc_id = u.ptc_id where u.email=? AND u.senha=?");
 			
 			ps = conexao.prepareStatement(sql.toString());
 			

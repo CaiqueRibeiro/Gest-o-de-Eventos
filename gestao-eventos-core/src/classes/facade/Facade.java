@@ -16,6 +16,7 @@ import classes.core.DAO.LocacaoDAO;
 import classes.core.DAO.ParticipanteDAO;
 import classes.core.DAO.ParticipanteEventoDAO;
 import classes.core.DAO.ProdutoDAO;
+import classes.core.DAO.RateioDAO;
 import classes.core.DAO.UsuarioDAO;
 import classes.strategy.ValidarDados;
 import classes.strategy.ValidarDadosParticipante;
@@ -23,10 +24,12 @@ import classes.strategy.ValidarDadosProduto;
 import classes.strategy.ValidarDadosUsuario;
 import classes.strategy.ValidarEndereco;
 import classes.strategy.ValidarExistencia;
+import classes.strategy.ValidarExistenciaParticipanteEvento;
 import classes.util.Resultado;
 import dominio.endereco.Locacao;
 import dominio.evento.Evento;
 import dominio.evento.IDominio;
+import dominio.evento.Rateio;
 import dominio.participantes.Administrador;
 import dominio.participantes.Participante;
 import dominio.produto.Fornecedor;
@@ -60,6 +63,7 @@ public class Facade implements IFacade{
 		FornecedorDAO fncDAO = new FornecedorDAO();
 		LocacaoDAO locDAO = new LocacaoDAO();
 		ParticipanteEventoDAO peDAO = new ParticipanteEventoDAO();
+		RateioDAO ratDAO = new RateioDAO();
 		
 		daos.put(Evento.class.getName(), evtDAO);
 		daos.put(Participante.class.getName(), ptcDAO);
@@ -69,6 +73,7 @@ public class Facade implements IFacade{
 		daos.put(Fornecedor.class.getName(), fncDAO);
 		daos.put(Locacao.class.getName(), locDAO);
 		daos.put(ParticipanteEventoVM.class.getName(), peDAO);
+		daos.put(Rateio.class.getName(), ratDAO);
 		
 		// Instanciando strategies Evento
 		ValidarDados vDados = new ValidarDados();
@@ -83,6 +88,9 @@ public class Facade implements IFacade{
 		
 		// Instanciando strategies Produto
 		ValidarDadosProduto vDadosProduto = new ValidarDadosProduto();
+		
+		// Instanciando strategies dos participantes do evento
+		ValidarExistenciaParticipanteEvento vParticipanteEvento = new ValidarExistenciaParticipanteEvento();
 		
 		// Listas de strategies para as operações do evento
 		List<IStrategy> rnsSalvarEvento = new ArrayList<IStrategy>();
@@ -106,6 +114,9 @@ public class Facade implements IFacade{
 		List<IStrategy> rnsSalvarProduto = new ArrayList<IStrategy>();
 		List<IStrategy> rnsAlterarProduto = new ArrayList<IStrategy>();
 		
+		// Lista de strategies para as operações do Participante do evento
+		List<IStrategy> rnsSalvarPtcEvento = new ArrayList<IStrategy>();
+		
 		// Regras de negócio sendo inseridas para o evento
 		rnsSalvarEvento.add(vDados);
 		rnsAlterarEvento.add(vDados);
@@ -123,6 +134,9 @@ public class Facade implements IFacade{
 		// Regras de negócio sendo inseridas para o produto
 		rnsSalvarProduto.add(vDadosProduto);
 		rnsAlterarProduto.add(vDadosProduto);
+		
+		// Regras de negócio sendo inseridas para o participante do evento
+		rnsSalvarPtcEvento.add(vParticipanteEvento);
 		
 		// Mapa para armazenar todas as operações do evento
 		Map<String, List<IStrategy>> rnsEvento = new HashMap<String, List<IStrategy>>();
@@ -147,11 +161,15 @@ public class Facade implements IFacade{
 		rnsProduto.put("SALVAR", rnsSalvarProduto);
 		rnsProduto.put("ALTERAR", rnsAlterarProduto);
 		
+		Map<String, List<IStrategy>> rnsPtcEvento = new HashMap<String, List<IStrategy>>();
+		rnsPtcEvento.put("SALVAR", rnsSalvarPtcEvento);
+		
 		// Mapa para todas as regras de negócio de um determinado domínio
 		rns.put(Evento.class.getName(), rnsEvento);
 		rns.put(Participante.class.getName(), rnsParticipante);
 		rns.put(Administrador.class.getName(), rnsUsuario);
 		rns.put(Produto.class.getName(), rnsProduto);
+		rns.put(ParticipanteEventoVM.class.getName(), rnsPtcEvento);
 
 	}
 

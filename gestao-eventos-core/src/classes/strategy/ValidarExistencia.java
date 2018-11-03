@@ -15,7 +15,6 @@ public class ValidarExistencia implements IStrategy {
 	@Override
 	public String processar(IDominio entidade) {
 		
-		
 		Participante participante = (Participante) entidade;
 		
 		ParticipanteDAO pDAO = new ParticipanteDAO();

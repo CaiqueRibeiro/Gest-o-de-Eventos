@@ -77,6 +77,7 @@ public class ParticipanteEventoDAO extends AbsDAO {
 		PreparedStatement ps = null;
 		List<IDominio> participantes = new ArrayList<IDominio>();
 		ParticipanteEventoVM participantesVM = (ParticipanteEventoVM) entidade;
+		List<Participante> ptc = participantesVM.getParticipantes();
 		
 		
 		try {
@@ -86,9 +87,9 @@ public class ParticipanteEventoDAO extends AbsDAO {
 			StringBuilder sql = new StringBuilder();
 			
 			sql.append("SELECT * from participantes_evento pe left join participantes p on p.ptc_id = pe.pe_ptc_id");
-			sql.append(" WHERE pe.pe_evt_id=?");
+			sql.append(" WHERE pe.pe_evt_id=?");			
 			
-			ps = conexao.prepareStatement(sql.toString());
+			ps = conexao.prepareStatement(sql.toString());	
 			
 			ps.setInt(1, participantesVM.getIdEvento());
 			

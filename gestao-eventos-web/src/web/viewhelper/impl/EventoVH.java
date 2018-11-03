@@ -56,6 +56,7 @@ public class EventoVH implements IViewHelper {
 			evento.setHora(request.getParameter("hora"));
 			evento.setQdtMaximaPessoas(Integer.parseInt(request.getParameter("max-participantes")));
 			evento.setSituacao(request.getParameter("situacao"));
+			System.out.println("Situação: " + evento.getSituacao());
 			
 			if(evento.getCategoria() == 4)
 				evento.setEntrada(Double.parseDouble(request.getParameter("porcentagem-lucro")));
