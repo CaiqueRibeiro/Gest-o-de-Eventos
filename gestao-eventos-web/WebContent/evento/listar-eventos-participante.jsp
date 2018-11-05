@@ -11,14 +11,14 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Cadastro de locações</title>
+    <title>Eventos como participante</title>
     </head>
     <body>
     	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     	<c:import url="../header.jsp" />
 
     	<div class="container">
-    		<center><h3>Busca de Locações</h3></center>  
+    		<center><h3>Busca de Eventos Como Participante</h3></center>  
 
     		<table class="table">
 	    		<thead>
@@ -40,18 +40,33 @@
 
 
 		    <table class="table table-light">
+		    <colgroup>
+		       <col span="1" style="width: 70%;">
+		       <col span="1" style="width: 15%;">
+		       <col span="1" style="width: 15%;">
+		    </colgroup>
 			    <thead>
 				    <tr>
 				    	<th scope="col">Nome</th>
 				    </tr>
 			    </thead>
 				    <tbody  id="corpo-lista">
+				    	<%
+				    		List<Evento> resultado = (List<Evento>) request.getAttribute("resultado");
+				    	
+					    	if(resultado != null) {
+					    		  
+					    	  	for(Evento ev : resultado) {
+				    	%>
 				    	<tr>
-				    		<td><a href="evento-participante.jsp">Aniversário do Zé</a></td>
+				    		<td><a href="consultar?operacao=CONSULTAR&evt-id=<%=ev.getId()%>&editar=false"><%=ev.getNome()%></a></td>
+				    		<td><a class="btn btn-success btn-delete" href="/gestao-eventos-web/evento/eventos-convidado?operacao=ATUALIZAR&acao=CONFIRMAR&evt-id=<%=ev.getId()%>">CONFIRMAR</a></td>
+				    		<td><a class="btn btn-danger btn-delete" href="/gestao-eventos-web/evento/eventos-convidado?operacao=ATUALIZAR&acao=REJEITAR&evt-id=<%=ev.getId()%>">REJEITAR</a></td>
 				    	</tr>
-				    	<tr>
-				    		<td><a href="evento-participante.jsp">Casamento do Carlos</a></td>
-				    	</tr>
+				    	<%
+					    	  	}
+					    	}
+				    	%>	
 				    </tbody>
 			    </table>
 		    </div>

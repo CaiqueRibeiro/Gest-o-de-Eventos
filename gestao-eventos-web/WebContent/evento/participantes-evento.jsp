@@ -31,13 +31,14 @@
 		<div class="card-image" id="box01">
 			<input type="hidden" name="id" class="id" id="id" value="<%=ptc.getId()%>">
 			<span><%=ptc.getNome()%></span>
+			<button type="button" value="<%=ptc.getId()%>" style="margin-right: 1%" class="btn btn-success pago-button">PAGO</button>
 			<button type="button" value="<%=ptc.getId()%>" class="btn btn-danger add-button">Remover</button>	
 		</div>
 		<%
 		  	}
 		}
 		%>
-		
+		<a id="add-pago-button" class="btn btn-success" href="/gestao-eventos-web/evento/participantes-evento?evt-id=${param.evtid}&operacao=ATUALIZAR&id=">Confirmar pagamento</a><br/>			
 		<a id="add-participantes-button" class="btn btn-danger" href="/gestao-eventos-web/evento/participantes-evento?evt-id=${param.evtid}&operacao=EXCLUIR&id=">Excluir participantes</a>		
 		<a id="voltar-button" class="btn btn-primary" href="/gestao-eventos-web/evento/consultar?evt-id=${param.evtid}&editar=true&operacao=CONSULTAR">Voltar ao evento</a>
 	</div>

@@ -260,5 +260,31 @@ public class ParticipanteDAO extends AbsDAO {
 		} // final FINALLY		
 		
 	} // final EXCLUIR
+	
+	public int consultar() {
+		
+		int id = 0;
+		
+		PreparedStatement ps = null;
+		
+		try {
+			
+			conexao.setAutoCommit(false);
+			StringBuilder sql = new StringBuilder();
+			sql.append("select last_insert_id() as id");
+			ps = conexao.prepareStatement(sql.toString());
+			ResultSet resultado = ps.executeQuery();
+			
+			while(resultado.next()) {
+				id = resultado.getInt("id");
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return id;
+	}
 
 }

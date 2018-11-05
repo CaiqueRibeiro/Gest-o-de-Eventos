@@ -19,7 +19,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/gestao-eventos-web/evento/cadastro-evento.jsp">Cadastrar</a>
           <a class="dropdown-item" href="/gestao-eventos-web/evento/consultar?operacao=CONSULTAR&editar=false">Meu Eventos</a>
-          <a class="dropdown-item" href="/gestao-eventos-web/evento/eventos-como-participante.jsp">Eventos Como Convidado</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/evento/eventos-convidado?operacao=CONSULTAR">Eventos Como Convidado</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -56,7 +56,7 @@
           Relatórios
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/eventos.jsp">Eventos</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/evento?operacao=CONSULTAR&tipo=EVENTO">Eventos</a>
           <a class="dropdown-item" href="/gestao-eventos-web/relatorios/participantes.jsp">Participantes</a>
           <a class="dropdown-item" href="/gestao-eventos-web/relatorios/locacoes.jsp">Locações</a>
           <a class="dropdown-item" href="/gestao-eventos-web/relatorios/estoque.jsp">Produtos</a>

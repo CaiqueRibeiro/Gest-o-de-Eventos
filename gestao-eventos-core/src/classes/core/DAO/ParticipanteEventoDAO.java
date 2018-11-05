@@ -66,7 +66,53 @@ public class ParticipanteEventoDAO extends AbsDAO {
 
 	@Override
 	public void alterar(IDominio entidade) throws SQLException {
-		// TODO Auto-generated method stub
+		
+		conectar();
+		PreparedStatement ps = null;
+		
+		ParticipanteEventoVM participantesVM = (ParticipanteEventoVM) entidade;
+		List<Participante> participantes = null;
+		
+		try {
+			
+			conexao.setAutoCommit(false);
+			
+			if(participantesVM.getParticipantes().get(0).getId() == 0) {			
+				participantes = (List<Participante>) (Object) this.consultarId();
+				
+			}  else {
+				participantes = participantesVM.getParticipantes();
+			}
+						
+				for(Participante p : participantes) {
+					StringBuilder sql = new StringBuilder();
+					sql.append("UPDATE participantes_evento set pe_pago = 1 WHERE pe_ptc_id=? AND pe_evt_id = ?");
+					ps = conexao.prepareStatement(sql.toString());
+					ps.setInt(1, p.getId());
+					ps.setInt(2, participantesVM.getIdEvento());
+						
+					ps.executeUpdate();
+					System.out.println(ps.toString());
+				}	
+			
+			conexao.commit();
+			
+		} catch (SQLException e) {
+			try {
+				conexao.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} // fim do try/catch INTERNO
+			
+			e.printStackTrace();
+			
+		} /* fim do try/catch */ finally {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} // final FINALLY			
 		
 	}
 

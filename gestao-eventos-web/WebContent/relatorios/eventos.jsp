@@ -1,3 +1,6 @@
+<%@page import="dominio.relatorios.DadosRelatorio"%>
+<%@page import="java.util.List"%>
+<%@page import="dominio.relatorios.Relatorio"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -38,43 +41,98 @@
     <script type="text/javascript" src="../js/visual.js"></script>
     <script type="text/javascript" src="../chart/dist/Chart.bundle.min.js"></script>
 <script>
+
+<% 
+
+	Relatorio relatorio = (Relatorio) request.getAttribute("resultado");
+	List<DadosRelatorio> linhaA = relatorio.getDadosA();
+	List<DadosRelatorio> linhaB = relatorio.getDadosB();
+%>
 var ctx = document.getElementById("myChart");
-var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var MONTHS = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+var dadosA = [
+	<%
+	for(int i = 1; i <= 12; i++) {
+		boolean flag = false;
+		for(DadosRelatorio dados : linhaA) {
+			if(dados.getChave().equals(String.valueOf(i))) {	
+				flag = true;
+				out.print(dados.getValor());
+			%>,
+				<% }
+			}
+			if(!flag) {
+				%>
+				0,
+				<%
+				}
+		}
+	%>
+];
+
+
+var dadosB = [
+	<%
+	for(int i = 1; i <= 12; i++) {
+		boolean flag = false;
+		for(DadosRelatorio dados : linhaB) {
+			if(dados.getChave().equals(String.valueOf(i))) {	
+				flag = true;
+				out.print(dados.getValor());
+			%>,
+				<% }
+			}
+			if(!flag) {
+				%>
+				0,
+				<%
+				}
+		}
+	%>
+];
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {
         labels: MONTHS,
         datasets: [{
-            label: 'EVENTOS CONCLUÍDOS',
-            data: [12, 19, 3, 5, 2, 3, 9, 15, 8, 19, 10, 9],
+            label: 'EVENTOS AGENDADOS',
+            data: dadosA,
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 99, 132, 0)',
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(255,99,132,1)'
             ],
-            borderWidth: 1
+            borderWidth: 3
+        }, {
+            label: 'EVENTOS ADIADOS',
+            yAxisID: 'B',
+            data: dadosB,
+            backgroundColor: [
+                'rgba(123, 144, 229, 0)'
+            ],
+            borderColor: [
+                'rgba(123, 144, 229, 1)'
+            ],
+            borderWidth: 3
         }]
     },
     options: {
         scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
+          yAxes: [{
+            id: 'A',
+            type: 'linear',
+            position: 'left',
+          }, {
+            id: 'B',
+            type: 'linear',
+            position: 'right',
+            ticks: {
+            	beginAtZero: true
+            }
+          }]
         }
-    }
+      }
 });
 </script>
 

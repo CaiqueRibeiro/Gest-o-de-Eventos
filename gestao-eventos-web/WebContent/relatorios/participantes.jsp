@@ -39,7 +39,7 @@
     <script type="text/javascript" src="../chart/dist/Chart.bundle.min.js"></script>
 <script>
 var ctx = document.getElementById("myChart");
-var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var MONTHS = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {

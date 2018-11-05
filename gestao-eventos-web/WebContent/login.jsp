@@ -35,7 +35,7 @@
 			  <br/>
 			  <div class="login-buttons">
 			  	<input type="submit" name="operacao" class="btn btn-primary" value="CONSULTAR">
-			  	<a href="index.jsp" name="operacao" class="btn btn-danger" value="CONSULTAR">ESQUECI A SENHA</a>
+			  	<a href="cadastrar.jsp" class="btn btn-success">CADASTRAR</a>
 			  </div>
 			</form>
 		</div>

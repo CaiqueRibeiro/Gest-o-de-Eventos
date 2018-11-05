@@ -19,17 +19,21 @@
 		<div class="container-form-login" style="width: 60% !important; margin-top: 5%; margin-bottom: 5%; padding: 2%">
 			<h1 class="text-center">Cadastro</h1>
 			
-			<form action="salvar" method="post">
+			<form action="cadastrar" method="post">
 			  <div class="form-row">
 			    <div class="form-group col-md-12">
-			    	<label for="nome">Nome</label>
-			    	<input type="text" required class="form-control" name="nome" placeholder="Nome inteiro do participante">
+			    	<label for="email">E-mail</label>
+			    	<input type="text" required class="form-control" name="email" placeholder="ex: zeninguem@hotmail.com">
+			    </div>
+			    <div class="form-group col-md-12">
+			    	<label for="email">Senha</label>
+			    	<input type="password" required class="form-control" name="senha">
 			    </div>
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-10">
-			    	<label for="email">E-mail</label>
-			    	<input type="text" required class="form-control" name="email" placeholder="ex: zeninguem@hotmail.com">
+			    	<label for="nome">Nome</label>
+			    	<input type="text" required class="form-control" name="nome" placeholder="Nome inteiro do participante">
 			    </div>
 			    <div class="form-group col-md-2">
 			      <label for="telefone">Telefone</label>

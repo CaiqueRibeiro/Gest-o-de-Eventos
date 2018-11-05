@@ -10,6 +10,7 @@ import classes.core.IDAO;
 import classes.core.IFacade;
 import classes.core.IStrategy;
 import classes.core.DAO.EventoDAO;
+import classes.core.DAO.EventosParticipanteDAO;
 import classes.core.DAO.FornecedorDAO;
 import classes.core.DAO.ItemProdutoDAO;
 import classes.core.DAO.LocacaoDAO;
@@ -17,6 +18,7 @@ import classes.core.DAO.ParticipanteDAO;
 import classes.core.DAO.ParticipanteEventoDAO;
 import classes.core.DAO.ProdutoDAO;
 import classes.core.DAO.RateioDAO;
+import classes.core.DAO.RelatorioDAO;
 import classes.core.DAO.UsuarioDAO;
 import classes.strategy.ValidarDados;
 import classes.strategy.ValidarDadosParticipante;
@@ -29,12 +31,14 @@ import classes.util.Resultado;
 import dominio.endereco.Locacao;
 import dominio.evento.Evento;
 import dominio.evento.IDominio;
+import dominio.evento.ListaEventosParticipante;
 import dominio.evento.Rateio;
 import dominio.participantes.Administrador;
 import dominio.participantes.Participante;
 import dominio.produto.Fornecedor;
 import dominio.produto.ItemProduto;
 import dominio.produto.Produto;
+import dominio.relatorios.Relatorio;
 import dominio.viewmodels.ParticipanteEventoVM;
 
 public class Facade implements IFacade{
@@ -64,6 +68,8 @@ public class Facade implements IFacade{
 		LocacaoDAO locDAO = new LocacaoDAO();
 		ParticipanteEventoDAO peDAO = new ParticipanteEventoDAO();
 		RateioDAO ratDAO = new RateioDAO();
+		EventosParticipanteDAO evpDAO = new EventosParticipanteDAO();
+		RelatorioDAO rDAO = new RelatorioDAO();
 		
 		daos.put(Evento.class.getName(), evtDAO);
 		daos.put(Participante.class.getName(), ptcDAO);
@@ -74,6 +80,8 @@ public class Facade implements IFacade{
 		daos.put(Locacao.class.getName(), locDAO);
 		daos.put(ParticipanteEventoVM.class.getName(), peDAO);
 		daos.put(Rateio.class.getName(), ratDAO);
+		daos.put(ListaEventosParticipante.class.getName(), evpDAO);
+		daos.put(Relatorio.class.getName(), rDAO);
 		
 		// Instanciando strategies Evento
 		ValidarDados vDados = new ValidarDados();

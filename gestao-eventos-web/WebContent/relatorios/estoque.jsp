@@ -37,33 +37,41 @@ var myChart = new Chart(ctx, {
             label: 'MÉDIA DE ENTRADAS E SAÍDAS NO ESTOQUE',
             data: [300, 201, 340, 49, 126, 413, 250, 383, 328, 507, 116, 95],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 99, 132, 0)',
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(255,99,132,1)'
             ],
-            borderWidth: 1
+            borderWidth: 3
+        }, {
+            label: 'MÉDIA DE PRODUTOS PERECIVEIS',
+            yAxisID: 'B',
+            data: [302, 101, 300, 40, 146, 313, 280, 303, 328, 510, 100, 100],
+            backgroundColor: [
+                'rgba(123, 144, 229, 0)'
+            ],
+            borderColor: [
+                'rgba(123, 144, 229, 1)'
+            ],
+            borderWidth: 3
         }]
     },
     options: {
         scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
+          yAxes: [{
+            id: 'A',
+            type: 'linear',
+            position: 'left',
+          }, {
+            id: 'B',
+            type: 'linear',
+            position: 'right',
+            ticks: {
+            	beginAtZero: true
+            }
+          }]
         }
-    }
+      }
 });
 </script>
 

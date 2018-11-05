@@ -90,7 +90,6 @@ public class ParticipantesEventoVH implements IViewHelper {
 			} else {
 				
 				if(operacao.equals("CONSULTAR")) {
-					System.out.println("ENTROU NO CONSULTAR");
 					request.setAttribute("resultado", ptcRecebidos);
 					request.getRequestDispatcher("participantes-evento.jsp").forward(request, response);
 				} else {

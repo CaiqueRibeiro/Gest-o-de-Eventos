@@ -19,6 +19,10 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Gestao</servlet-name>
+    <url-pattern>/cadastrar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
     <url-pattern>/evento/salvar</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
@@ -48,6 +52,10 @@
   <servlet-mapping>
     <servlet-name>Gestao</servlet-name>
     <url-pattern>/evento/consultar-rateio</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/evento/eventos-convidado</url-pattern>
   </servlet-mapping>
     <servlet-mapping>
     <servlet-name>Gestao</servlet-name>
@@ -97,5 +105,20 @@
     <servlet-name>Gestao</servlet-name>
     <url-pattern>/estoque/excluir</url-pattern>
   </servlet-mapping>
- 
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/relatorios/evento</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>Gestao</servlet-name>
+    <url-pattern>/relatorios/participante</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gestao</servlet-name>
+    <url-pattern>/relatorios/produto</url-pattern>
+  </servlet-mapping> 
+  <servlet-mapping>
+<servlet-name>Gestao</servlet-name>
+    <url-pattern>/relatorios/locacao</url-pattern>
+  </servlet-mapping>
 </web-app>

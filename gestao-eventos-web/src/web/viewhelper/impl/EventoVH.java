@@ -92,6 +92,14 @@ public class EventoVH implements IViewHelper {
 			evento.setLocacao(locacao);
 		} // OPERACAO SALVAR E ALTERAR
 		else if(operacao.equals("CONSULTAR") || operacao.equals("EXCLUIR")) {
+			
+			Administrador administrador = new Administrador();
+			Administrador adm = (Administrador) request.getSession().getAttribute("usuarioLogado");
+			int admId = adm.getId();
+			
+			administrador.setId(admId);
+			
+			evento.setAdministrador(administrador);
 
 			
 			String eventoId = request.getParameter("evt-id");
@@ -155,7 +163,6 @@ public class EventoVH implements IViewHelper {
 			} else {
 				String editavel = request.getParameter("editar");
 				
-				System.out.println("EDITAVEL: " + editavel + " ID: " + request.getParameter("evt-id"));
 				Evento evento = (Evento) recebido.get(0);
 				request.setAttribute("resultado", evento);
 				if(editavel != "" && editavel != null) {
