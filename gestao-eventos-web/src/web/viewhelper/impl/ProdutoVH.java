@@ -45,8 +45,16 @@ public class ProdutoVH implements IViewHelper {
 		if(operacao.equals("CONSULTAR")) {
 			String pdt_id = request.getParameter("pdt-id");
 			
+			String pdt_nome = request.getParameter("nome");
+			
 			if(pdt_id != null && pdt_id != "") {
+				
 				produto.setId(Integer.parseInt(pdt_id));
+				
+			} else if(pdt_nome != null && pdt_nome != "") {
+				
+				produto.setNome(pdt_nome);
+				
 			}
 		}
 		
@@ -86,8 +94,11 @@ public class ProdutoVH implements IViewHelper {
 				request.setAttribute("erro", "Não há produtos");
 				request.getRequestDispatcher("lista-produtos.jsp").forward(request, response);			
 			} else if(recebido.size() > 1) {
+				
+				request.getSession().setAttribute("listaProdutos", resultado);
 				request.setAttribute("resultado", pdtRecebidos);
 				request.getRequestDispatcher("lista-produtos.jsp").forward(request, response);
+				
 			} else {
 				String editavel = request.getParameter("editar");
 				System.out.println("Editável? " + editavel);

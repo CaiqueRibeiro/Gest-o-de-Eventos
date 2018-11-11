@@ -42,5 +42,12 @@ public class LoginService {
 		session.setAttribute("usuarioLogado", usuario);
 		
 	}
+	
+	public void logoff() {
+		
+		HttpSession session = this.request.getSession();
+		session.invalidate();
+		
+	}
 
 }

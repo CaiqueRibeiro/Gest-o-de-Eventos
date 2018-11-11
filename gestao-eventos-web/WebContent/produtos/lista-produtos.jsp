@@ -8,6 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="../css/visual.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">0
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -30,10 +31,13 @@
 	
 	    		<tbody>
 	    			<tr>
+	    			<form action="consultar" method="POST">
+	    				<input type="hidden" name="editar" value="false">
 	    				<td  id="nome-filtro"><input type="text"style="width: 80%; margin-top: 0.5%" id="nome" name="nome"/></td>
-	    				<td style="text-align: left"><input type="submit" id="consultar" class="btn btn-primary" value="CONSULTAR"/>
-	    					<a href="consultar?operacao=CONSULTAR&editar=false" class="btn btn-success">Cadastrar</a>
-	    				</td>                       
+	    				<td style="text-align: left"><input type="submit" id="consultar" name="operacao" class="btn btn-primary" value="CONSULTAR"/>
+	    					<a href="http://localhost:8080/gestao-eventos-web/produtos/cadastro-produto.jsp" class="btn btn-success">Cadastrar</a>
+	    				</td>   
+	    			</form>                    
 	    			</tr>
 	    		</tbody>
    		 	</table>
@@ -55,6 +59,7 @@
 				    	%>
 				    	<tr>
 				    		<td><a href="consultar?operacao=CONSULTAR&pdt-id=<%=pdt.getId()%>&editar=false"><%=pdt.getNome()%></a></td>
+				    		<td><a class="btn btn-danger btn-delete" href="consultar?operacao=EXCLUIR&pdt-id=<%=pdt.getId()%>&editar=false"><i class="fa fa-times" aria-hidden="true"></i></a></td>
 				    	</tr>
 				    	<%
 					    	  	}

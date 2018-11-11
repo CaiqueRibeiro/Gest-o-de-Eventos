@@ -72,6 +72,7 @@ public class Gestao extends HttpServlet {
     	vhs = new HashMap<String, IViewHelper>();
     	vhs.put("/gestao-eventos-web/login", new UsuarioVH());
     	vhs.put("/gestao-eventos-web/cadastrar", new UsuarioVH());
+    	vhs.put("/gestao-eventos-web/sair", new UsuarioVH());
     	
     	vhs.put("/gestao-eventos-web/evento/salvar", new EventoVH());
     	vhs.put("/gestao-eventos-web/evento/consultar", new EventoVH());

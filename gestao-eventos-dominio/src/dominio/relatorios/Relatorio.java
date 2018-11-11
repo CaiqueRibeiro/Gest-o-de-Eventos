@@ -3,9 +3,11 @@ package dominio.relatorios;
 import java.util.List;
 
 import dominio.evento.EntidadeDominio;
+import dominio.participantes.Administrador;
 
 public class Relatorio extends EntidadeDominio {
 	
+	private Administrador usuario;
 	private TipoRelatorio tpRelatorio;
 	private List<DadosRelatorio> dadosA;
 	private List<DadosRelatorio> dadosB;
@@ -14,7 +16,19 @@ public class Relatorio extends EntidadeDominio {
 	public Relatorio(TipoRelatorio tipo) {
 		this.tpRelatorio = tipo;
 	}
+		
 	
+	public Administrador getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Administrador usuario) {
+		this.usuario = usuario;
+	}
+
+
+
 	public TipoRelatorio getTpRelatorio() {
 		return tpRelatorio;
 	}

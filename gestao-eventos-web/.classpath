@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="C:/Users/Caique/Documents/Java - Programas/JSTL/jstl-1.2.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/gestao-eventos-core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/gestao-eventos-dominio"/>
+	<classpathentry kind="lib" path="C:/Users/Caique/Documents/Bibliotecas e Frameworks/gson-2.8.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

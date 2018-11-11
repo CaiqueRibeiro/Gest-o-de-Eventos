@@ -8,7 +8,6 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import classes.util.Resultado;
 import dominio.endereco.Endereco;
@@ -25,7 +24,7 @@ public class UsuarioVH implements IViewHelper {
 		
 		String operacao = request.getParameter("operacao");
 		
-		Administrador administrador;
+		Administrador administrador = null;
 		
 		if(operacao.equals("CONSULTAR")) {
 			LoginService loginService = new LoginService(request);
@@ -41,7 +40,15 @@ public class UsuarioVH implements IViewHelper {
 				administrador.setSenha(senha);
 			}
 			
+		} else if(operacao.equals("EXCLUIR")) {
+			
+			administrador = new Administrador();
+			
+			LoginService loginService = new LoginService(request);
+			loginService.logoff();
+			
 		} else {
+		
 			String email = request.getParameter("email");
 			String senha = request.getParameter("senha");
 			
@@ -117,11 +124,15 @@ public class UsuarioVH implements IViewHelper {
 				
 				if(operacao.equals("SALVAR")) {
 					response.sendRedirect("login.jsp");					
+				} else if(operacao.equals("EXCLUIR")){
+					
+					response.sendRedirect("login.jsp");
+					
+				} else {				
+					LoginService service = new LoginService(request);
+					service.setLogin(usrRecebidos.get(0));
+					request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
-				
-				LoginService service = new LoginService(request);
-				service.setLogin(usrRecebidos.get(0));
-				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 		}
 		

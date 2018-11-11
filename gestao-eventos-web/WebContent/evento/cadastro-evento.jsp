@@ -42,13 +42,21 @@
 			    </div>
 			  </div>
 			  <div class="form-row">
-			    <div class="form-group col-md-6">
+			    <div class="form-group col-md-3">
 			      <label for="categoria">Categoria</label>
 			      <select class="categoria form-control" name="categoria" id="categoria">
 			      	<option value="1">Aniversário</option>
 			      	<option value="2">Casamento</option>
 			      	<option value="3">Festa empresarial</option>
 			      	<option value="4">Show</option>
+			      </select>
+			    </div>
+			    <div class="form-group col-md-3">
+			      <label for="tipo-evento">Tipo do evento</label>
+			      <select class="tipo-evento form-control" name="tipo-evento" id="tipo-evento">
+			      	<option value="GRATUITO">GRATUITO</option>
+			      	<option value="PAGO-ENTRADA">COBRANÇA DE ENTRADA</option>
+			      	<option value="PAGO-PRODUTO">COBRANÇA POR PRODUTO</option>
 			      </select>
 			    </div>
 			    <div class="form-group col-md-3">
@@ -62,8 +70,8 @@
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-4">
-			      <label for="porcentagem-lucro">Porcentagem de lucro / entrada</label>
-			      <input type="number" required class="porcentagem-lucro form-control" min="0" id="porcentagem-lucro" name="porcentagem-lucro">
+			      <label for="valor-entrada">Entrada</label>
+			      <input type="number" required class="valor-entrada form-control" min="0" step="0.01" id="valor-entrada" name="valor-entrada">
 			    </div>
 			    <div class="form-group col-md-4">
 			      <label for="inicio-rateio">Início do rateio</label>

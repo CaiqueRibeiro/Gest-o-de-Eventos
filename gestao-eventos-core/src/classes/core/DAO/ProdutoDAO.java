@@ -130,23 +130,21 @@ public class ProdutoDAO extends AbsDAO {
 			
 			if(produto.getId() != 0) {
 				sql.append(" AND prd_id = ?");
-			}
-			
-			if(produto.getNome() != null && produto.getNome() != "") {
-				sql.append(" AND nome = ?");
+			} else if(produto.getNome() != null && produto.getNome() != "") {
+				
+				sql.append(" AND p.nome LIKE '%" + produto.getNome() + "%' ");
+				
 			}
 			
 			ps = conexao.prepareStatement(sql.toString());
 			
 			if(produto.getId() != 0) {
+				System.out.println();
 				ps.setInt(i, produto.getId());
 				i++;
 			}
 			
-			if(produto.getNome() != null && produto.getNome() != "") {
-				ps.setString(i, produto.getNome());
-				i++;
-			}
+			System.out.println(ps.toString());
 			
 			ResultSet resultado = ps.executeQuery();
 			

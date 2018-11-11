@@ -129,7 +129,7 @@
 			  </div>
 			  <br/>
 			  <input type="submit" class="btn btn-primary" value="ALTERAR DADOS">
-			  <a href="rateio-evento.jsp" class="btn btn-success">RATEIO DO EVENTO</a>
+			  <a href="/gestao-eventos-web/evento/consultar-rateio?operacao=CONSULTAR&rat-id=${resultado.getRateio().getId()}" class="btn btn-success">RATEIO DO EVENTO</a>
 			  <input type="hidden" name="operacao" class="btn btn-primary" value="CONSULTAR">
 			</form>
 		</div>

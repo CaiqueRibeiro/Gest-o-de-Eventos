@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import classes.util.Resultado;
 import dominio.evento.IDominio;
+import dominio.participantes.Administrador;
 import dominio.produto.Produto;
 import dominio.relatorios.Relatorio;
 import dominio.relatorios.TipoRelatorio;
+import web.services.LoginService;
 import web.viewhelper.IViewHelper;
 
 public class RelatoriosVH implements IViewHelper {
@@ -32,6 +34,10 @@ public class RelatoriosVH implements IViewHelper {
 		} else {
 			relatorio = new Relatorio(TipoRelatorio.LOCACAO);
 		}
+		
+		Administrador adm = (Administrador) request.getSession().getAttribute("usuarioLogado");
+		
+		relatorio.setUsuario(adm);
 		
 		return relatorio;
 	}

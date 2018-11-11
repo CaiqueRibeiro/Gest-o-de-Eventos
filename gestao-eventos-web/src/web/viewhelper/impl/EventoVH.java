@@ -56,12 +56,15 @@ public class EventoVH implements IViewHelper {
 			evento.setHora(request.getParameter("hora"));
 			evento.setQdtMaximaPessoas(Integer.parseInt(request.getParameter("max-participantes")));
 			evento.setSituacao(request.getParameter("situacao"));
-			System.out.println("Situação: " + evento.getSituacao());
+
+			evento.setTipoPagamento(request.getParameter("tipo-evento"));
 			
-			if(evento.getCategoria() == 4)
-				evento.setEntrada(Double.parseDouble(request.getParameter("porcentagem-lucro")));
-			else
-				evento.setLucro(Double.parseDouble(request.getParameter("porcentagem-lucro")));
+			if(evento.getTipoPagamento().equals("PAGO-ENTRADA")) {
+				double valorEntrada = Double.parseDouble(request.getParameter("valor-entrada"));
+				evento.setEntrada(valorEntrada);
+			} else {
+				evento.setEntrada(0);
+			}
 			
 			// insere informações sobre o endereço
 			endereco.setLogradouro(request.getParameter("logradouro"));
@@ -72,7 +75,14 @@ public class EventoVH implements IViewHelper {
 			endereco.setCidade(request.getParameter("cidade"));
 			endereco.setEstado(request.getParameter("estado"));
 			
-			rateio.setValorPagar(0);
+			if(evento.getTipoPagamento().equals("PAGO-ENTRADA")) {	
+				System.out.println("TIPO PAGAMENTO: " + evento.getTipoPagamento());
+				rateio.setValorPagar(evento.getEntrada() * evento.getQdtMaximaPessoas());				
+			} else {
+				evento.setEntrada(0);
+			}
+			
+			System.out.println("VALOR RATEIO: " + rateio.getValorPagar());
 			
 			// Formata as datas necessárias
 			SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");			

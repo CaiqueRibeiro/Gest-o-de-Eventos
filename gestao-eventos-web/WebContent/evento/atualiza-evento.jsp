@@ -47,13 +47,21 @@
 			    </div>
 			  </div>
 			  <div class="form-row">
-			    <div class="form-group col-md-6">
+			    <div class="form-group col-md-3">
 			      <label for="categoria">Categoria</label>
 			      <select class="genero form-control" name="categoria" id="categoria">
 			      	<option value="1" ${resultado.getCategoria() == 1 ? "selected" : "" }>Aniversário</option>
 			      	<option value="2" ${resultado.getCategoria() == 2 ? "selected" : "" }>Casamento</option>
 			      	<option value="3" ${resultado.getCategoria() == 3 ? "selected" : "" }>Festa empresarial</option>
 			      	<option value="4" ${resultado.getCategoria() == 4 ? "selected" : "" }>Show</option>
+			      </select>
+			    </div>
+			    <div class="form-group col-md-3">
+			      <label for="tipo-evento">Tipo do evento</label>
+			      <select class="tipo-evento form-control" name="tipo-evento" id="tipo-evento">
+			      	<option value="GRATUITO" ${resultado.getTipoPagamento().equals("GRATUITO") ? "selected" : ""}>GRATUITO</option>
+			      	<option value="PAGO-ENTRADA" ${resultado.getTipoPagamento().equals("PAGO-ENTRADA") ? "selected" : ""}>COBRANÇA DE ENTRADA</option>
+			      	<option value="PAGO-PRODUTO" ${resultado.getTipoPagamento().equals("PAGO-PRODUTO") ? "selected" : ""}>COBRANÇA POR PRODUTO</option>
 			      </select>
 			    </div>
 			    <div class="form-group col-md-3">
@@ -67,8 +75,8 @@
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-4">
-			      <label for="porcentagem-lucro">Porcentagem de lucro ou Valor de entrada</label>
-			      <input type="number" min="0" step="0.01" required class="porcentagem-lucro form-control" name="porcentagem-lucro" value="${resultado.getLucro() == -1 ? resultado.getEntrada() : resultado.getLucro()}">
+			      <label for="valor-entrada">Valor de entrada</label>
+			      <input type="number" min="0" step="0.01" required class="valor-entrada form-control" name="valor-entrada" value="${resultado.getEntrada()}">
 			    </div>
 			    <div class="form-group col-md-4">
 			      <label for="inicio-rateio">Início do rateio</label>

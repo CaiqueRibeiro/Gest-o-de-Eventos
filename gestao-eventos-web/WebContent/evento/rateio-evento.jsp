@@ -23,7 +23,7 @@
 			  <div class="form-row">
 				  <div class="form-group col-md-10">
 				    <label for="valor">Valor total do evento</label>
-				    <p name="valor">R$5000,00</p>
+				    <p name="valor">R$ ${resultado.getValorPagar() }</p>
 				  </div>
 			  </div>
 			  <div class="form-row">
@@ -33,7 +33,17 @@
 			    </div>
 			    <div class="form-group col-md-6">
 			      <label for="categoria" readonly >Valor ainda a pagar</label>
-				   <p name="qtde-participantes">R$3978,00</p>					
+				   <p name="qtde-participantes">R$ 3978,00</p>					
+			    </div>
+			  </div>
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="qtde-participantes" readonly>Início do rateio</label>
+				   <p name="qtde-participantes">${resultado.getInicioRateio() }</p>
+			    </div>
+			    <div class="form-group col-md-6">
+			      <label for="categoria" readonly >Final do rateio</label>
+				   <p name="qtde-participantes">${resultado.getFimRateio() }</p>					
 			    </div>
 			  </div>
 			  <br/>

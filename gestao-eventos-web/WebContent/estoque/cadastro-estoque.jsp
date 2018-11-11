@@ -22,11 +22,25 @@
 	
 	<div class="container-fluid" style="justify-content: flex-end;">
 	<%
-		Resultado rProdutos = (Resultado) getServletContext().getAttribute("listaProdutos");
+		Resultado rProdutos;
+	
+		rProdutos = (Resultado) session.getAttribute("listaProdutos");
+		
+		if(rProdutos == null) {
+			rProdutos = (Resultado) getServletContext().getAttribute("listaProdutos");			
+		}
+	
 		List<IDominio> lista = rProdutos.getEntidades();
 		List<Produto> produtos = (List<Produto>) (Object) lista;	
 		
-		Resultado rFornecedores = (Resultado) getServletContext().getAttribute("listaFornecedores");
+		
+		
+		Resultado rFornecedores = (Resultado) session.getAttribute("listaFornecedores");
+		
+		if(rFornecedores == null) {		
+			rFornecedores = (Resultado) getServletContext().getAttribute("listaFornecedores");
+		}
+		
 		List<IDominio> listaFornecedores = rFornecedores.getEntidades();
 		List<Fornecedor> fornecedores = (List<Fornecedor>) (Object) listaFornecedores;	
 	%>

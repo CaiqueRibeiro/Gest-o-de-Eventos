@@ -77,7 +77,7 @@ public class RateioDAO extends AbsDAO {
 			
 			StringBuilder sql = new StringBuilder(); // variável para concatenar as Strings
 			// inicia a declaração da query
-			sql.append("UPDATE rateios set dt_inicio=?, dt_final=?");
+			sql.append("UPDATE rateios set dt_inicio=?, dt_final=?, valor_pagar=?");
 			sql.append(" where rat_id=?");
 			
 			ps = conexao.prepareStatement(sql.toString());
@@ -90,7 +90,10 @@ public class RateioDAO extends AbsDAO {
 			Timestamp fim = new Timestamp(rateio.getFimRateio().getTime());
 			ps.setTimestamp(2, fim);
 			
-			ps.setDouble(3, rateio.getId());
+			ps.setDouble(3, rateio.getValorPagar());
+			ps.setDouble(4, rateio.getId());
+			
+			System.out.println(ps.toString());
 			
 			ps.executeUpdate();
 			conexao.commit();

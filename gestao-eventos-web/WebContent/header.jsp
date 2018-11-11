@@ -57,15 +57,14 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/gestao-eventos-web/relatorios/evento?operacao=CONSULTAR&tipo=EVENTO">Eventos</a>
-          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/participantes.jsp">Participantes</a>
-          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/locacoes.jsp">Locações</a>
-          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/estoque.jsp">Produtos</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/evento?operacao=CONSULTAR&tipo=PARTICIPANTE">Participantes</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/evento?operacao=CONSULTAR&tipo=PRODUTO">Produtos</a>
         </div>
       </li>                
     </ul>
     <form class="form-inline my-2 my-lg-0">
    
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+      <a href="sair?operacao=EXCLUIR" class="btn btn-outline-light my-2 my-sm-0">Logout</a>
     </form>
   </div>
 </nav>

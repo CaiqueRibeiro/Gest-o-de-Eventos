@@ -49,6 +49,7 @@ public class ParticipanteDAO extends AbsDAO {
 			ps.setInt(7, participante.getEndereco().getId());
 			
 			ps.executeUpdate();
+			
 			conexao.commit();
 			
 		} catch (SQLException e) {

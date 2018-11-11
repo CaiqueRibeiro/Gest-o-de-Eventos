@@ -1,6 +1,6 @@
+<%@page import="dominio.relatorios.DadosRelatorio"%>
 <%@page import="java.util.List"%>
 <%@page import="dominio.relatorios.Relatorio"%>
-<%@page import="dominio.relatorios.DadosRelatorio"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="../css/visual.css"/>
 <link type="text/css" rel="stylesheet" href="../css/relatorios.css"/>
-<title>Relatórios - PARTICIPANTES</title>
+<title>Relatórios - Eventos</title>
 </head>
 <body>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -26,18 +26,18 @@
     <script type="text/javascript" src="../js/visual.js"></script>
     <script type="text/javascript" src="../chart/dist/Chart.bundle.min.js"></script>
 <script>
+
 <% 
 
 	Relatorio relatorio = (Relatorio) request.getAttribute("resultado");
 	List<DadosRelatorio> linhaA = relatorio.getDadosA();
 	List<DadosRelatorio> linhaB = relatorio.getDadosB();
 %>
-
 var ctx = document.getElementById("myChart");
-var GENEROS = ['Homens', 'Mulheres'];
+var MONTHS = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 var dadosA = [
 	<%
-	for(int i = 1; i <= 2; i++) {
+	for(int i = 1; i <= 12; i++) {
 		boolean flag = false;
 		for(DadosRelatorio dados : linhaA) {
 			if(dados.getChave().equals(String.valueOf(i))) {	
@@ -58,7 +58,7 @@ var dadosA = [
 
 var dadosB = [
 	<%
-	for(int i = 1; i <= 2; i++) {
+	for(int i = 1; i <= 12; i++) {
 		boolean flag = false;
 		for(DadosRelatorio dados : linhaB) {
 			if(dados.getChave().equals(String.valueOf(i))) {	

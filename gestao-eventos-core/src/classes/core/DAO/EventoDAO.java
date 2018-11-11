@@ -38,8 +38,8 @@ public class EventoDAO extends AbsDAO {
 			
 			StringBuilder sql = new StringBuilder(); // variável para concatenar as Strings
 			// inicia a declaração da query
-			sql.append("INSERT INTO eventos (nome, data, hora, max_pessoas, situacao, cat_id, end_id, user_id, loc_id, rat_id, pct_lucro)");
-			sql.append(" VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+			sql.append("INSERT INTO eventos (nome, data, hora, max_pessoas, tipo_evento, situacao, cat_id, end_id, user_id, loc_id, rat_id, pct_lucro)");
+			sql.append(" VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
 			
 			ps = conexao.prepareStatement(sql.toString());
 			
@@ -50,16 +50,15 @@ public class EventoDAO extends AbsDAO {
 			ps.setTimestamp(2, time);
 			ps.setString(3, evento.getHora());
 			ps.setInt(4, evento.getQdtMaximaPessoas());
-			ps.setString(5, evento.getSituacao());
-			ps.setInt(6, evento.getCategoria());
-			ps.setInt(7, evento.getEndereco().getId());
-			ps.setInt(8, evento.getAdministrador().getId());
-			ps.setInt(9, evento.getLocacao().getId());
-			ps.setInt(10, evento.getRateio().getId());
-			if(evento.getEntrada() == -1)
-				ps.setDouble(11, evento.getLucro());
-			else
-				ps.setDouble(11, evento.getEntrada());
+			ps.setString(5, evento.getTipoPagamento());
+			ps.setString(6, evento.getSituacao());
+			ps.setInt(7, evento.getCategoria());
+			ps.setInt(8, evento.getEndereco().getId());
+			ps.setInt(9, evento.getAdministrador().getId());
+			ps.setInt(10, evento.getLocacao().getId());
+			ps.setInt(11, evento.getRateio().getId());
+			
+			ps.setDouble(12, evento.getEntrada());
 			
 			ps.executeUpdate();
 			conexao.commit();
@@ -105,7 +104,7 @@ public class EventoDAO extends AbsDAO {
 			
 			StringBuilder sql = new StringBuilder(); // variável para concatenar as Strings
 			// inicia a declaração da query
-			sql.append("UPDATE eventos set nome=?, data=?, hora=?, max_pessoas=?, situacao=?, cat_id=?, end_id=?, user_id=?, loc_id=?, pct_lucro=?");
+			sql.append("UPDATE eventos set nome=?, data=?, hora=?, max_pessoas=?, tipo_evento=?, situacao=?, cat_id=?, end_id=?, user_id=?, loc_id=?, pct_lucro=?");
 			sql.append(" where evt_id=?");
 			
 			ps = conexao.prepareStatement(sql.toString());
@@ -117,17 +116,16 @@ public class EventoDAO extends AbsDAO {
 			ps.setTimestamp(2, time);
 			ps.setString(3, evento.getHora());
 			ps.setInt(4, evento.getQdtMaximaPessoas());
-			ps.setString(5, evento.getSituacao());
-			ps.setInt(6, evento.getCategoria());
-			ps.setInt(7, evento.getEndereco().getId());
-			ps.setInt(8, evento.getAdministrador().getId());
-			ps.setInt(9, evento.getLocacao().getId());
-			if(evento.getEntrada() == -1)
-				ps.setDouble(10, evento.getLucro());
-			else
-				ps.setDouble(10, evento.getEntrada());
+			ps.setString(5, evento.getTipoPagamento());
+			ps.setString(6, evento.getSituacao());
+			ps.setInt(7, evento.getCategoria());
+			ps.setInt(8, evento.getEndereco().getId());
+			ps.setInt(9, evento.getAdministrador().getId());
+			ps.setInt(10, evento.getLocacao().getId());
 			
-			ps.setInt(11, evento.getId());
+			ps.setDouble(11, evento.getEntrada());
+			
+			ps.setInt(12, evento.getId());
 			
 			ps.executeUpdate();
 			conexao.commit();
@@ -206,15 +204,14 @@ public class EventoDAO extends AbsDAO {
 				eventoBuscado.setId(resultado.getInt("evt_id"));
 				eventoBuscado.setNome(resultado.getString("nome"));
 				eventoBuscado.setQdtMaximaPessoas(resultado.getInt("max_pessoas"));
+				eventoBuscado.setTipoPagamento(resultado.getString("tipo_evento"));
 				eventoBuscado.setData(resultado.getDate("data"));
 				eventoBuscado.setHora(resultado.getString("hora"));
 				eventoBuscado.setSituacao(resultado.getString("situacao"));
 				eventoBuscado.setCategoria(resultado.getInt("c.cat_id"));
 				eventoBuscado.setCatNome(resultado.getString("cat_nome"));
-				if(eventoBuscado.getCatNome().equals("Show"))
-					eventoBuscado.setEntrada(resultado.getDouble("pct_lucro"));
-				else
-					eventoBuscado.setLucro(resultado.getDouble("pct_lucro") * 100);
+				
+				eventoBuscado.setEntrada(resultado.getDouble("pct_lucro"));
 				
 				enderecoBuscado.setId(resultado.getInt("end_id"));
 				enderecoBuscado.setLogradouro(resultado.getString("logradouro"));

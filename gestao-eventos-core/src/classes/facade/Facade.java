@@ -196,7 +196,6 @@ public class Facade implements IFacade{
 				List<IDominio> entidades = new ArrayList<IDominio>();
 				entidades.add(entidade);
 				resultado.setEntidades(entidades);
-				System.out.println("obj gravado!");
 			} catch(SQLException e) {
 				e.printStackTrace();
 				System.out.println("Fachada: Não foi possível realizar o registro!");

@@ -16,7 +16,7 @@
 	<c:import url="../header.jsp" />
 	<center><h1>Operação Realizada Com Sucesso</h1></center>
 	<br>
-	<center><a href="../index.jsp" name="operacao" class="btn btn-success">Início</a></center>
+	<center><a href="/gestao-eventos-web/produtos/consultar?operacao=CONSULTAR&editar=false" name="operacao" class="btn btn-success">Início</a></center>
 	
 	<script type="text/javascript" src="js/visual.js"></script>
 	<script src="../bootstrap/js/bootstrap.min.js" ></script>
