@@ -8,6 +8,7 @@ public class ItemProduto extends EntidadeDominio {
 	
 	private Produto produto;
 	private double quantidade = 0.0;
+	private double qtdRestante = 0;
 	private double preco = 0.0;
 	private double precoTotal = 0.0;
 	Fornecedor fornecedor;
@@ -33,8 +34,15 @@ public class ItemProduto extends EntidadeDominio {
 		this.calcPrecoTotal();
 	}
 	
-	
- 	public double getPreco() {
+ 	public double getQtdRestante() {
+		return qtdRestante;
+	}
+
+	public void setQtdRestante(double qtdRestante) {
+		this.qtdRestante = qtdRestante;
+	}
+
+	public double getPreco() {
 		return preco;
 	}
 

@@ -13,13 +13,19 @@ public class ValidarDados implements IStrategy{
 		
 		Evento evento = (Evento) entidade;
 		
-		if(evento.getNome() == null || evento.getNome() == "") {
-			this.msg = "Não existe nome!";
+		if(evento.getProdutos() != null) {
+			return null;
+		} else {
+		
+			if(evento.getNome() == null || evento.getNome() == "") {
+				this.msg = "Não existe nome!";
+				
+				return this.msg;
+			}
 			
-			return this.msg;
+			return null;
 		}
 		
-		return null;
 	}
 
 }

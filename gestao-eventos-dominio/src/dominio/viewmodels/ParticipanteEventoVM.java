@@ -9,8 +9,9 @@ import dominio.participantes.Participante;
 
 public class ParticipanteEventoVM extends EntidadeDominio {
 	
-	public List<Participante> participantes;
-	public Evento evento;
+	private List<Participante> participantes;
+	private Evento evento;
+	private boolean incluidos;
 	
 	public ParticipanteEventoVM(){
 	}
@@ -33,6 +34,18 @@ public class ParticipanteEventoVM extends EntidadeDominio {
 
 	public void setEvento(Evento evento) {
 		this.evento = evento;
+	}
+	
+	public Evento getEvento() {
+		return this.evento;
+	}
+
+	public boolean isIncluidos() {
+		return incluidos;
+	}
+
+	public void setIncluidos(boolean incluidos) {
+		this.incluidos = incluidos;
 	}
 	
 	

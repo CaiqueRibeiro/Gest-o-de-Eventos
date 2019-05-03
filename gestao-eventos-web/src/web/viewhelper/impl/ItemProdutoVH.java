@@ -92,22 +92,37 @@ public class ItemProdutoVH implements IViewHelper {
 			request.setAttribute("mensagem", msgErro);
 			request.getRequestDispatcher("erro.jsp").forward(request, response);
 		} else {
+			
+			String estoqueEvento = request.getParameter("estoque-evento");
+			
+			if(estoqueEvento.equals("true")) {
+				
+				if(recebido == null || recebido.size() <= 0) {
+					request.setAttribute("resultado", null);
+					request.getRequestDispatcher("../evento/estoque-para-evento.jsp").forward(request, response);	
+				} else {					
+					request.setAttribute("resultado", pdtRecebidos);
+					request.getRequestDispatcher("../evento/estoque-para-evento.jsp").forward(request, response);					
+				}
+				
+			} else {
 		
-			if(recebido == null || recebido.size() <= 0) {
-				request.setAttribute("resultado", null);
-				request.getRequestDispatcher("estoque.jsp").forward(request, response);			
-			} else if(recebido.size() > 1) {
-				request.setAttribute("resultado", pdtRecebidos);
-				request.getRequestDispatcher("estoque.jsp").forward(request, response);
-			} else {				
-				ItemProduto item = (ItemProduto) recebido.get(0);
-				request.setAttribute("resultado", item);
-				if(operacao.equals("ATUALIZAR") || operacao.equals("SALVAR")) {
-					request.getRequestDispatcher("sucesso.jsp").forward(request, response);	
-				} else if (operacao.equals("EXCLUIR")) {
-					response.sendRedirect("consultar?operacao=CONSULTAR&editar=false");					
-				} else {
-					request.getRequestDispatcher("entrada-estoque.jsp").forward(request, response);
+				if(recebido == null || recebido.size() <= 0) {
+					request.setAttribute("resultado", null);
+					request.getRequestDispatcher("estoque.jsp").forward(request, response);			
+				} else if(recebido.size() > 1) {
+					request.setAttribute("resultado", pdtRecebidos);
+					request.getRequestDispatcher("estoque.jsp").forward(request, response);
+				} else {				
+					ItemProduto item = (ItemProduto) recebido.get(0);
+					request.setAttribute("resultado", item);
+					if(operacao.equals("ATUALIZAR") || operacao.equals("SALVAR")) {
+						request.getRequestDispatcher("sucesso.jsp").forward(request, response);	
+					} else if (operacao.equals("EXCLUIR")) {
+						response.sendRedirect("consultar?operacao=CONSULTAR&editar=false");					
+					} else {
+						request.getRequestDispatcher("entrada-estoque.jsp").forward(request, response);
+					}
 				}
 			}
 		

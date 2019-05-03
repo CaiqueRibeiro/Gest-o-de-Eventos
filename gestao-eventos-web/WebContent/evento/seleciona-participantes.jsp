@@ -39,6 +39,7 @@
 		}
 		%>
 		<a id="add-participantes-button" class="btn btn-primary" href="/gestao-eventos-web/evento/add-participante?evt-id=${param.evtid}&operacao=SALVAR&id=">Selecionar Participantes</a>
+		<a id="voltar-button" class="btn btn-primary" href="/gestao-eventos-web/evento/consultar?evt-id=${param.evtid}&editar=true&operacao=CONSULTAR">Voltar ao evento</a>
 	</div>
 	
 	<script src="../bootstrap/js/jquery-3.3.1.slim.min.js"></script>

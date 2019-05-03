@@ -132,22 +132,54 @@ public class ParticipanteEventoDAO extends AbsDAO {
 			
 			StringBuilder sql = new StringBuilder();
 			
-			sql.append("SELECT * from participantes_evento pe left join participantes p on p.ptc_id = pe.pe_ptc_id");
-			sql.append(" WHERE pe.pe_evt_id=?");			
-			
-			ps = conexao.prepareStatement(sql.toString());	
-			
-			ps.setInt(1, participantesVM.getIdEvento());
-			
-			ResultSet resultado = ps.executeQuery();
-			
-			while(resultado.next()) {
-				Participante pBuscado = new Participante();
+			if(participantesVM.isIncluidos() == false) {
+
 				
-				pBuscado.setId(resultado.getInt("p.ptc_id"));
-				pBuscado.setNome(resultado.getString("p.nome"));
+				sql.append("SELECT * from participantes where ptc_id NOT IN");
+				sql.append(" (SELECT pe_ptc_id from participantes_evento WHERE pe_evt_id = ?)");			
 				
-				participantes.add(pBuscado);
+				ps = conexao.prepareStatement(sql.toString());
+				
+				ps.setInt(1, participantesVM.getIdEvento());
+				
+				System.out.println(ps.toString());
+				
+				ResultSet resultado = ps.executeQuery();
+				
+				while(resultado.next()) {
+					Participante pBuscado = new Participante();
+					
+					pBuscado.setId(resultado.getInt("ptc_id"));
+					pBuscado.setNome(resultado.getString("nome"));
+					
+					participantes.add(pBuscado);
+				}
+				
+			} else {
+			
+				sql.append("SELECT * from participantes_evento pe left join participantes p on p.ptc_id = pe.pe_ptc_id");
+				sql.append(" WHERE pe.pe_evt_id=? AND pe.pe_situacao != 'REJEITADO'");			
+				
+				ps = conexao.prepareStatement(sql.toString());	
+				
+				ps.setInt(1, participantesVM.getIdEvento());			
+			
+				System.out.println(ps.toString());
+				
+				ResultSet resultado = ps.executeQuery();
+				
+				while(resultado.next()) {
+					Participante pBuscado = new Participante();
+					
+					pBuscado.setId(resultado.getInt("p.ptc_id"));
+					pBuscado.setNome(resultado.getString("p.nome"));
+					int pago = resultado.getInt("pe.pe_pago");
+					System.out.println("Número: " + pago);
+					pBuscado.setPago(pago == 1 ? true : false);
+					System.out.println(pBuscado.getNome() + ": " + "pago: " + pBuscado.isPago());
+					
+					participantes.add(pBuscado);
+				}
 			}
 			
 			conexao.commit();

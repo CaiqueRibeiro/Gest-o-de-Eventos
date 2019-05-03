@@ -17,7 +17,15 @@
 	<c:import url="../header.jsp" />
 	<div class="container container-grafico" id="container-grafico">
 
+
 	<div class="form-row">
+		<div class="form-group col-md-3">
+			<a href="http://localhost:8080/gestao-eventos-web/relatorios/evento?operacao=CONSULTAR&tipo=EVENTO&ano=2018" class="btn btn-success btn-lg btn-ano">2018</a>
+			<a href="http://localhost:8080/gestao-eventos-web/relatorios/evento?operacao=CONSULTAR&tipo=EVENTO&ano=2019" class="btn btn-success btn-lg btn-ano">2019</a>
+		</div>
+	</div>
+
+	<div class="form-row">	
 		<div class="form-group col-md-6">	
 			<select class="seletores form-control" id="selecao-inicio">
 			    <option value="1">Janeiro</option>
@@ -198,7 +206,7 @@ function criaGrafico(meses, dadoA, dadoB) {
 	    		      data: dadoA,
 	    		      spanGaps: true,
 	    		    }, {
-	    		      label: "EVENTOS ADIADOS",
+	    		      label: "EVENTOS CANCELADOS",
 	    		      fill: false,
 	    		      lineTension: 0.1,
 	    		      borderColor: 'rgba(123, 144, 229, 1)', // The main line color

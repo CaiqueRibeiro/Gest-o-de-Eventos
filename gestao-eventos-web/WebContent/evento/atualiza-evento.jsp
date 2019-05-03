@@ -54,6 +54,12 @@
 			      	<option value="2" ${resultado.getCategoria() == 2 ? "selected" : "" }>Casamento</option>
 			      	<option value="3" ${resultado.getCategoria() == 3 ? "selected" : "" }>Festa empresarial</option>
 			      	<option value="4" ${resultado.getCategoria() == 4 ? "selected" : "" }>Show</option>
+			      	<option value="5" ${resultado.getCategoria() == 5 ? "selected" : "" }>Reunião</option>
+			      	<option value="6" ${resultado.getCategoria() == 6 ? "selected" : "" }>Evento Religioso</option>
+			      	<option value="7" ${resultado.getCategoria() == 7 ? "selected" : "" }>Curso Semanal</option>
+			      	<option value="8" ${resultado.getCategoria() == 8 ? "selected" : "" }>Curso Mensal</option>
+			      	<option value="9" ${resultado.getCategoria() == 9 ? "selected" : "" }>Evento Esportivo</option>
+			      	<option value="10" ${resultado.getCategoria() == 10 ? "selected" : "" }>Festa Genérica</option>
 			      </select>
 			    </div>
 			    <div class="form-group col-md-3">
@@ -151,10 +157,11 @@
 			    </div>
 			  </div>
 			  <br/>
-			  <button type="submit" required name="operacao" class="btn btn-primary" value="ATUALIZAR">ATUALIZAR</button>
-			  <a href="/gestao-eventos-web/evento/consultar-participantes?operacao=CONSULTAR&evtid=${resultado.getId()}" id="add-participantes" class="btn btn-success">Adicionar Participantes</a>
-			  <a href="/gestao-eventos-web/evento/participantes-evento?operacao=CONSULTAR&evtid=${resultado.getId()}" class="btn btn-success">Ver Participantes</a>
-			  <a href="" class="btn btn-primary">Gerir Estoque</a>
+			  <button type="submit" name="operacao" class="btn btn-primary" value="ATUALIZAR">ATUALIZAR</button>
+			  <a href="/gestao-eventos-web/evento/consultar-participantes?operacao=CONSULTAR&evtid=${resultado.getId()}&incluidos=false" id="add-participantes" class="btn btn-success">Adicionar Participantes</a>
+			  <a href="/gestao-eventos-web/evento/participantes-evento?operacao=CONSULTAR&evtid=${resultado.getId()}&incluidos=true" class="btn btn-success">Ver Participantes</a>
+			  <a href="/gestao-eventos-web/estoque/consultar?operacao=CONSULTAR&editar=false&estoque-evento=true&evtid=${resultado.getId()}" class="btn btn-primary">Gerir Estoque</a>
+			  <a href="/gestao-eventos-web/evento/rateio-produtos.jsp?operacao=CONSULTAR&evtid=${resultado.getId()}&ratid=${resultado.getRateio().getId()}" class="btn btn-primary" style="display: ${resultado.getTipoPagamento().equals('PAGO-PRODUTO') ? 'inline-block' : 'none'}">Items para o rateio</a>
 			  <a href="excluir?&operacao=EXCLUIR&evt-id=${resultado.getId()}&rat-id=${resultado.getRateio().getId()}&end-id=${resultado.getEndereco().getId()}" class="btn btn-danger">EXCLUIR</a>
 			</form>
 		</div>

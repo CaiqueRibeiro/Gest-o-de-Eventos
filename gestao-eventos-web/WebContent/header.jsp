@@ -24,15 +24,6 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
-          Locações
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/gestao-eventos-web/locacoes/cadastro-locacao.jsp">Cadastrar Locação</a>
-          <a class="dropdown-item" href="/gestao-eventos-web/locacoes/lista-locacoes.jsp">Lista de Locações</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
           Participantes
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -42,13 +33,22 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
+          Locações
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/gestao-eventos-web/locacoes/consultar?operacao=CONSULTAR">Listar Locações</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/locacoes/cadastro-locacao.jsp">Cadastrar Nova Locacação</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
           Produtos e Estoque
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/gestao-eventos-web/produtos/consultar?operacao=CONSULTAR&editar=false">Lista Produtos</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/produtos/consultar?operacao=CONSULTAR&editar=false">Lista de Produtos</a>
           <a class="dropdown-item" href="/gestao-eventos-web/produtos/cadastro-produto.jsp">Cadastrar Novo Produto</a>
-          <a class="dropdown-item" href="/gestao-eventos-web/estoque/consultar?operacao=CONSULTAR&editar=false"">Consulta de Estoque</a>
-		  <a class="dropdown-item" href="/gestao-eventos-web/estoque/cadastro-estoque.jsp"">Cadastrar item no Estoque</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/estoque/consultar?operacao=CONSULTAR&editar=false&estoque-evento=false">Consulta de Estoque</a>
+		  <a class="dropdown-item" href="/gestao-eventos-web/estoque/cadastro-estoque.jsp?estoque-evento=false">Cadastrar item no Estoque</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -56,15 +56,15 @@
           Relatórios
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/evento?operacao=CONSULTAR&tipo=EVENTO">Eventos</a>
-          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/evento?operacao=CONSULTAR&tipo=PARTICIPANTE">Participantes</a>
-          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/evento?operacao=CONSULTAR&tipo=PRODUTO">Produtos</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/evento?operacao=CONSULTAR&tipo=EVENTO&ano=2018">Eventos</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/evento?operacao=CONSULTAR&tipo=PARTICIPANTE&ano=2018">Participantes</a>
+          <a class="dropdown-item" href="/gestao-eventos-web/relatorios/evento?operacao=CONSULTAR&tipo=PRODUTO&ano=2018">Produtos</a>
         </div>
       </li>                
     </ul>
     <form class="form-inline my-2 my-lg-0">
    
-      <a href="sair?operacao=EXCLUIR" class="btn btn-outline-light my-2 my-sm-0">Logout</a>
+      <a href="/gestao-eventos-web/sair?operacao=EXCLUIR" class="btn btn-outline-light my-2 my-sm-0">Logout</a>
     </form>
   </div>
 </nav>

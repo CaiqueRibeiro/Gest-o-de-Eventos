@@ -19,38 +19,45 @@
 		<div class="container-form">
 			<h1>Atualização de Locação</h1>
 			
-			<form action="salvar">
+			<form action="alterar">
+			  <input type="hidden" name="loc-id" id="loc-id" value="${resultado.getId()}">
+			
 			  <div class="form-row">
 				  <div class="form-group col-md-10">
 				    <label for="rua">Nome da Locação</label>
-				    <input type="text" required class="rua form-control" name="nome" value="Zezinho Festas">
+				    <input type="text" required class="rua form-control" name="nome" value=${resultado.getNome() }>
 				  </div>
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
-			      <label for="categoria">Acústica</label>
-			      <select class="genero form-control" name="categoria">
-			      	<option value="1">Sim</option>
-			      	<option value="2" selected>Não</option>
+			      <label for="acustica">Acústica</label>
+			      <select class="acustica form-control" name="acustica">
+			      	<option value="1"  ${resultado.isAcustica() == true ? "selected" : "" }>Sim</option>
+			      	<option value="2"  ${resultado.isAcustica() == false ? "selected" : "" }>Não</option>
 			      </select>
 			    </div>
 			    <div class="form-group col-md-6">
-			      <label for="categoria">Aberto/Fechado</label>
-			      <select class="genero form-control" name="categoria">
-			      	<option value="1">Aberto</option>
-			      	<option value="2" selected>Fechado</option>
+			      <label for="aberto-fechado">Aberto/Fechado</label>
+			      <select class="aberto-fechado form-control" name="aberto-fechado">
+			      	<option value="1" ${resultado.getAmbiente().name().equals("ABERTO") ? "selected" : "" }>Aberto</option>
+			      	<option value="2" ${resultado.getAmbiente().name().equals("FECHADO") ? "selected" : "" }>Fechado</option>
 			      </select>
 			    </div>
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-4">
-			      <label for="porcentagem-lucro">Capacidade do Estacionamento</label>
-			      <input type="number" required class="porcentagem-lucro form-control" min="0" value="120">
+			      <label for="vagas-estacionamento">Capacidade do Estacionamento</label>
+			      <input type="number" required class="vagas-estacionamento form-control" min="0" name="vagas-estacionamento" value="${resultado.getVagasEstacionamento()}">
+			    </div>
+			  </div>
+			  <div class="form-row">
+			    <div class="form-group col-md-4">
+			      <label for="aluguel">Aluguel</label>
+			      <input type="number" step="0.01" required class="aluguel form-control" min="0" name="aluguel" value="${resultado.getValorAluguel() }">
 			    </div>
 			  </div>
 			  <br/>
-			  <a href="sucesso.jsp" name="operacao" class="btn btn-primary" value="ATUALIZAR">Alterar</a>
-			  <a href="sucesso.jsp" name="operacao" class="btn btn-danger" value="ATUALIZAR">Excluir</a>
+			  <button type="submit" name="operacao" class="btn btn-primary" value="ATUALIZAR">ATUALIZAR</button>
 			</form>
 		</div>
 	</div>

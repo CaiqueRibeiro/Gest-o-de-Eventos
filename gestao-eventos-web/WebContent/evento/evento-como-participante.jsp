@@ -133,6 +133,7 @@
 
 			  <a href="/gestao-eventos-web/evento/eventos-convidado?operacao=ATUALIZAR&acao=CONFIRMAR&evt-id=${resultado.getId()}" ${resultado.getParticipantes().get(0).getSituacao().equals("CONFIRMADO") ? 'style="display: none"' : ""} class="btn btn-success">CONFIRMAR</a>
 			  <a href="/gestao-eventos-web/evento/eventos-convidado?operacao=ATUALIZAR&acao=REJEITAR&evt-id=${resultado.getId()}" ${resultado.getParticipantes().get(0).getSituacao().equals("REJEITADO") ? 'style="display: none"' : ""} class="btn btn-danger">REJEITAR</a>
+			  <a href="/gestao-eventos-web/evento/lista-produtos-rateio?operacao=CONSULTAR&evt-id=${resultado.getId()}&rat-id=${resultado.getRateio().getId()}" class="btn btn-success">VER PRODUTOS DO RATEIO</a>
 			</form>
 		</div>
 	</div>

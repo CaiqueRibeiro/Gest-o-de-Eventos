@@ -21,16 +21,13 @@ public class RateioVH implements IViewHelper {
 		String operacao = request.getParameter("operacao");
 		Rateio rateio = new Rateio();
 		
-		rateio.setId(Integer.parseInt(request.getParameter("rat-id")));
-		
+		rateio.setId(Integer.parseInt(request.getParameter("rat-id")));		
 		
 		return rateio;
 	}
 
 	@Override
-	public void formataView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
-	
-			throws IOException, ServletException {
+	public void formataView(Resultado resultado, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		List<IDominio> recebido = null;
 		List<Rateio> relRecebidos = null;
 		String msgErro = "";

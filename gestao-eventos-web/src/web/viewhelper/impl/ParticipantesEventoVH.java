@@ -49,10 +49,14 @@ public class ParticipantesEventoVH implements IViewHelper {
 				
 		} else if(operacao.equals("CONSULTAR")) {
 			int idEvento = Integer.parseInt(request.getParameter("evtid"));
+			boolean listaIncluidos = request.getParameter("incluidos").equals("true") ? true : false;
+			
+			System.out.println("Incluidos: " + listaIncluidos);
 			
 			Evento evento = new Evento();
 			evento.setId(idEvento);
 			participantes.setEvento(evento);
+			participantes.setIncluidos(listaIncluidos);
 		}
 		
 		
@@ -64,6 +68,7 @@ public class ParticipantesEventoVH implements IViewHelper {
 			throws IOException, ServletException {
 		
 		String operacao = request.getParameter("operacao");
+		String uri = request.getRequestURI();
 		
 		List<IDominio> recebido = null;
 		List<Participante> ptcRecebidos = null;
@@ -84,14 +89,18 @@ public class ParticipantesEventoVH implements IViewHelper {
 			if(recebido == null || recebido.size() <= 0) {
 				request.setAttribute("erro", "Não há participantes");
 				request.getRequestDispatcher("sucesso.jsp").forward(request, response);			
-			} else if(recebido.size() > 1) {
-				request.setAttribute("resultado", ptcRecebidos);
-				request.getRequestDispatcher("participantes-evento.jsp").forward(request, response);
 			} else {
 				
 				if(operacao.equals("CONSULTAR")) {
-					request.setAttribute("resultado", ptcRecebidos);
-					request.getRequestDispatcher("participantes-evento.jsp").forward(request, response);
+					
+					if(uri.equals("/gestao-eventos-web/evento/consultar-participantes")) {
+						System.out.println("CONSULTAR PARTICIPANTES");
+						request.setAttribute("resultado", ptcRecebidos);
+						request.getRequestDispatcher("seleciona-participantes.jsp").forward(request, response);	
+					} else {
+						request.setAttribute("resultado", ptcRecebidos);
+						request.getRequestDispatcher("participantes-evento.jsp").forward(request, response);
+					}
 				} else {
 						request.getRequestDispatcher("sucesso.jsp").forward(request, response);
 				}

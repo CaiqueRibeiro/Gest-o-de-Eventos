@@ -17,6 +17,7 @@ public class EventoDAO extends AbsDAO {
 
 	@Override
 	public void salvar(IDominio entidade) throws SQLException {
+		
 				
 		conectar();
 		PreparedStatement ps = null;
@@ -26,59 +27,65 @@ public class EventoDAO extends AbsDAO {
 		// Converte a entidade genérica em evento
 		Evento evento = (Evento) entidade;
 		
-		try {
-			
-			enderecoDAO.salvar(evento.getEndereco());
-			evento.getEndereco().setId(enderecoDAO.consultar());
-			
-			rateioDAO.salvar(evento.getRateio());
-			evento.getRateio().setId(rateioDAO.consultar());
-			
-			conexao.setAutoCommit(false);
-			
-			StringBuilder sql = new StringBuilder(); // variável para concatenar as Strings
-			// inicia a declaração da query
-			sql.append("INSERT INTO eventos (nome, data, hora, max_pessoas, tipo_evento, situacao, cat_id, end_id, user_id, loc_id, rat_id, pct_lucro)");
-			sql.append(" VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
-			
-			ps = conexao.prepareStatement(sql.toString());
-			
-			// insere os objetos na query:
-			ps.setString(1, evento.getNome());
-			// converte a data
-			Timestamp time = new Timestamp(evento.getData().getTime());
-			ps.setTimestamp(2, time);
-			ps.setString(3, evento.getHora());
-			ps.setInt(4, evento.getQdtMaximaPessoas());
-			ps.setString(5, evento.getTipoPagamento());
-			ps.setString(6, evento.getSituacao());
-			ps.setInt(7, evento.getCategoria());
-			ps.setInt(8, evento.getEndereco().getId());
-			ps.setInt(9, evento.getAdministrador().getId());
-			ps.setInt(10, evento.getLocacao().getId());
-			ps.setInt(11, evento.getRateio().getId());
-			
-			ps.setDouble(12, evento.getEntrada());
-			
-			ps.executeUpdate();
-			conexao.commit();
-			
-		} catch (SQLException e) {
+		if(evento.getProdutos() != null) {
+			EstoqueEventoDAO estoqueDAO = new EstoqueEventoDAO();
+			estoqueDAO.salvar(evento);
+		} else {
+		
 			try {
-				conexao.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			} // fim do try/catch INTERNO
-			
-			e.printStackTrace();
-			
-		} /* fim do try/catch */ finally {
-			try {
-				ps.close();
+				
+				enderecoDAO.salvar(evento.getEndereco());
+				evento.getEndereco().setId(enderecoDAO.consultar());
+				
+				rateioDAO.salvar(evento.getRateio());
+				evento.getRateio().setId(rateioDAO.consultar());
+				
+				conexao.setAutoCommit(false);
+				
+				StringBuilder sql = new StringBuilder(); // variável para concatenar as Strings
+				// inicia a declaração da query
+				sql.append("INSERT INTO eventos (nome, data, hora, max_pessoas, tipo_evento, situacao, cat_id, end_id, user_id, loc_id, rat_id, pct_lucro)");
+				sql.append(" VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+				
+				ps = conexao.prepareStatement(sql.toString());
+				
+				// insere os objetos na query:
+				ps.setString(1, evento.getNome());
+				// converte a data
+				Timestamp time = new Timestamp(evento.getData().getTime());
+				ps.setTimestamp(2, time);
+				ps.setString(3, evento.getHora());
+				ps.setInt(4, evento.getQdtMaximaPessoas());
+				ps.setString(5, evento.getTipoPagamento());
+				ps.setString(6, evento.getSituacao());
+				ps.setInt(7, evento.getCategoria());
+				ps.setInt(8, evento.getEndereco().getId());
+				ps.setInt(9, evento.getAdministrador().getId());
+				ps.setInt(10, evento.getLocacao().getId());
+				ps.setInt(11, evento.getRateio().getId());
+				
+				ps.setDouble(12, evento.getEntrada());
+				
+				ps.executeUpdate();
+				conexao.commit();
+				
 			} catch (SQLException e) {
+				try {
+					conexao.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} // fim do try/catch INTERNO
+				
 				e.printStackTrace();
-			}
-		} // final FINALLY
+				
+			} /* fim do try/catch */ finally {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} // final FINALLY
+		}
 		
 	} // final SALVAR
 
@@ -93,60 +100,65 @@ public class EventoDAO extends AbsDAO {
 		// Converte a entidade genérica em evento
 		Evento evento = (Evento) entidade;
 		
-		try {
-			
-			enderecoDAO.alterar(evento.getEndereco());
-			//evento.getEndereco().setId(enderecoDAO.consultar());
-			
-			rateioDAO.alterar(evento.getRateio());
-			
-			conexao.setAutoCommit(false);
-			
-			StringBuilder sql = new StringBuilder(); // variável para concatenar as Strings
-			// inicia a declaração da query
-			sql.append("UPDATE eventos set nome=?, data=?, hora=?, max_pessoas=?, tipo_evento=?, situacao=?, cat_id=?, end_id=?, user_id=?, loc_id=?, pct_lucro=?");
-			sql.append(" where evt_id=?");
-			
-			ps = conexao.prepareStatement(sql.toString());
-			
-			// insere os objetos na query:
-			ps.setString(1, evento.getNome());
-			// converte a data
-			Timestamp time = new Timestamp(evento.getData().getTime());
-			ps.setTimestamp(2, time);
-			ps.setString(3, evento.getHora());
-			ps.setInt(4, evento.getQdtMaximaPessoas());
-			ps.setString(5, evento.getTipoPagamento());
-			ps.setString(6, evento.getSituacao());
-			ps.setInt(7, evento.getCategoria());
-			ps.setInt(8, evento.getEndereco().getId());
-			ps.setInt(9, evento.getAdministrador().getId());
-			ps.setInt(10, evento.getLocacao().getId());
-			
-			ps.setDouble(11, evento.getEntrada());
-			
-			ps.setInt(12, evento.getId());
-			
-			ps.executeUpdate();
-			conexao.commit();
-			
-		} catch (SQLException e) {
-			try {
-				conexao.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			} // fim do try/catch INTERNO
-			
-			e.printStackTrace();
-			
-		} /* fim do try/catch */ finally {
-		try {
-			ps.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	} // final FINALLY
+		if(evento.getProdutos() != null) {
+			EstoqueEventoDAO estoqueDAO = new EstoqueEventoDAO();
+			estoqueDAO.alterar(evento);
+		} else {
 		
+			try {
+				
+				enderecoDAO.alterar(evento.getEndereco());
+				//evento.getEndereco().setId(enderecoDAO.consultar());
+				
+				rateioDAO.alterar(evento.getRateio());
+				
+				conexao.setAutoCommit(false);
+				
+				StringBuilder sql = new StringBuilder(); // variável para concatenar as Strings
+				// inicia a declaração da query
+				sql.append("UPDATE eventos set nome=?, data=?, hora=?, max_pessoas=?, tipo_evento=?, situacao=?, cat_id=?, end_id=?, user_id=?, loc_id=?, pct_lucro=?");
+				sql.append(" where evt_id=?");
+				
+				ps = conexao.prepareStatement(sql.toString());
+				
+				// insere os objetos na query:
+				ps.setString(1, evento.getNome());
+				// converte a data
+				Timestamp time = new Timestamp(evento.getData().getTime());
+				ps.setTimestamp(2, time);
+				ps.setString(3, evento.getHora());
+				ps.setInt(4, evento.getQdtMaximaPessoas());
+				ps.setString(5, evento.getTipoPagamento());
+				ps.setString(6, evento.getSituacao());
+				ps.setInt(7, evento.getCategoria());
+				ps.setInt(8, evento.getEndereco().getId());
+				ps.setInt(9, evento.getAdministrador().getId());
+				ps.setInt(10, evento.getLocacao().getId());
+				
+				ps.setDouble(11, evento.getEntrada());
+				
+				ps.setInt(12, evento.getId());
+				
+				ps.executeUpdate();
+				conexao.commit();
+				
+			} catch (SQLException e) {
+				try {
+					conexao.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} // fim do try/catch INTERNO
+				
+				e.printStackTrace();
+				
+			} /* fim do try/catch */ finally {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} // final FINALLY
+		}
 		
 	} // final ALTERAR
 
@@ -162,100 +174,120 @@ public class EventoDAO extends AbsDAO {
 		// Converte a entidade genérica em evento
 		Evento evento = (Evento) entidade;
 		
-		try {
-						
-			conexao.setAutoCommit(false);
-			
-			StringBuilder sql = new StringBuilder(); // variável para concatenar as Strings
-			// inicia a declaração da query
-			sql.append("SELECT * from eventos ev left join enderecos end on end.end_id = ev.end_id left join categorias c");
-			sql.append(" on c.cat_id = ev.cat_id left join rateios r on r.rat_id = ev.rat_id left join locacoes l on l. loc_id = ev.loc_id where 1=1 AND user_id=?");
-			
-			if(evento.getId() != 0) {
-				sql.append(" AND evt_id=?");
-			}
-			if(evento.getNome() != null && evento.getNome() != "") {
-				sql.append(" AND nome=?");
-			}
-			
-			ps = conexao.prepareStatement(sql.toString());
-			
-			ps.setInt(1, evento.getAdministrador().getId());
-			
-			if(evento.getId() != 0) {
-				ps.setInt(2, evento.getId());
-			}
-			
-			if(evento.getNome() != null && evento.getNome() != "") {
-				ps.setString(3, evento.getNome());
-			}
-			
-			System.out.println(ps.toString());
-			
-			ResultSet resultado = ps.executeQuery();
-			
-			while(resultado.next()) {
-				
-				Evento eventoBuscado = new Evento();
-				Endereco enderecoBuscado = new Endereco();
-				Rateio rateioBuscado = new Rateio();
-				Locacao locacaoBuscada = new Locacao();
-				
-				eventoBuscado.setId(resultado.getInt("evt_id"));
-				eventoBuscado.setNome(resultado.getString("nome"));
-				eventoBuscado.setQdtMaximaPessoas(resultado.getInt("max_pessoas"));
-				eventoBuscado.setTipoPagamento(resultado.getString("tipo_evento"));
-				eventoBuscado.setData(resultado.getDate("data"));
-				eventoBuscado.setHora(resultado.getString("hora"));
-				eventoBuscado.setSituacao(resultado.getString("situacao"));
-				eventoBuscado.setCategoria(resultado.getInt("c.cat_id"));
-				eventoBuscado.setCatNome(resultado.getString("cat_nome"));
-				
-				eventoBuscado.setEntrada(resultado.getDouble("pct_lucro"));
-				
-				enderecoBuscado.setId(resultado.getInt("end_id"));
-				enderecoBuscado.setLogradouro(resultado.getString("logradouro"));
-				enderecoBuscado.setBairro(resultado.getString("bairro"));
-				enderecoBuscado.setRua(resultado.getString("rua"));
-				enderecoBuscado.setCEP(resultado.getString("cep"));
-				enderecoBuscado.setNumero(resultado.getString("numero"));
-				enderecoBuscado.setCidade(resultado.getString("cidade"));
-				enderecoBuscado.setEstado(resultado.getString("estado"));
-				
-				rateioBuscado.setId(resultado.getInt("rat_id"));
-				rateioBuscado.setInicioRateio(resultado.getDate("dt_inicio"));
-				rateioBuscado.setFimRateio(resultado.getDate("dt_final"));
-				rateioBuscado.setValorPagar(resultado.getDouble("valor_pagar"));
-				
-				locacaoBuscada.setId(resultado.getInt("l.loc_id"));
-				locacaoBuscada.setNome(resultado.getString("l.nome"));
-				
-				eventoBuscado.setEndereco(enderecoBuscado);
-				eventoBuscado.setRateio(rateioBuscado);
-				eventoBuscado.setLocacao(locacaoBuscada);
-				
-				eventos.add(eventoBuscado);
-			}
-			
-			conexao.commit();
-			
-		} catch (SQLException e) {
-			try {
-				conexao.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			} // fim do try/catch INTERNO
-			
-			e.printStackTrace();
-			
-		} /* fim do try/catch */ finally {
-		try {
-			ps.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	} // final FINALLY
+		if(evento.getProdutos() != null) {
+			System.out.println("ENTROU NO CONSULTAR INTERNO :::::::::::::::::");
+			EstoqueEventoDAO estoqueDAO = new EstoqueEventoDAO();
+			return estoqueDAO.consultar(evento);
+		} else {
 		
+			try {
+							
+				conexao.setAutoCommit(false);
+				
+				StringBuilder sql = new StringBuilder(); // variável para concatenar as Strings
+				// inicia a declaração da query
+				if(evento.isConvidado() == true) {
+	
+					sql.append("SELECT * from eventos ev left join enderecos end on end.end_id = ev.end_id left join categorias c");
+					sql.append(" on c.cat_id = ev.cat_id left join rateios r on r.rat_id = ev.rat_id left join locacoes l on l. loc_id = ev.loc_id where 1=1 AND user_id != ?");				
+	
+					ps = conexao.prepareStatement(sql.toString());
+					
+					ps.setInt(1, evento.getAdministrador().getId());
+					
+					
+				} else {
+				
+					sql.append("SELECT * from eventos ev left join enderecos end on end.end_id = ev.end_id left join categorias c");
+					sql.append(" on c.cat_id = ev.cat_id left join rateios r on r.rat_id = ev.rat_id left join locacoes l on l. loc_id = ev.loc_id where 1=1 AND user_id=?");
+					
+					
+					if(evento.getId() != 0) {
+						sql.append(" AND evt_id=?");
+					}
+					
+					if(evento.getNome() != null && evento.getNome() != "") {
+						sql.append(" AND nome=?");
+					}
+					
+					ps = conexao.prepareStatement(sql.toString());
+					
+					ps.setInt(1, evento.getAdministrador().getId());
+					
+					if(evento.getId() != 0) {
+						ps.setInt(2, evento.getId());
+					}
+					
+					if(evento.getNome() != null && evento.getNome() != "") {
+						ps.setString(3, evento.getNome());
+					}
+				
+				}
+							
+				ResultSet resultado = ps.executeQuery();
+				
+				while(resultado.next()) {
+					
+					Evento eventoBuscado = new Evento();
+					Endereco enderecoBuscado = new Endereco();
+					Rateio rateioBuscado = new Rateio();
+					Locacao locacaoBuscada = new Locacao();
+					
+					eventoBuscado.setId(resultado.getInt("evt_id"));
+					eventoBuscado.setNome(resultado.getString("nome"));
+					eventoBuscado.setQdtMaximaPessoas(resultado.getInt("max_pessoas"));
+					eventoBuscado.setTipoPagamento(resultado.getString("tipo_evento"));
+					eventoBuscado.setData(resultado.getDate("data"));
+					eventoBuscado.setHora(resultado.getString("hora"));
+					eventoBuscado.setSituacao(resultado.getString("situacao"));
+					eventoBuscado.setCategoria(resultado.getInt("c.cat_id"));
+					eventoBuscado.setCatNome(resultado.getString("cat_nome"));
+					
+					eventoBuscado.setEntrada(resultado.getDouble("pct_lucro"));
+					
+					enderecoBuscado.setId(resultado.getInt("end_id"));
+					enderecoBuscado.setLogradouro(resultado.getString("logradouro"));
+					enderecoBuscado.setBairro(resultado.getString("bairro"));
+					enderecoBuscado.setRua(resultado.getString("rua"));
+					enderecoBuscado.setCEP(resultado.getString("cep"));
+					enderecoBuscado.setNumero(resultado.getString("numero"));
+					enderecoBuscado.setCidade(resultado.getString("cidade"));
+					enderecoBuscado.setEstado(resultado.getString("estado"));
+					
+					rateioBuscado.setId(resultado.getInt("rat_id"));
+					rateioBuscado.setInicioRateio(resultado.getDate("dt_inicio"));
+					rateioBuscado.setFimRateio(resultado.getDate("dt_final"));
+					rateioBuscado.setValorPagar(resultado.getDouble("valor_pagar"));
+					
+					locacaoBuscada.setId(resultado.getInt("l.loc_id"));
+					locacaoBuscada.setNome(resultado.getString("l.nome"));
+					
+					eventoBuscado.setEndereco(enderecoBuscado);
+					eventoBuscado.setRateio(rateioBuscado);
+					eventoBuscado.setLocacao(locacaoBuscada);
+					
+					eventos.add(eventoBuscado);
+				}
+				
+				conexao.commit();
+				
+			} catch (SQLException e) {
+				try {
+					conexao.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} // fim do try/catch INTERNO
+				
+				e.printStackTrace();
+				
+			} /* fim do try/catch */ finally {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} // final FINALLY
+		}
 	return eventos;
 		
 	} // final CONSULTAR

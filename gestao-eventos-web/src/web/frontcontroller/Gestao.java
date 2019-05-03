@@ -22,12 +22,15 @@ import web.command.impl.ConsultarCommand;
 import web.command.impl.ExcluirCommand;
 import web.command.impl.SalvarCommand;
 import web.viewhelper.IViewHelper;
+import web.viewhelper.impl.EstoqueEventoVH;
 import web.viewhelper.impl.EventoVH;
 import web.viewhelper.impl.EventosParticipanteVH;
 import web.viewhelper.impl.ItemProdutoVH;
+import web.viewhelper.impl.LocacaoVH;
 import web.viewhelper.impl.ParticipanteVH;
 import web.viewhelper.impl.ParticipantesEventoVH;
 import web.viewhelper.impl.ProdutoVH;
+import web.viewhelper.impl.RateioProdutoVH;
 import web.viewhelper.impl.RateioVH;
 import web.viewhelper.impl.RelatoriosVH;
 import web.viewhelper.impl.UsuarioVH;
@@ -80,8 +83,12 @@ public class Gestao extends HttpServlet {
     	vhs.put("/gestao-eventos-web/evento/excluir", new EventoVH());
     	vhs.put("/gestao-eventos-web/evento/add-participante", new ParticipantesEventoVH());
     	vhs.put("/gestao-eventos-web/evento/participantes-evento", new ParticipantesEventoVH());
-    	vhs.put("/gestao-eventos-web/evento/consultar-participantes", new ParticipanteVH()); 
-    	vhs.put("/gestao-eventos-web/evento/eventos-convidado", new EventosParticipanteVH()); 
+    	vhs.put("/gestao-eventos-web/evento/consultar-participantes", new ParticipantesEventoVH()); 
+    	vhs.put("/gestao-eventos-web/evento/eventos-convidado", new EventosParticipanteVH());
+    	vhs.put("/gestao-eventos-web/evento/lista-produtos-rateio", new RateioProdutoVH());
+    	vhs.put("/gestao-eventos-web/evento/salvar-produtos-rateio", new RateioProdutoVH());
+    	vhs.put("/gestao-eventos-web/evento/alterar-produtos-rateio", new RateioProdutoVH());
+    	vhs.put("/gestao-eventos-web/evento/estoque-evento", new EstoqueEventoVH());
     	
     	vhs.put("/gestao-eventos-web/evento/consultar-rateio", new RateioVH()); 
     	
@@ -99,6 +106,11 @@ public class Gestao extends HttpServlet {
     	vhs.put("/gestao-eventos-web/estoque/consultar", new ItemProdutoVH());
     	vhs.put("/gestao-eventos-web/estoque/alterar", new ItemProdutoVH());
     	vhs.put("/gestao-eventos-web/estoque/excluir", new ItemProdutoVH());
+    	
+    	vhs.put("/gestao-eventos-web/locacoes/salvar", new LocacaoVH());
+    	vhs.put("/gestao-eventos-web/locacoes/consultar", new LocacaoVH());
+    	vhs.put("/gestao-eventos-web/locacoes/alterar", new LocacaoVH());
+    	vhs.put("/gestao-eventos-web/locacoes/excluir", new LocacaoVH());    	
     	
     	vhs.put("/gestao-eventos-web/relatorios/evento", new RelatoriosVH());
     	vhs.put("/gestao-eventos-web/relatorios/participante", new RelatoriosVH());

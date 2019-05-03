@@ -24,6 +24,7 @@ public class RelatoriosVH implements IViewHelper {
 		Relatorio relatorio = null;
 		
 		String tipoRelatorio = request.getParameter("tipo");
+		String ano = request.getParameter("ano");
 		
 		if(tipoRelatorio.equals("EVENTO")) {
 			relatorio = new Relatorio(TipoRelatorio.EVENTO);
@@ -38,6 +39,7 @@ public class RelatoriosVH implements IViewHelper {
 		Administrador adm = (Administrador) request.getSession().getAttribute("usuarioLogado");
 		
 		relatorio.setUsuario(adm);
+		relatorio.setAno(ano);
 		
 		return relatorio;
 	}

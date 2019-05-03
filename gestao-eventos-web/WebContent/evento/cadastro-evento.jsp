@@ -49,6 +49,13 @@
 			      	<option value="2">Casamento</option>
 			      	<option value="3">Festa empresarial</option>
 			      	<option value="4">Show</option>
+			      	<option value="5">Reunião</option>
+			      	<option value="6">Evento Religioso</option>
+			      	<option value="7">Curso Semanal</option>
+			      	<option value="8">Curso Mensal</option>
+			      	<option value="9">Evento Esportivo</option>
+			      	<option value="10">Festa Genérica</option>
+			      	
 			      </select>
 			    </div>
 			    <div class="form-group col-md-3">

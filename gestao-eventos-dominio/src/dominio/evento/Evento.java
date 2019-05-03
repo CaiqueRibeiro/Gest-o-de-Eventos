@@ -7,6 +7,7 @@ import dominio.endereco.Endereco;
 import dominio.endereco.Locacao;
 import dominio.participantes.Administrador;
 import dominio.participantes.Participante;
+import dominio.produto.ItemProduto;
 
 public class Evento extends EntidadeDominio {
 	
@@ -25,6 +26,8 @@ public class Evento extends EntidadeDominio {
 	private String situacao;
 	private double valorTotal = 0;
 	private double entrada = -1;
+	private boolean convidado = false;
+	private List<ItemProduto> produtos;
 	
 	// Adiciona participante um por um na lista
 	public void addParticipante(Participante participante) {
@@ -151,11 +154,23 @@ public class Evento extends EntidadeDominio {
 	public void setTipoPagamento(String tipoPagamento) {
 		this.tipoPagamento = tipoPagamento;
 	}
+
+	public boolean isConvidado() {
+		return convidado;
+	}
+
+	public void setConvidado(boolean convidado) {
+		this.convidado = convidado;
+	}
+
+	public List<ItemProduto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<ItemProduto> produtos) {
+		this.produtos = produtos;
+	}
 	
 	
-	
-	
-	
-	
-	
+		
 }

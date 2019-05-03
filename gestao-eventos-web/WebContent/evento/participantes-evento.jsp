@@ -31,8 +31,12 @@
 		<div class="card-image" id="box01">
 			<input type="hidden" name="id" class="id" id="id" value="<%=ptc.getId()%>">
 			<span><%=ptc.getNome()%></span>
-			<button type="button" value="<%=ptc.getId()%>" style="margin-right: 1%" class="btn btn-success pago-button">PAGO</button>
-			<button type="button" value="<%=ptc.getId()%>" class="btn btn-danger add-button">Remover</button>	
+			<% if (!ptc.isPago()) { %>
+				<button type="button" value="<%=ptc.getId()%>" style="margin-right: 1%" class="btn btn-success pago-button">PAGO</button>
+				<button type="button" value="<%=ptc.getId()%>" class="btn btn-danger add-button">Remover</button>	
+			<% } else { %>
+			<button type="button" value="" readonly="true" style="margin-right: 1%" class="btn btn-secondary">JÁ PAGO</button>
+			<% } %>			
 		</div>
 		<%
 		  	}

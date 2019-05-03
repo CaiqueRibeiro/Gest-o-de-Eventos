@@ -8,9 +8,9 @@ public class Locacao extends EntidadeDominio {
 	private Ambiente ambiente;
 	private boolean acustica;
 	private boolean possuiEstacionamento;
-	private int vagasEstacionamento;
-	private int vagasEstacionamentoUsadas;	
-	private double valorAluguel;
+	private int vagasEstacionamento = 0;
+	private int vagasEstacionamentoUsadas = 0;	
+	private double valorAluguel = 0.0;
 	
 	public String getNome() {
 		return nome;

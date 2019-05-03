@@ -47,12 +47,12 @@ public class RelatorioDAO extends AbsDAO {
 				
 				relProcurado = new Relatorio(TipoRelatorio.EVENTO);
 				
-				sql.append("select MONTH(data) as data, count(evt_id) as quantidade, situacao from eventos where user_id = ? AND situacao='AGENDADO' OR situacao='ADIADO' group by MONTH(data), situacao order by situacao, data");
+				sql.append("select MONTH(data) as data, count(evt_id) as quantidade, situacao from eventos where user_id = ? AND YEAR(data) = ? AND (situacao='AGENDADO' OR situacao='CANCELADO') group by MONTH(data), situacao order by situacao, data");
 				ps = conexao.prepareStatement(sql.toString());
-				System.out.println(ps.toString());
 				
-				ps.setInt(1, 3);
-				
+				ps.setInt(1, relatorio.getUsuario().getId());
+				ps.setString(2, relatorio.getAno());
+								
 				ResultSet resultado = ps.executeQuery();
 				
 				while(resultado.next()) {
@@ -77,7 +77,6 @@ public class RelatorioDAO extends AbsDAO {
 				
 				sql.append("select MONTH(ip.dt_entrada) as data, count(ip.prd_id) as quantidade, p.perecivel from item_produto ip left join produtos p on p.prd_id = ip.prd_id group by data, p.perecivel;");
 				ps = conexao.prepareStatement(sql.toString());
-				System.out.println(ps.toString());
 				
 				ResultSet resultado = ps.executeQuery();
 				

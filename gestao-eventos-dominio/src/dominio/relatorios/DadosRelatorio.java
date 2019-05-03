@@ -7,6 +7,7 @@ public class DadosRelatorio extends EntidadeDominio {
 	private String chave;
 	private int valor;
 	private String situacao;
+	
 	public String getChave() {
 		return chave;
 	}

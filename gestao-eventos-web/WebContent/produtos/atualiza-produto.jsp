@@ -38,6 +38,10 @@
 						<option value="1" ${resultado.getCategoria().getId() == 1 ? "selected" : "" }>Bebida Alcóolica</option>
 						<option value="2" ${resultado.getCategoria().getId() == 2 ? "selected" : "" }>Roupas e Acessórios</option>
 						<option value="3" ${resultado.getCategoria().getId() == 3 ? "selected" : "" }>Doces e Salgadinhos</option>
+						<option value="4" ${resultado.getCategoria().getId() == 4 ? "selected" : "" }>Equipamentos</option>
+						<option value="5" ${resultado.getCategoria().getId() == 5 ? "selected" : "" }>Bebida sem álcool</option>
+						<option value="6" ${resultado.getCategoria().getId() == 6 ? "selected" : "" }>Material de construcao</option>
+						<option value="7" ${resultado.getCategoria().getId() == 7 ? "selected" : "" }>Material de estudo</option>
 					</select>
 			    </div>
 			  </div>

@@ -55,6 +55,7 @@
 				    	%>
 				    	<tr>
 				    		<td><a href="consultar?operacao=CONSULTAR&evt-id=<%=ev.getId()%>&editar=false"><%=ev.getNome()%></a></td>
+				    		<td><a href="consultar?operacao=CONSULTAR&evt-id=<%=ev.getId()%>&editar=false"><%=ev.getSituacao()%></a></td>
 				    	</tr>
 				    	<%
 					    	  	}

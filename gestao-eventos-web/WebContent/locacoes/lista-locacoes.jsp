@@ -1,3 +1,4 @@
+<%@page import="dominio.endereco.Locacao"%>
 <%@page import="dominio.evento.Evento"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -46,15 +47,23 @@
 				    </tr>
 			    </thead>
 				    <tbody  id="corpo-lista">
-				    	<tr>
-				    		<td><a href="consulta-locacoes.jsp">Rose Festas</a></td>
-				    	</tr>
-				    	<tr>
-				    		<td><a href="consulta-locacoes.jsp">Carlos Eventos</a></td>
-				    	</tr>
-				    	<tr>
-				    		<td><a href="consulta-locacoes.jsp">Zezinho Festas</a></td>
-				    	</tr>
+						<%
+							
+							List<Locacao> locacoes = (List<Locacao>) request.getAttribute("resultado");
+							
+							if(locacoes != null) {
+								
+								for(Locacao l : locacoes) {
+						%>
+						    	<tr>
+						    		<td><a href="consultar?operacao=CONSULTAR&loc-id=<%=l.getId()%>"><%=l.getNome()%></a></td>
+						    	</tr>
+					    <%
+								}
+								
+							}
+						
+						%>
 				    </tbody>
 			    </table>
 		    </div>

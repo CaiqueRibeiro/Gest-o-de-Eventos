@@ -21,7 +21,6 @@ enviar.onclick = e => {
 	e.preventDefault()
 	let url = enviar.href
 	url = url.substr(0,(url.length - 1))
-	alert(url)
 	window.location.assign(url)
 }
 
@@ -43,6 +42,5 @@ enviarPago.onclick = e => {
 	e.preventDefault()
 	let url = enviarPago.href
 	url = url.substr(0,(url.length - 1))
-	alert(url)
 	window.location.assign(url)
 }

@@ -18,6 +18,7 @@ import classes.core.DAO.ParticipanteDAO;
 import classes.core.DAO.ParticipanteEventoDAO;
 import classes.core.DAO.ProdutoDAO;
 import classes.core.DAO.RateioDAO;
+import classes.core.DAO.RateioProdutoDAO;
 import classes.core.DAO.RelatorioDAO;
 import classes.core.DAO.UsuarioDAO;
 import classes.strategy.ValidarDados;
@@ -26,6 +27,7 @@ import classes.strategy.ValidarDadosProduto;
 import classes.strategy.ValidarDadosUsuario;
 import classes.strategy.ValidarEndereco;
 import classes.strategy.ValidarExistencia;
+import classes.strategy.ValidarExistenciaEvento;
 import classes.strategy.ValidarExistenciaParticipanteEvento;
 import classes.util.Resultado;
 import dominio.endereco.Locacao;
@@ -33,6 +35,7 @@ import dominio.evento.Evento;
 import dominio.evento.IDominio;
 import dominio.evento.ListaEventosParticipante;
 import dominio.evento.Rateio;
+import dominio.evento.RateioProduto;
 import dominio.participantes.Administrador;
 import dominio.participantes.Participante;
 import dominio.produto.Fornecedor;
@@ -70,6 +73,7 @@ public class Facade implements IFacade{
 		RateioDAO ratDAO = new RateioDAO();
 		EventosParticipanteDAO evpDAO = new EventosParticipanteDAO();
 		RelatorioDAO rDAO = new RelatorioDAO();
+		RateioProdutoDAO rpDAO = new RateioProdutoDAO();
 		
 		daos.put(Evento.class.getName(), evtDAO);
 		daos.put(Participante.class.getName(), ptcDAO);
@@ -80,11 +84,13 @@ public class Facade implements IFacade{
 		daos.put(Locacao.class.getName(), locDAO);
 		daos.put(ParticipanteEventoVM.class.getName(), peDAO);
 		daos.put(Rateio.class.getName(), ratDAO);
+		daos.put(RateioProduto.class.getName(), rpDAO);
 		daos.put(ListaEventosParticipante.class.getName(), evpDAO);
 		daos.put(Relatorio.class.getName(), rDAO);
 		
 		// Instanciando strategies Evento
 		ValidarDados vDados = new ValidarDados();
+		//ValidarExistenciaEvento veEvento = new ValidarExistenciaEvento();
 				
 		// Instanciando strategies Participante
 		ValidarExistencia vExistencia = new ValidarExistencia();
@@ -127,6 +133,7 @@ public class Facade implements IFacade{
 		
 		// Regras de negócio sendo inseridas para o evento
 		rnsSalvarEvento.add(vDados);
+		//rnsSalvarEvento.add(veEvento);
 		rnsAlterarEvento.add(vDados);
 		
 		// Regras de negócio sendo inseridas para o participante

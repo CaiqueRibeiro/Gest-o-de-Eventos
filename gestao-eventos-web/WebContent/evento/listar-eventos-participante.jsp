@@ -59,7 +59,7 @@
 					    	  	for(Evento ev : resultado) {
 				    	%>
 				    	<tr>
-				    		<td><a href="consultar?operacao=CONSULTAR&evt-id=<%=ev.getId()%>&editar=false"><%=ev.getNome()%></a></td>
+				    		<td><a href="/gestao-eventos-web/evento/eventos-convidado?operacao=CONSULTAR&acao=CONSULTAR&evt-id=<%=ev.getId()%>&editar=false"><%=ev.getNome()%></a></td>
 				    		<td><a class="btn btn-success btn-delete" href="/gestao-eventos-web/evento/eventos-convidado?operacao=ATUALIZAR&acao=CONFIRMAR&evt-id=<%=ev.getId()%>">CONFIRMAR</a></td>
 				    		<td><a class="btn btn-danger btn-delete" href="/gestao-eventos-web/evento/eventos-convidado?operacao=ATUALIZAR&acao=REJEITAR&evt-id=<%=ev.getId()%>">REJEITAR</a></td>
 				    	</tr>

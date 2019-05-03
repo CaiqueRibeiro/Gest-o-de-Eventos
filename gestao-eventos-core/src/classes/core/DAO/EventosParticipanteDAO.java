@@ -9,6 +9,7 @@ import java.util.List;
 import dominio.evento.Evento;
 import dominio.evento.IDominio;
 import dominio.evento.ListaEventosParticipante;
+import dominio.evento.Rateio;
 import dominio.participantes.Participante;
 
 public class EventosParticipanteDAO extends AbsDAO {
@@ -25,7 +26,6 @@ public class EventosParticipanteDAO extends AbsDAO {
 		PreparedStatement ps = null;
 		
 		ListaEventosParticipante lista = (ListaEventosParticipante) entidade;
-		System.out.println(":::::::Tamanho da Lista no DAO: " + lista.getEventos().size());
 		
 		try {	
 			
@@ -81,9 +81,17 @@ public class EventosParticipanteDAO extends AbsDAO {
 			StringBuilder sql = new StringBuilder();
 			sql.append("select * from eventos e left join participantes_evento pe on pe.pe_evt_id = e.evt_id WHERE 1=1 AND pe.pe_situacao != 'REJEITADO' AND pe.pe_ptc_id=?");
 			
+			if(lista.getEventos().get(0).getId() != 0) {
+				sql.append(" AND pe.pe_evt_id = ?");
+			}
+			
 			ps = conexao.prepareStatement(sql.toString());
 			
 			ps.setInt(1, lista.getParticipante().getId());
+			
+			if(lista.getEventos().get(0).getId() != 0) {
+				ps.setInt(2, lista.getEventos().get(0).getId());
+			}
 			
 			System.out.println(ps.toString());
 			
@@ -91,15 +99,19 @@ public class EventosParticipanteDAO extends AbsDAO {
 			
 			while(resultado.next()) {
 				Evento evtProcurado = new Evento();
+				Rateio ratProcurado = new Rateio();
 				Participante pProcurado = new Participante();
 				List<Participante> ptcEvento = new ArrayList<Participante>();
 				
 				pProcurado.setSituacao(resultado.getString("pe.pe_situacao"));
 				ptcEvento.add(pProcurado);
 				
+				ratProcurado.setId(resultado.getInt("e.rat_id"));
+				
 				evtProcurado.setId(resultado.getInt("e.evt_id"));
 				evtProcurado.setNome(resultado.getString("e.nome"));
 				evtProcurado.setParticipantes(ptcEvento);
+				evtProcurado.setRateio(ratProcurado);
 				
 				eventos.add(evtProcurado);
 			}

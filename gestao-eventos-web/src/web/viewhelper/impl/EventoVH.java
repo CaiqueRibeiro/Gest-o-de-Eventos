@@ -44,8 +44,10 @@ public class EventoVH implements IViewHelper {
 				rateio.setId(Integer.parseInt(rateioId));
 			}
 			
+
 			Administrador adm = (Administrador) request.getSession().getAttribute("usuarioLogado");
 			int admId = adm.getId();
+			
 			
 			administrador.setId(admId);
 			locacao.setId(Integer.parseInt(request.getParameter("locacao")));
@@ -81,9 +83,7 @@ public class EventoVH implements IViewHelper {
 			} else {
 				evento.setEntrada(0);
 			}
-			
-			System.out.println("VALOR RATEIO: " + rateio.getValorPagar());
-			
+						
 			// Formata as datas necessárias
 			SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");			
 			try {
@@ -104,8 +104,16 @@ public class EventoVH implements IViewHelper {
 		else if(operacao.equals("CONSULTAR") || operacao.equals("EXCLUIR")) {
 			
 			Administrador administrador = new Administrador();
+			
+			String convidado = request.getParameter("convidado");
 			Administrador adm = (Administrador) request.getSession().getAttribute("usuarioLogado");
 			int admId = adm.getId();
+			
+			if(convidado == null || convidado.equals("false")) {
+				evento.setConvidado(false);
+			} else {
+				evento.setConvidado(true);
+			}
 			
 			administrador.setId(admId);
 			

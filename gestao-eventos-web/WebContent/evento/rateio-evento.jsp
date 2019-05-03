@@ -31,10 +31,6 @@
 			      <label for="qtde-participantes" readonly>Participantes do rateio</label>
 				   <p name="qtde-participantes">396</p>
 			    </div>
-			    <div class="form-group col-md-6">
-			      <label for="categoria" readonly >Valor ainda a pagar</label>
-				   <p name="qtde-participantes">R$ 3978,00</p>					
-			    </div>
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-6">

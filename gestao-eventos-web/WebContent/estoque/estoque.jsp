@@ -14,14 +14,14 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Lista de produtos</title>
+    <title>Lista de Estoque</title>
     </head>
     <body>
     	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     	<c:import url="../header.jsp" />
 
     	<div class="container">
-    		<center><h3>Estoque</h3></center>  
+    		<center><h3>Estoque Disponível</h3></center>  
     		
 			 <table class="table">
 	    		<thead>
@@ -59,10 +59,10 @@
 					    	  	for(ItemProduto item : resultado) {
 				    	%>
 				    	<tr>
-				    		<td><a href="consultar?operacao=CONSULTAR&pdt-id=<%=item.getProduto().getId()%>&fnc-id=<%=item.getFornecedor().getId()%>&editar=false"><%=item.getProduto().getNome()%></a></td>
-				    		<td><a href="consultar?operacao=CONSULTAR&pdt-id=<%=item.getProduto().getId()%>&fnc-id=<%=item.getFornecedor().getId()%>&editar=false"><%=item.getFornecedor().getNome()%></a></td>
-				    		<td><a href="consultar?operacao=CONSULTAR&pdt-id=<%=item.getProduto().getId()%>&fnc-id=<%=item.getFornecedor().getId()%>&editar=false"><%=item.getQuantidade()%></a></td>
-				    		<td><a class="btn btn-danger btn-delete" href="consultar?operacao=EXCLUIR&pdt-id=<%=item.getProduto().getId()%>&fnc-id=<%=item.getFornecedor().getId()%>&editar=false"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+				    		<td><a href="consultar?operacao=CONSULTAR&pdt-id=<%=item.getProduto().getId()%>&fnc-id=<%=item.getFornecedor().getId()%>&editar=false&estoque-evento=false"><%=item.getProduto().getNome()%></a></td>
+				    		<td><a href="consultar?operacao=CONSULTAR&pdt-id=<%=item.getProduto().getId()%>&fnc-id=<%=item.getFornecedor().getId()%>&editar=false&estoque-evento=false"><%=item.getFornecedor().getNome()%></a></td>
+				    		<td><a href="consultar?operacao=CONSULTAR&pdt-id=<%=item.getProduto().getId()%>&fnc-id=<%=item.getFornecedor().getId()%>&editar=false&estoque-evento=false"><%=item.getQuantidade()%></a></td>
+				    		<td><a class="btn btn-danger btn-delete" href="consultar?operacao=EXCLUIR&pdt-id=<%=item.getProduto().getId()%>&fnc-id=<%=item.getFornecedor().getId()%>&editar=false&estoque-evento=false"><i class="fa fa-times" aria-hidden="true"></i></a></td>
 				    	</tr>
 				    	<%
 					    	  	}

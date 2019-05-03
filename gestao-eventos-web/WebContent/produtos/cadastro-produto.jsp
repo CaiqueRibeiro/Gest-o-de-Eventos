@@ -37,6 +37,10 @@
 						<option value="1">Bebida Alcóolica</option>
 						<option value="2">Roupas e Acessórios</option>
 						<option value="3">Doces e Salgadinhos</option>
+						<option value="4">Equipamentos</option>
+						<option value="5">Bebida sem álcool</option>
+						<option value="6">Material de construcao</option>
+						<option value="7">Material de estudo</option>
 					</select>
 			    </div>
 			  </div>

@@ -54,6 +54,7 @@
 			    </div>
 			  </div>
 			  <br/>
+			  <input type="hidden" name="estoque-evento" value="false">
 			  <input type="submit" name="operacao" class="btn btn-primary" value="ATUALIZAR">
 			</form>
 		</div>

@@ -39,15 +39,28 @@ public class EventosParticipanteVH implements IViewHelper {
 			}
 			
 			int evtId = Integer.parseInt(request.getParameter("evt-id"));
+			System.out.println("ID EVENTO::::: " + evtId);
 			Evento evento = new Evento();
 			evento.setId(evtId);
 			List<Evento> listaEventos = new ArrayList<Evento>();
 			listaEventos.add(evento);
 			
 			lista.setEventos(listaEventos);			
-		}
-		
-		
+		} else if(operacao.equals("CONSULTAR")) {
+			
+			String evtId = request.getParameter("evt-id");
+			
+			List<Evento> listaEventos = new ArrayList<Evento>();
+			Evento evento = new Evento();
+			
+			if(evtId != null && evtId != "") {
+				evento.setId(Integer.parseInt(evtId));			
+			}
+			
+			listaEventos.add(evento);	
+			lista.setEventos(listaEventos);
+						
+		}		
 		
 		return lista;
 		

@@ -11,6 +11,7 @@ public class Relatorio extends EntidadeDominio {
 	private TipoRelatorio tpRelatorio;
 	private List<DadosRelatorio> dadosA;
 	private List<DadosRelatorio> dadosB;
+	private String ano;
 	
 	
 	public Relatorio(TipoRelatorio tipo) {
@@ -28,10 +29,10 @@ public class Relatorio extends EntidadeDominio {
 	}
 
 
-
 	public TipoRelatorio getTpRelatorio() {
 		return tpRelatorio;
 	}
+	
 	public void setTpRelatorio(TipoRelatorio tpRelatorio) {
 		this.tpRelatorio = tpRelatorio;
 	}
@@ -51,9 +52,15 @@ public class Relatorio extends EntidadeDominio {
 	public void setDadosB(List<DadosRelatorio> dados) {
 		this.dadosB = dados;
 	}
-	
-	
-	
-	
 
+
+	public String getAno() {
+		return ano;
+	}
+
+
+	public void setAno(String ano) {
+		this.ano = ano;
+	}
+	
 }

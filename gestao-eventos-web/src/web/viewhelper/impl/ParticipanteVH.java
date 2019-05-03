@@ -118,11 +118,6 @@ public class ParticipanteVH implements IViewHelper {
 			ptcRecebidos = (List<Participante>) (Object) recebido;
 		}
 			
-		if(uri.equals("/gestao-eventos-web/evento/consultar-participantes")) {
-			request.setAttribute("resultado", ptcRecebidos);
-			request.getRequestDispatcher("seleciona-participantes.jsp").forward(request, response);			
-		} else {
-			
 			if(msgErro != null && msgErro != "") {
 				request.setAttribute("mensagem", msgErro);
 				request.getRequestDispatcher("erro.jsp").forward(request, response);
@@ -151,7 +146,7 @@ public class ParticipanteVH implements IViewHelper {
 				}
 			
 			} // caso não tenha mensagem de erro
-		}
+		
 		
 	}
 

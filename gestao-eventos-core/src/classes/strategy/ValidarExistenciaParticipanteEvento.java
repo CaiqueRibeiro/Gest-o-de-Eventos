@@ -17,6 +17,7 @@ public class ValidarExistenciaParticipanteEvento implements IStrategy {
 	public String processar(IDominio entidade) {
 		
 		ParticipanteEventoVM participante = (ParticipanteEventoVM) entidade;
+		participante.setIncluidos(true);
 		ParticipanteEventoDAO dao = new ParticipanteEventoDAO();
 		
 		try {
